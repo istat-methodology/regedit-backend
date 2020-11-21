@@ -5,15 +5,15 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.dto.AddressDto;
-import it.istat.mec.regedit.service.AddressService;
 
 
 @Component
 public class Translators {
 	
 
-	public static AddressDto translate(AddressService x) {
+	public static AddressDto translate(Address x) {
 
 		final ModelMapper modelMapper = new ModelMapper();
 		final AddressDto dTO = modelMapper.map(x, AddressDto.class);

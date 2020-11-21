@@ -24,12 +24,8 @@ public class RegEditController {
 	@GetMapping("/hello")
     public ResponseEntity<String> health() {
         return ResponseEntity.ok("I'm fine !");
-    }
+    }	
 	@GetMapping("/addresses")
-    public ResponseEntity<String> addresses() {
-        return ResponseEntity.ok("Hola !");
-    }
-	@GetMapping("/test")
 	public ResponseEntity<List<AddressDto>> getAll() {
 
 		return ResponseEntity.ok(addressService.findAllAddressess().stream()
