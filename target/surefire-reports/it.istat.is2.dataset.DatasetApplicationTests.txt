@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-Test set: it.istat.is2.dataset.DatasetApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.489 s <<< FAILURE! - in it.istat.is2.dataset.DatasetApplicationTests
-it.istat.is2.dataset.DatasetApplicationTests  Time elapsed: 0.485 s  <<< ERROR!
-java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
-
