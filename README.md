@@ -22,7 +22,7 @@ Also you can create a PostgreSQL database using the script `regedit-create-postg
 
 Then yo can load the metadata and the test data, using the script `regedit-data.sql` stored in the [RegEdit_PATH/db](db/regedit-data.sql) folder.
 
-As a first step, configure the database connection in the 'application.properties' file, located in the path `[RegEdit_PATH]/src/main/resources`:
+As a first step, configure the database connection in the 'application.yml' file, located in the path `[RegEdit_PATH]/src/main/resources`:
 
 Postgres connection
 ```
