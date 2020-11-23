@@ -1,4 +1,4 @@
-# RegEdit Service- regedit-backend service
+# RegEdit Service
 
 A JAVA REST API service to editing a register address table by user.
 
