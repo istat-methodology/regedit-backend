@@ -61,11 +61,10 @@ You can run the RegEdit Service as Docker containers using docker compose:
 ```
 
 ## Test the application 
-You can test the application and explore the available services, linking to API documentation  by Swagger tools::
-```
+You can test the application and explore the available services, linking to API documentation  by Swagger tools:
+
     [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-  
-```
+
 
 ## License
 InterpreterService is EUPL-licensed
