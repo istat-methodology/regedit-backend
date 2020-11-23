@@ -41,29 +41,29 @@ spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
 
 Now you can perform your first build of the application using Maven comand:
 ```
-[IS_PATH]> mvn package
+[RegEdit_PATH]> mvn package
 ```
 If the build process ends successfully, you are ready to run the application:
 The application is built using the open source framework Spring Boot, which generates an 
 executable jar (that can be run from the command line). Spring Boot creates a stand-alone Spring 
 based Applications, with an embedded Tomcat, that you can "just run".
 ```
-[IS_PATH]> java –jar target/regedit.jar
+[RegEdit_PATH]> java –jar target/regedit.jar
 ```
 or using Maven comand:
 ```
-[IS_PATH]> mvn spring-boot:run 
+[RegEdit_PATH]> mvn spring-boot:run 
 ```
 ## Docker compose
 You can run the RegEdit Service as Docker containers using docker compose: 
 ```
-[IS_PATH]> docker-compose up
+[RegEdit_PATH]> docker-compose up
 ```
 
 ## Test the application 
 You can test the application and explore the available services, linking to API documentation  by Swagger tools::
 ```
-  http://localhost:8080/swagger-ui.html
+    [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
   
 ```
 
