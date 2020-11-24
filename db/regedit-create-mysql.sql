@@ -27,7 +27,7 @@ CREATE TABLE `regedit`.`addresses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE `regedit`.`addresses_edit` (
+CREATE TABLE `regedit`.`edit_address` (
   `user` integer ,
   `address` integer ,
   `state` text,
