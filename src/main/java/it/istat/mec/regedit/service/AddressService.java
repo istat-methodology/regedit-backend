@@ -50,4 +50,13 @@ public class AddressService {
 		addressDao.delete(address);    	
     	return address;
     }
+	public Long newAdress(Long addressId, String param1, String param2, String param3) {
+		final Address addrs = new Address();		
+		addrs.setChiaveCivico(param1);
+		addrs.setChiaveStrada(param2);
+		addrs.setCivico(param3);
+		// ... completare
+	 
+		return addressDao.save(addrs).getId();
+	}
 }
