@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.domain.Address;
 
@@ -36,5 +37,17 @@ public class AddressService {
 	
 	public List<Address>  findAllAddressess() {
         return addressDao.findAll();
+    }
+	public Address findAddressById(long id) {
+        return addressDao.findById(id).orElse(null);
+    }
+	public Address updateAddress(Address address) {
+   	 
+    	return addressDao.save(address);
+    }
+	public Address deleteAddress(long id) {   
+		Address address = findAddressById(id);
+		addressDao.delete(address);    	
+    	return address;
     }
 }
