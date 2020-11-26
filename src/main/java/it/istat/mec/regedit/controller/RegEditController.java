@@ -40,14 +40,25 @@ public class RegEditController {
 
 	}
 	@DeleteMapping(value = "/{addressId}")
-    public ResponseEntity<Void> deleteAddress(@PathVariable("addressId") Long id) {
+    public AddressDto deleteAddress(@PathVariable("addressId") Long id) {
         
-		return ResponseEntity.ok().build();
+		return  addressService.deleteAddress(id);
     }
 	@PostMapping
-	public ResponseEntity<Long> create(@RequestBody CreateAddressRequest request) {
-		Long addressId = addressService.newAdress(request.getId(), request.getChiaveCivico(),
-				request.getChiaveStrada(), request.getCivico());
-		return ResponseEntity.ok(addressId);
+	public AddressDto create(@RequestBody CreateAddressRequest request) {		
+		return addressService.newAdress(request.getCodiceArchivioOr(), request.getProgressivoIndirizzoOr(), 
+				 request.getComuneOr(), request.getLocalitaOr(),
+				 request.getIndirizzoOriginale(), request.getLocalitaSu(), request.getDugSu(),
+				 request.getDufSu(), request.getCivicoSu(), request.getEsponenteSu(), 
+				 request.getValidazione(), request.getDug(), request.getDuf(),
+				 request.getCivico(), request.getEsponente(), request.getLocalita(),
+				 request.getChiaveStrada(), request.getChiaveCivico(), 
+				 request.getFonte());
+	}
+	@GetMapping(value = "/{id}")
+	public AddressDto getAddress(@PathVariable("id") Long id) {
+
+		return  addressService.findAddressById(id);
+
 	}
 }

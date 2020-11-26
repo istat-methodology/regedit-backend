@@ -29,6 +29,9 @@ import org.springframework.stereotype.Service;
 
 import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.domain.Address;
+import it.istat.mec.regedit.dto.AddressDto;
+import it.istat.mec.regedit.exceptions.NoDataException;
+import it.istat.mec.regedit.translators.Translators;
 
 @Service
 public class AddressService {
@@ -37,26 +40,47 @@ public class AddressService {
 	
 	public List<Address>  findAllAddressess() {
         return addressDao.findAll();
-    }
-	public Address findAddressById(long id) {
-        return addressDao.findById(id).orElse(null);
-    }
+    }	
 	public Address updateAddress(Address address) {
    	 
     	return addressDao.save(address);
     }
-	public Address deleteAddress(long id) {   
-		Address address = findAddressById(id);
-		addressDao.delete(address);    	
-    	return address;
+	public AddressDto deleteAddress(long id) {   
+		AddressDto addressDto = findAddressById(id);		
+    	return addressDto;
     }
-	public Long newAdress(Long addressId, String param1, String param2, String param3) {
+	public AddressDto newAdress(String codiceArchivioOr, String progressivoIndirizzoOr, 
+			String comuneOr, String localitaOr, String indirizzoOriginale, String localitaSu, String dugSu, 
+			String dufSu, String civicoSu, String esponenteSu, String validazione, String dug,
+			String duf, String civico, String esponente, String localita, String chiaveStrada,
+			String chiaveCivico, String fonte) {
 		final Address addrs = new Address();		
-		addrs.setChiaveCivico(param1);
-		addrs.setChiaveStrada(param2);
-		addrs.setCivico(param3);
-		// ... completare
-	 
-		return addressDao.save(addrs).getId();
+		addrs.setCodiceArchivioOr(codiceArchivioOr);
+		addrs.setProgressivoIndirizzoOr(progressivoIndirizzoOr);
+		addrs.setComuneOr(comuneOr);
+		addrs.setLocalitaOr(localitaOr);
+		addrs.setIndirizzoOriginale(indirizzoOriginale);
+		addrs.setLocalitaSu(localitaSu);
+		addrs.setDugSu(dugSu);
+		addrs.setDufSu(dufSu);
+		addrs.setCivicoSu(civicoSu);
+		addrs.setEsponenteSu(esponenteSu);
+		addrs.setValidazione(validazione);
+		addrs.setDug(dug);
+		addrs.setDuf(duf);
+		addrs.setCivico(civico);
+		addrs.setEsponente(esponente);
+		addrs.setLocalita(localita);
+		addrs.setChiaveStrada(chiaveStrada);
+		addrs.setChiaveCivico(chiaveCivico);
+		addrs.setFonte(fonte);
+		
+		return findAddressById(addressDao.save(addrs).getId());	
+	}
+	public AddressDto findAddressById(long id) {
+
+		if (!addressDao.findById(id).isPresent())
+			throw new NoDataException("Business Function no present");
+		return Translators.translate(addressDao.findById(id).get());
 	}
 }
