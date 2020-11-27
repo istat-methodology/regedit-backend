@@ -67,5 +67,5 @@ You can test the application and explore the available services, linking to API 
 
 
 ## License
-InterpreterService is EUPL-licensed
+RegEdit Service is EUPL-licensed
 
