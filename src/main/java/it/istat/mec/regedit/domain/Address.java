@@ -53,14 +53,16 @@ public class Address implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long id;
+	@Column(name = "ID_ADDRESS")
+	private Long idAddress;
 	@Column(name = "CODICE_ARCHIVIO_OR")
 	private String codiceArchivioOr;
 	@Column(name = "PROGRESSIVO_INDIRIZZO_OR")
 	private String progressivoIndirizzoOr;
-	@Column(name = "COMUNE_OR")
-	private String comuneOr;
+	@Column(name = "PRO_COM_OR")
+	private String proComOr;
+	@Column(name = "DENOMINAZIONE_COM")
+	private String denominazioneComune;
 	@Column(name = "LOCALITA_OR")
 	private String localitaOr;
 	@Column(name = "INDIRIZZO_ORIGINALE")
@@ -73,26 +75,30 @@ public class Address implements Serializable {
 	private String dufSu;
 	@Column(name = "CIVICO_SU")
 	private String civicoSu;
+	@Column(name = "KM_SUGGERITO")
+	private String kmSuggerito;
 	@Column(name = "ESPONENTE_SU")
 	private String esponenteSu;
 	@Column(name = "VALIDAZIONE")
 	private String validazione;
-	@Column(name = "DUG")
-	private String dug;
-	@Column(name = "DUF")
-	private String duf;
-	@Column(name = "CIVICO")
-	private String civico;
-	@Column(name = "ESPONENTE")
-	private String esponente;
-	@Column(name = "LOCALITA")
-	private String localita;
+	@Column(name = "LOCALITA_REV")
+	private String localitaRev;
+	@Column(name = "DUG_REV")
+	private String dugRev;
+	@Column(name = "DUF_REV")
+	private String dufRev;
+	@Column(name = "CIVICO_REV")
+	private String civicoRev;
+	@Column(name = "ESPONENTE_REV")
+	private String esponenteRev;	
 	@Column(name = "CHIAVE_STRADA")
 	private String chiaveStrada;
 	@Column(name = "CHIAVE_CIVICO")
 	private String chiaveCivico;
-	@Column(name = "FONTE")
-	private String fonte;
+	@Column(name = "ID_FONTE")
+	private String idFonte;
+	@Column(name = "ID_REVISORE")
+	private String idRevisore;
 	
 	@OneToMany(mappedBy = "addressParent")
 	@JsonBackReference

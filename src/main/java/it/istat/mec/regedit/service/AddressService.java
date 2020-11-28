@@ -51,32 +51,34 @@ public class AddressService {
     	return addressDto;
     }
 	public AddressDto newAdress(String codiceArchivioOr, String progressivoIndirizzoOr, 
-			String comuneOr, String localitaOr, String indirizzoOriginale, String localitaSu, String dugSu, 
-			String dufSu, String civicoSu, String esponenteSu, String validazione, String dug,
-			String duf, String civico, String esponente, String localita, String chiaveStrada,
-			String chiaveCivico, String fonte) {
+			String proComOr, String denominazioneComune, String localitaOr, String indirizzoOriginale, String localitaSu, String dugSu, 
+			String dufSu, String civicoSu, String kmSuggerito, String esponenteSu, String validazione, String dugRev,
+			String dufRev, String civicoRev, String esponenteRev, String localitaRev, String chiaveStrada,
+			String chiaveCivico, String idFonte, String idRevisore) {
 		final Address addrs = new Address();		
 		addrs.setCodiceArchivioOr(codiceArchivioOr);
 		addrs.setProgressivoIndirizzoOr(progressivoIndirizzoOr);
-		addrs.setComuneOr(comuneOr);
+		addrs.setProComOr(proComOr);
+		addrs.setDenominazioneComune(denominazioneComune);
 		addrs.setLocalitaOr(localitaOr);
 		addrs.setIndirizzoOriginale(indirizzoOriginale);
 		addrs.setLocalitaSu(localitaSu);
 		addrs.setDugSu(dugSu);
 		addrs.setDufSu(dufSu);
 		addrs.setCivicoSu(civicoSu);
+		addrs.setKmSuggerito(kmSuggerito);
 		addrs.setEsponenteSu(esponenteSu);
 		addrs.setValidazione(validazione);
-		addrs.setDug(dug);
-		addrs.setDuf(duf);
-		addrs.setCivico(civico);
-		addrs.setEsponente(esponente);
-		addrs.setLocalita(localita);
+		addrs.setLocalitaRev(localitaRev);
+		addrs.setDugRev(dugRev);
+		addrs.setDufRev(dufRev);
+		addrs.setCivicoRev(civicoRev);
+		addrs.setEsponenteRev(esponenteRev);		
 		addrs.setChiaveStrada(chiaveStrada);
 		addrs.setChiaveCivico(chiaveCivico);
-		addrs.setFonte(fonte);
-		
-		return findAddressById(addressDao.save(addrs).getId());	
+		addrs.setIdFonte(idFonte);
+		addrs.setIdRevisore(idRevisore);
+		return findAddressById(addressDao.save(addrs).getIdAddress());	
 	}
 	public AddressDto findAddressById(long id) {
 

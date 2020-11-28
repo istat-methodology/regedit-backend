@@ -66,11 +66,11 @@ public class RegEditController {
 	@PostMapping("/addresses")
 	public AddressDto create(@RequestBody CreateAddressRequest request) {
 		return addressService.newAdress(request.getCodiceArchivioOr(), request.getProgressivoIndirizzoOr(),
-				request.getComuneOr(), request.getLocalitaOr(), request.getIndirizzoOriginale(),
-				request.getLocalitaSu(), request.getDugSu(), request.getDufSu(), request.getCivicoSu(),
-				request.getEsponenteSu(), request.getValidazione(), request.getDug(), request.getDuf(),
-				request.getCivico(), request.getEsponente(), request.getLocalita(), request.getChiaveStrada(),
-				request.getChiaveCivico(), request.getFonte());
+				request.getProComOr(), request.getDenominazioneComune(), request.getLocalitaOr(), request.getIndirizzoOriginale(),
+				request.getLocalitaSu(), request.getDugSu(), request.getDufSu(), request.getCivicoSu(), request.getKmSuggerito(),
+				request.getEsponenteSu(), request.getValidazione(), request.getDugRev(), request.getDufRev(),
+				request.getCivicoRev(), request.getEsponenteRev(), request.getLocalitaRev(), request.getChiaveStrada(),
+				request.getChiaveCivico(), request.getIdFonte(), request.getIdRevisore());
 	}
 
 	@GetMapping(value = "/addresses/{id}")
