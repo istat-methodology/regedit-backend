@@ -98,9 +98,8 @@ public class Address implements Serializable {
 	@Column(name = "ID_FONTE")
 	private String idFonte;
 	@Column(name = "ID_REVISORE")
-	private String idRevisore;
-	
-	@OneToMany(mappedBy = "addressParent")
-	@JsonBackReference
-	private List<EditAddress> editAddress;
+	private Integer idRevisore;
+	@Column(name = "STATO")
+	private Short stato;
+
 }

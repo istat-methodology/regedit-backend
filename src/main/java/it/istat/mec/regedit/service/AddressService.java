@@ -54,7 +54,7 @@ public class AddressService {
 			String proComOr, String denominazioneComune, String localitaOr, String indirizzoOriginale, String localitaSu, String dugSu, 
 			String dufSu, String civicoSu, String kmSuggerito, String esponenteSu, String validazione, String dugRev,
 			String dufRev, String civicoRev, String esponenteRev, String localitaRev, String chiaveStrada,
-			String chiaveCivico, String idFonte, String idRevisore) {
+			String chiaveCivico, String idFonte, Integer idRevisore) {
 		final Address addrs = new Address();		
 		addrs.setCodiceArchivioOr(codiceArchivioOr);
 		addrs.setProgressivoIndirizzoOr(progressivoIndirizzoOr);

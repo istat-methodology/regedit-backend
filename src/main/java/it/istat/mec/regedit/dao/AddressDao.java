@@ -25,10 +25,13 @@ package it.istat.mec.regedit.dao;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import it.istat.mec.regedit.domain.Address;
+import it.istat.mec.regedit.dto.ReportDto;
 
 
 @Repository
@@ -43,4 +46,14 @@ public interface AddressDao extends CrudRepository<Address, Long> {
 	public void save(Optional<Address> businessService); 
 	
 	public void delete(Address address);
+	
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(adr.stato)) "
+			  + "FROM Address AS adr WHERE adr.stato is not null and adr.idRevisore=:user GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	List<ReportDto> getAddressStateByUser(@Param("user") Integer user);
+	
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(adr.stato)) "
+			  + "FROM Address AS adr WHERE adr.stato is not null and adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	Optional<ReportDto> getAddressStateByUserAndState(Integer user, Short state);
+
+ 
 }

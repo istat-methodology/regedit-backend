@@ -1,7 +1,13 @@
 package it.istat.mec.regedit.exceptions;
 
 public class NoDataException extends RuntimeException {
-    public NoDataException(String message) {
+    
+	
+	private static final long serialVersionUID = 2687477693444569386L;
+	public NoDataException(String message) {
         super(message);
+    }
+    public NoDataException() {
+        super("No data found");
     }
 }
