@@ -22,33 +22,42 @@
  */
 package it.istat.mec.regedit.dto;
 
+import java.util.Date;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AddressDto {
 	
-	private Long id;	
-	private String codiceArchivioOr;	
-	private String progressivoIndirizzoOr;	
-	private String comuneOr;	
-	private String localitaOr;	
+	private Integer progressivoIndirizzo;	
+	private Integer codiceArchivio;		
+	private String proCom;	
+	private String denominazioneComune;	
+	private String localitaOriginale;	
 	private String indirizzoOriginale;	
-	private String localitaSu;	
-	private String dugSu;	
-	private String dufSu;	
-	private String civicoSu;	
-	private String esponenteSu;	
-	private String validazione;	
-	private String dug;	
-	private String duf;	
-	private String civico;	
-	private String esponente;	
-	private String localita;	
-	private String chiaveStrada;	
-	private String chiaveCivico;	
-	private String fonte;
-	
+	private String localitaNorm;	
+	private String dugNorm;	
+	private String dufNorm;	
+	private Integer civicoNorm;	
+	private String kmNorm;	
+	private String esponenteNorm;	
+	private String validazione;		
+	private String dugVal;	
+	private String dufVal;	
+	private Integer civicoVal;	
+	private String kmVal;	
+	private String esponenteVal;	
+	private String localitaVal;		
+	private Integer cdpstrEgon;		
+	private Integer cdpcivEgon;		
+	private Integer idFonte;	
+	private Integer stratoIndirizzo;	
+	private Integer idRevisore;	
+	private Short stato;	
+	private Date dataIns;	
+	private Date dataMod;	
+	private String nomeFile;	
 	
 	
 }
