@@ -52,13 +52,11 @@ public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_ADDRESS")
-	private Long idAddress;
-	@Column(name = "CODICE_ARCHIVIO_OR")
-	private String codiceArchivioOr;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	@Column(name = "PROGRESSIVO_INDIRIZZO_OR")
-	private String progressivoIndirizzoOr;
+	private String progressivoIndirizzo;
+	@Column(name = "CODICE_ARCHIVIO_OR")
+	private String codiceArchivioOr;	
 	@Column(name = "PRO_COM_OR")
 	private String proComOr;
 	@Column(name = "DENOMINAZIONE_COM")
