@@ -58,7 +58,7 @@ public class RegEditController {
 	}
 
 	@DeleteMapping(value = "/addresses/{addressId}")
-	public AddressDto deleteAddress(@PathVariable("addressId") Long id) {
+	public AddressDto deleteAddress(@PathVariable("addressId") Integer id) {
 
 		return addressService.deleteAddress(id);
 	}
@@ -75,7 +75,7 @@ public class RegEditController {
 	}
 
 	@GetMapping(value = "/addresses/{id}")
-	public AddressDto getAddress(@PathVariable("id") Long id) {
+	public AddressDto getAddress(@PathVariable("id") Integer id) {
 
 		return addressService.findAddressById(id);
 

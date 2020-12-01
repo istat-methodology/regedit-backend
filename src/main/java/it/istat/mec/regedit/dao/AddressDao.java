@@ -35,13 +35,13 @@ import it.istat.mec.regedit.dto.ReportDto;
 
 
 @Repository
-public interface AddressDao extends CrudRepository<Address, Long> {
+public interface AddressDao extends CrudRepository<Address, Integer> {
 
 	@Override
     List<Address> findAll();
 	
 	@Override
-	Optional<Address> findById(Long idfunction);
+	Optional<Address> findById(Integer idfunction);
 	
 	public void save(Optional<Address> businessService); 
 	

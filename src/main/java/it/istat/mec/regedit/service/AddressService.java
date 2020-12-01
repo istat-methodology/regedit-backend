@@ -47,7 +47,7 @@ public class AddressService {
     	return addressDao.save(address);
     }
 
-	public AddressDto deleteAddress(long id) {   
+	public AddressDto deleteAddress(Integer id) {   
 		AddressDto addressDto = findAddressById(id);		
     	return addressDto;
     }
@@ -87,7 +87,7 @@ public class AddressService {
 		addrs.setNomeFile(nomeFile);
 		return findAddressById(addressDao.save(addrs).getProgressivoIndirizzo());
 	}
-	public AddressDto findAddressById(long id) {
+	public AddressDto findAddressById(Integer id) {
 
 		if (!addressDao.findById(id).isPresent())
 			throw new NoDataException("Business Function no present");
