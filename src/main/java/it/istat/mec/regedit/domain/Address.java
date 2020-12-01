@@ -23,6 +23,7 @@
 package it.istat.mec.regedit.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -53,51 +54,61 @@ public class Address implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	@Column(name = "PROGRESSIVO_INDIRIZZO_OR")
-	private String progressivoIndirizzo;
-	@Column(name = "CODICE_ARCHIVIO_OR")
-	private String codiceArchivioOr;	
-	@Column(name = "PRO_COM_OR")
-	private String proComOr;
-	@Column(name = "DENOMINAZIONE_COM")
+	@Column(name = "PROGRESSIVO_INDIRIZZO")
+	private Integer progressivoIndirizzo;
+	@Column(name = "CODICE_ARCHIVIO")
+	private Integer codiceArchivio;	
+	@Column(name = "PRO_COM")
+	private String proCom;
+	@Column(name = "DENOMINAZIONE_COMUNE")
 	private String denominazioneComune;
-	@Column(name = "LOCALITA_OR")
-	private String localitaOr;
+	@Column(name = "LOCALITA_ORIGINALE")
+	private String localitaOriginale;
 	@Column(name = "INDIRIZZO_ORIGINALE")
 	private String indirizzoOriginale;
-	@Column(name = "LOCALITA_SU")
-	private String localitaSu;
-	@Column(name = "DUG_SU")
-	private String dugSu;
-	@Column(name = "DUF_SU")
-	private String dufSu;
-	@Column(name = "CIVICO_SU")
-	private String civicoSu;
-	@Column(name = "KM_SUGGERITO")
-	private String kmSuggerito;
-	@Column(name = "ESPONENTE_SU")
-	private String esponenteSu;
+	@Column(name = "LOCALITA_NORM")
+	private String localitaNorm;
+	@Column(name = "DUG_NORM")
+	private String dugNorm;
+	@Column(name = "DUF_NORM")
+	private String dufNorm;
+	@Column(name = "CIVICO_NORM")
+	private Integer civicoNorm;
+	@Column(name = "KM_NORM")
+	private String kmNorm;
+	@Column(name = "ESPONENTE_NORM")
+	private String esponenteNorm;
 	@Column(name = "VALIDAZIONE")
-	private String validazione;
-	@Column(name = "LOCALITA_REV")
-	private String localitaRev;
-	@Column(name = "DUG_REV")
-	private String dugRev;
-	@Column(name = "DUF_REV")
-	private String dufRev;
-	@Column(name = "CIVICO_REV")
-	private String civicoRev;
-	@Column(name = "ESPONENTE_REV")
-	private String esponenteRev;	
-	@Column(name = "CHIAVE_STRADA")
-	private String chiaveStrada;
-	@Column(name = "CHIAVE_CIVICO")
-	private String chiaveCivico;
+	private String validazione;	
+	@Column(name = "DUG_VAL")
+	private String dugVal;
+	@Column(name = "DUF_VAL")
+	private String dufVal;
+	@Column(name = "CIVICO_VAL")
+	private Integer civicoVal;
+	@Column(name = "KM_VAL")
+	private String kmVal;
+	@Column(name = "ESPONENTE_VAL")
+	private String esponenteVal;
+	@Column(name = "LOCALITA_VAL")
+	private String localitaVal;	
+	@Column(name = "CDPSTR_EGON")
+	private Integer cdpstrEgon;	
+	@Column(name = "CDPCIV_EGON")
+	private Integer cdpcivEgon;	
 	@Column(name = "ID_FONTE")
-	private String idFonte;
+	private Integer idFonte;
+	@Column(name = "STRATO_INDIRIZZO")
+	private Integer stratoIndirizzo;
 	@Column(name = "ID_REVISORE")
 	private Integer idRevisore;
 	@Column(name = "STATO")
 	private Short stato;
+	@Column(name = "DATA_INS")
+	private Date dataIns;
+	@Column(name = "DATA_MOD")
+	private Date dataMod;
+	@Column(name = "NOME_FILE")
+	private String nomeFile;
 
 }

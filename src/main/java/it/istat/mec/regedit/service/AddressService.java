@@ -22,6 +22,7 @@
  */
 package it.istat.mec.regedit.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,35 +51,41 @@ public class AddressService {
 		AddressDto addressDto = findAddressById(id);		
     	return addressDto;
     }
-	public AddressDto newAdress(String codiceArchivioOr, String progressivoIndirizzoOr, 
-			String proComOr, String denominazioneComune, String localitaOr, String indirizzoOriginale, String localitaSu, String dugSu, 
-			String dufSu, String civicoSu, String kmSuggerito, String esponenteSu, String validazione, String dugRev,
-			String dufRev, String civicoRev, String esponenteRev, String localitaRev, String chiaveStrada,
-			String chiaveCivico, String idFonte, Integer idRevisore) {
-		final Address addrs = new Address();		
-		addrs.setCodiceArchivioOr(codiceArchivioOr);
-		addrs.setProgressivoIndirizzoOr(progressivoIndirizzoOr);
-		addrs.setProComOr(proComOr);
+	public AddressDto newAdress(Integer progressivoIndirizzo, Integer codiceArchivio,  
+			String proCom, String denominazioneComune, String localitaOriginale, String indirizzoOriginale, String localitaNorm, String dugNorm, 
+			String dufNorm, Integer civicoNorm, String kmNorm, String esponenteNorm, String validazione, String dugVal,
+			String dufVal, Integer civicoVal, String kmVal, String esponenteVal, String localitaVal, Integer cdpstrEgon, Integer cdpcivEgon,
+			Integer idFonte, Integer stratoIndirizzo, Integer idRevisore, Short stato, Date dataIns, Date dataMod, String nomeFile) {
+		final Address addrs = new Address();	
+		addrs.setProgressivoIndirizzo(progressivoIndirizzo);
+		addrs.setCodiceArchivio(codiceArchivio);		
+		addrs.setProCom(proCom);
 		addrs.setDenominazioneComune(denominazioneComune);
-		addrs.setLocalitaOr(localitaOr);
+		addrs.setLocalitaOriginale(localitaOriginale);
 		addrs.setIndirizzoOriginale(indirizzoOriginale);
-		addrs.setLocalitaSu(localitaSu);
-		addrs.setDugSu(dugSu);
-		addrs.setDufSu(dufSu);
-		addrs.setCivicoSu(civicoSu);
-		addrs.setKmSuggerito(kmSuggerito);
-		addrs.setEsponenteSu(esponenteSu);
+		addrs.setLocalitaOriginale(localitaOriginale);
+		addrs.setDugNorm(dugNorm);
+		addrs.setDufNorm(dufNorm);
+		addrs.setCivicoNorm(civicoNorm);
+		addrs.setKmNorm(kmNorm);
+		addrs.setEsponenteNorm(esponenteNorm);
 		addrs.setValidazione(validazione);
-		addrs.setLocalitaRev(localitaRev);
-		addrs.setDugRev(dugRev);
-		addrs.setDufRev(dufRev);
-		addrs.setCivicoRev(civicoRev);
-		addrs.setEsponenteRev(esponenteRev);		
-		addrs.setChiaveStrada(chiaveStrada);
-		addrs.setChiaveCivico(chiaveCivico);
+		addrs.setDugVal(dugVal);		
+		addrs.setDufVal(dufVal);
+		addrs.setCivicoVal(civicoVal);
+		addrs.setKmVal(kmVal);
+		addrs.setEsponenteVal(esponenteVal);	
+		addrs.setLocalitaVal(localitaVal);
+		addrs.setCdpstrEgon(cdpstrEgon);
+		addrs.setCdpcivEgon(cdpcivEgon);		
 		addrs.setIdFonte(idFonte);
+		addrs.setStratoIndirizzo(stratoIndirizzo);
 		addrs.setIdRevisore(idRevisore);
-		return findAddressById(addressDao.save(addrs).getIdAddress());	
+		addrs.setStato(stato);
+		addrs.setDataIns(dataIns);
+		addrs.setDataMod(dataMod);
+		addrs.setNomeFile(nomeFile);
+		return findAddressById(addressDao.save(addrs).getProgressivoIndirizzo());
 	}
 	public AddressDto findAddressById(long id) {
 

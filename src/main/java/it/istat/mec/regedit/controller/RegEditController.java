@@ -65,12 +65,13 @@ public class RegEditController {
 
 	@PostMapping("/addresses")
 	public AddressDto create(@RequestBody CreateAddressRequest request) {
-		return addressService.newAdress(request.getCodiceArchivioOr(), request.getProgressivoIndirizzoOr(),
-				request.getProComOr(), request.getDenominazioneComune(), request.getLocalitaOr(), request.getIndirizzoOriginale(),
-				request.getLocalitaSu(), request.getDugSu(), request.getDufSu(), request.getCivicoSu(), request.getKmSuggerito(),
-				request.getEsponenteSu(), request.getValidazione(), request.getDugRev(), request.getDufRev(),
-				request.getCivicoRev(), request.getEsponenteRev(), request.getLocalitaRev(), request.getChiaveStrada(),
-				request.getChiaveCivico(), request.getIdFonte(), request.getIdRevisore());
+		return addressService.newAdress(request.getProgressivoIndirizzo(), request.getCodiceArchivio(),
+				request.getProCom(), request.getDenominazioneComune(), request.getLocalitaOriginale(), request.getIndirizzoOriginale(),
+				request.getLocalitaNorm(), request.getDugNorm(), request.getDufNorm(), request.getCivicoNorm(), request.getKmNorm(),
+				request.getEsponenteNorm(), request.getValidazione(), request.getDugVal(), request.getDufVal(),
+				request.getCivicoVal(), request.getKmVal(), request.getEsponenteVal(), request.getLocalitaVal(), request.getCdpstrEgon(),
+				request.getCdpcivEgon(), request.getIdFonte(), request.getStratoIndirizzo(), request.getIdRevisore(),
+				request.getStato(), request.getDataIns(), request.getDataMod(), request.getNomeFile());
 	}
 
 	@GetMapping(value = "/addresses/{id}")
