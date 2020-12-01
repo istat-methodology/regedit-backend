@@ -46,7 +46,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "ADDRESSES")
+@Table(name = "WP1_INDIRIZZI_DA_REVISIONARE")
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Address implements Serializable {
 
