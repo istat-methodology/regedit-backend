@@ -112,6 +112,17 @@ public class RegEditController {
 		
 		return addressDto;	
 	}
+	@PostMapping(value = "/addresses/{validate}")
+	public AddressDto validateAddress(@RequestBody UpdateAddressRequest request) {
+		AddressDto addressDto = addressService.findAddressById(request.getProgressivoIndirizzo());
+		
+		addressDto.setStato(request.getStato());
+		Calendar calendar = Calendar.getInstance();
+		Date now = calendar.getTime();
+		addressDto.setDataMod(now);
+		
+		return addressDto;	
+	}
 	
 	
 	
