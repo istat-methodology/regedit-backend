@@ -80,4 +80,13 @@ public class RegEditController {
 		return addressService.findAddressById(id);
 
 	}
+	@GetMapping(value = "/addresses/{user}")
+	public List<AddressDto> getAddressesByUser(@PathVariable("user") Integer user) {
+		return addressService.getAddressesByUser(user);
+	}
+	
+	@GetMapping(value = "/address/{user}")
+	public AddressDto getFirstAddressesByUser(@PathVariable("user") Integer user) {
+		return addressService.getAddressesByUser(user).get(0);
+	}
 }

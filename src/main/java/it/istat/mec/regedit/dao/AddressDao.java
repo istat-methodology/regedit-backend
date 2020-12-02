@@ -31,6 +31,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import it.istat.mec.regedit.domain.Address;
+import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ReportDto;
 
 
@@ -56,4 +57,9 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 	Optional<ReportDto> getAddressStateByUserAndState(Integer user, Short state);
 
  
+	@Query("SELECT address adr "
+			  + "FROM Address WHERE adr.stato is not null and adr.idRevisore=:user ORDER BY adr.pro_com")
+	List<AddressDto> getAddressesByUser(@Param("user") Integer user);
+	
+	
 }

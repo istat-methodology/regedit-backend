@@ -93,4 +93,8 @@ public class AddressService {
 			throw new NoDataException("Business Function no present");
 		return Translators.translate(addressDao.findById(id).get());
 	}
+	public List<AddressDto> getAddressesByUser(Integer user) {
+
+		return addressDao.getAddressesByUser(user);
+	}
 }
