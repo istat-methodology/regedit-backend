@@ -22,6 +22,8 @@
  */
 package it.istat.mec.regedit.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
+import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import it.istat.mec.regedit.translators.Translators;
@@ -89,4 +92,28 @@ public class RegEditController {
 	public AddressDto getFirstAddressesByUser(@PathVariable("user") Integer user) {
 		return addressService.getAddressesByUser(user).get(0);
 	}
+	@PostMapping(value = "/addresses/{addressId}")
+	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request) {
+		AddressDto addressDto = addressService.findAddressById(request.getProgressivoIndirizzo());
+		addressDto.setValidazione(request.getValidazione());
+		addressDto.setDugVal(request.getDugVal());
+		addressDto.setDufVal(request.getDufVal());
+		addressDto.setCivicoVal(request.getCivicoVal());
+		addressDto.setKmVal(request.getKmVal());
+		addressDto.setEsponenteVal(request.getEsponenteVal());
+		addressDto.setLocalitaVal(request.getLocalitaVal());
+		addressDto.setCdpstrEgon(request.getCdpstrEgon());
+		addressDto.setCdpcivEgon(request.getCdpcivEgon());
+		addressDto.setIdFonte(request.getIdFonte());
+		addressDto.setStato(request.getStato());
+		Calendar calendar = Calendar.getInstance();
+		Date now = calendar.getTime();
+		addressDto.setDataMod(now);
+		
+		return addressDto;	
+	}
+	
+	
+	
+	
 }
