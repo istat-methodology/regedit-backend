@@ -96,8 +96,8 @@ public class RegEditController {
 		return addresses;
 	}
 	
-	@GetMapping(value = "/address/user/{user}")
-	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato) {
+	@GetMapping(value = "/address/user/{user}/state/{stato}")
+	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato) {
 		AddressDto address = new AddressDto();
 		try {
 			address = addressService.getFirstAddressByUser(user, stato);

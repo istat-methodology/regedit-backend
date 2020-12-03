@@ -66,8 +66,8 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 			  + "FROM Address as adr WHERE adr.stato is not null and adr.idRevisore=:user ORDER BY adr.proCom")
 	List<AddressDto> getAddressesByUser(@Param("user") Integer user);*/
 	@Query("SELECT adr  "
-	  + "FROM Address as adr WHERE adr.stato=:stato and adr.idRevisore=:user ORDER BY adr.proCom")
-	List<Address> getAddressesByUser(@Param("user") Integer user, @Param("stato") Short stato);
+	  + "FROM Address as adr WHERE adr.stato=:state and adr.idRevisore=:user ORDER BY adr.proCom")
+	List<Address> getAddressesByUser(@Param("user") Integer user, @Param("state") Short stato);
 	
 	
 }
