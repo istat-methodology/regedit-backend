@@ -24,6 +24,7 @@ package it.istat.mec.regedit.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,8 +94,16 @@ public class AddressService {
 			throw new NoDataException("Business Function no present");
 		return Translators.translate(addressDao.findById(id).get());
 	}
-	public List<AddressDto> getAddressesByUser(Integer user) {
-
-		return addressDao.getAddressesByUser(user);
+	public List<AddressDto> getAddressesByUser(Integer user, Short stato) throws Exception{
+		List<AddressDto> addresses = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
+				.collect(Collectors.toList());		
+		return addresses;
+		
+	}
+	public AddressDto getFirstAddressByUser(Integer user, Short stato) throws Exception{
+		AddressDto address = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
+				.collect(Collectors.toList()).get(0);		
+		return address;
+		
 	}
 }

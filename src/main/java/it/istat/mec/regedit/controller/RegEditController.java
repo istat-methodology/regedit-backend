@@ -22,6 +22,7 @@
  */
 package it.istat.mec.regedit.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -85,13 +86,25 @@ public class RegEditController {
 
 	}
 	@GetMapping(value = "/addresses/user/{user}")
-	public List<AddressDto> getAddressesByUser(@PathVariable("user") Integer user) {
-		return addressService.getAddressesByUser(user);
+	public List<AddressDto> getAddressesByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato) {
+		List<AddressDto> addresses = new ArrayList<AddressDto>();
+		try {
+			addresses = addressService.getAddressesByUser(user, stato);
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+		return addresses;
 	}
 	
 	@GetMapping(value = "/address/user/{user}")
-	public AddressDto getFirstAddressesByUser(@PathVariable("user") Integer user) {
-		return addressService.getAddressesByUser(user).get(0);
+	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato) {
+		AddressDto address = new AddressDto();
+		try {
+			address = addressService.getFirstAddressByUser(user, stato);
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+		return address;
 	}
 	@PostMapping(value = "/addresses/{addressId}")
 	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request) {

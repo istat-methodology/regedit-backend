@@ -56,15 +56,18 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 			  + "FROM Address AS adr WHERE adr.stato is not null and adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
 	Optional<ReportDto> getAddressStateByUserAndState(Integer user, Short state);
 
- 
-	@Query("SELECT adr.progressivoIndirizzo, adr.codiceArchivio, adr.proCom, adr.denominazioneComune, "
+
+	 /*	@Query("SELECT adr.progressivoIndirizzo, adr.codiceArchivio, adr.proCom, adr.denominazioneComune, "
 			+ "adr.localitaOriginale, adr.indirizzoOriginale, adr.localitaNorm, adr.dugNorm, adr.dufNorm, "
 			+ "adr.civicoNorm, adr.kmNorm, adr.esponenteNorm, adr.validazione, adr.dugVal, adr.dufVal, "
 			+ "adr.civicoVal, adr.kmVal, adr.esponenteVal, adr.localitaVal, adr.cdpstrEgon, adr.cdpcivEgon, "
 			+ "adr.idFonte, adr.stratoIndirizzo, adr.idRevisore, adr.stato, adr.dataIns, adr.dataMod, "
 			+ "adr.nomeFile "
 			  + "FROM Address as adr WHERE adr.stato is not null and adr.idRevisore=:user ORDER BY adr.proCom")
-	List<AddressDto> getAddressesByUser(@Param("user") Integer user);
+	List<AddressDto> getAddressesByUser(@Param("user") Integer user);*/
+	@Query("SELECT adr  "
+	  + "FROM Address as adr WHERE adr.stato=:stato and adr.idRevisore=:user ORDER BY adr.proCom")
+	List<Address> getAddressesByUser(@Param("user") Integer user, @Param("stato") Short stato);
 	
 	
 }
