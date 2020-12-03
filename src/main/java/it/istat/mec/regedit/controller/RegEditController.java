@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -112,11 +113,11 @@ public class RegEditController {
 		
 		return addressDto;	
 	}
-	@PostMapping(value = "/addresses/{validate}")
-	public AddressDto validateAddress(@RequestBody UpdateAddressRequest request) {
-		AddressDto addressDto = addressService.findAddressById(request.getProgressivoIndirizzo());
-		
-		addressDto.setStato(request.getStato());
+	@PutMapping(value = "/addresses/{addressId}")
+	public AddressDto validateAddress(@PathVariable("addressId") Integer id) {
+		AddressDto addressDto = addressService.findAddressById(id);
+		// TODO: Da definire utilizzo e provenienza dello stato
+		addressDto.setStato((short) 1);
 		Calendar calendar = Calendar.getInstance();
 		Date now = calendar.getTime();
 		addressDto.setDataMod(now);
