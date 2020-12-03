@@ -96,7 +96,7 @@ public class RegEditController {
 		return addresses;
 	}
 	
-	@GetMapping(value = "/address/user/{user}/state/{stato}")
+	@GetMapping(value = "/address/user/{user}/state/{state}")
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato) {
 		AddressDto address = new AddressDto();
 		try {
