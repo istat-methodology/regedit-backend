@@ -105,7 +105,7 @@ public class AddressService {
 	public AddressDto getFirstAddressByUser(Integer user, Short stato) throws NoDataException{		
 		List<AddressDto> addresses = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
 				.collect(Collectors.toList());
-		if (addresses==null)
+		if (addresses.size()==0)
 			throw new NoDataException("Address no present");
 			AddressDto address = addresses.get(0);
 		return address;
