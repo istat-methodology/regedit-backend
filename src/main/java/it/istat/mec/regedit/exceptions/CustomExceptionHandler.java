@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import it.istat.mec.regedit.bean.FaultResponse;
@@ -32,6 +31,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(NoDataException.class)
 	public ResponseEntity<FaultResponse> noDataException(Exception ex) {
 		FaultResponse response = new FaultResponse(HttpStatus.NO_CONTENT.toString(), ex.getMessage());
+
 		return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
 	}
 
