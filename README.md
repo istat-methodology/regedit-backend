@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/istat-methodology/regedit-backend.svg?branch=main)](https://travis-ci.org/istat-methodology/regedit-backend) 
 # RegEdit Service
 
 A JAVA REST API service to editing a register address table by user.
