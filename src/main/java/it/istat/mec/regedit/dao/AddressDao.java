@@ -31,43 +31,40 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import it.istat.mec.regedit.domain.Address;
-import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ReportDto;
-
 
 @Repository
 public interface AddressDao extends CrudRepository<Address, Integer> {
 
 	@Override
-    List<Address> findAll();
-	
+	List<Address> findAll();
+
 	@Override
-	Optional<Address> findById(Integer idfunction);
-	
-	public void save(Optional<Address> address); 
-	
+	Optional<Address> findById(Integer id);
+
+	public void save(Optional<Address> address);
+
 	public void delete(Address address);
+ 
+	List<Address> findByIdRevisoreOrderByProComAsc(@Param("idRevisore") Integer idRevisore);
 	
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(adr.stato)) "
-			  + "FROM Address AS adr WHERE adr.stato is not null and adr.idRevisore=:user GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
-	List<ReportDto> getAddressStateByUser(@Param("user") Integer user);
+	List<Address> findByStatoOrderByProComAsc(@Param("stato") Short stato);
 	
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(adr.stato)) "
-			  + "FROM Address AS adr WHERE adr.stato is not null and adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
-	Optional<ReportDto> getAddressStateByUserAndState(Integer user, Short state);
+	List<Address> findByIdRevisoreAndStatoOrderByProComAsc(@Param("idRevisore") Integer idRevisore, @Param("stato") Short stato);
+	
+	
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(*)) "
+			+ "FROM Address AS adr  GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	List<ReportDto> getReportAddressState();
 
 
-	 /*	@Query("SELECT adr.progressivoIndirizzo, adr.codiceArchivio, adr.proCom, adr.denominazioneComune, "
-			+ "adr.localitaOriginale, adr.indirizzoOriginale, adr.localitaNorm, adr.dugNorm, adr.dufNorm, "
-			+ "adr.civicoNorm, adr.kmNorm, adr.esponenteNorm, adr.validazione, adr.dugVal, adr.dufVal, "
-			+ "adr.civicoVal, adr.kmVal, adr.esponenteVal, adr.localitaVal, adr.cdpstrEgon, adr.cdpcivEgon, "
-			+ "adr.idFonte, adr.stratoIndirizzo, adr.idRevisore, adr.stato, adr.dataIns, adr.dataMod, "
-			+ "adr.nomeFile "
-			  + "FROM Address as adr WHERE adr.stato is not null and adr.idRevisore=:user ORDER BY adr.proCom")
-	List<AddressDto> getAddressesByUser(@Param("user") Integer user);*/
-	@Query("SELECT adr  "
-	  + "FROM Address as adr WHERE adr.stato=:state and adr.idRevisore=:user ORDER BY adr.proCom")
-	List<Address> getAddressesByUser(@Param("user") Integer user, @Param("state") Short stato);
-	
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(*)) "
+			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	List<ReportDto> getReportAddressStateByUser(@Param("user") Integer user);
+
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(*)) "
+			+ "FROM Address AS adr WHERE adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	Optional<ReportDto> getReportAddressStateByUserAndState(Integer user, Short state);
+
 	
 }

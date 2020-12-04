@@ -38,28 +38,42 @@ import it.istat.mec.regedit.translators.Translators;
 @Service
 public class AddressService {
 	@Autowired
-    AddressDao addressDao;
-	
-	public List<Address>  findAllAddressess() {
-        return addressDao.findAll();
-    }	
-	public Address updateAddress(Address address) {
-   	 
-    	return addressDao.save(address);
-    }
+	AddressDao addressDao;
 
-	public AddressDto deleteAddress(Integer id) {   
-		AddressDto addressDto = findAddressById(id);		
-    	return addressDto;
-    }
-	public AddressDto newAdress(Integer progressivoIndirizzo, Integer codiceArchivio,  
-			String proCom, String denominazioneComune, String localitaOriginale, String indirizzoOriginale, String localitaNorm, String dugNorm, 
-			String dufNorm, Integer civicoNorm, String kmNorm, String esponenteNorm, String validazione, String dugVal,
-			String dufVal, Integer civicoVal, String kmVal, String esponenteVal, String localitaVal, Integer cdpstrEgon, Integer cdpcivEgon,
-			Integer idFonte, Integer stratoIndirizzo, Integer idRevisore, Short stato, Date dataIns, Date dataMod, String nomeFile) {
-		final Address addrs = new Address();	
+	public List<AddressDto> findAllAddressess(Integer revisore, Short stato) {
+		if (revisore == null && stato == null)
+			return addressDao.findAll().stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
+		else if (stato == null)
+			return addressDao.findByIdRevisoreOrderByProComAsc(revisore).stream().map(x -> Translators.translate(x))
+					.collect(Collectors.toList());
+		if (revisore == null && stato != null)
+			return addressDao.findByStatoOrderByProComAsc(stato).stream().map(x -> Translators.translate(x))
+					.collect(Collectors.toList());
+		else
+			return addressDao.findByIdRevisoreAndStatoOrderByProComAsc(revisore, stato).stream()
+					.map(x -> Translators.translate(x)).collect(Collectors.toList());
+
+	}
+
+	public Address updateAddress(Address address) {
+
+		return addressDao.save(address);
+	}
+
+	public AddressDto deleteAddress(Integer id) {
+		AddressDto addressDto = findAddressById(id);
+		return addressDto;
+	}
+
+	public AddressDto newAdress(Integer progressivoIndirizzo, Integer codiceArchivio, String proCom,
+			String denominazioneComune, String localitaOriginale, String indirizzoOriginale, String localitaNorm,
+			String dugNorm, String dufNorm, Integer civicoNorm, String kmNorm, String esponenteNorm, String validazione,
+			String dugVal, String dufVal, Integer civicoVal, String kmVal, String esponenteVal, String localitaVal,
+			Integer cdpstrEgon, Integer cdpcivEgon, Integer idFonte, Integer stratoIndirizzo, Integer idRevisore,
+			Short stato, Date dataIns, Date dataMod, String nomeFile) {
+		final Address addrs = new Address();
 		addrs.setProgressivoIndirizzo(progressivoIndirizzo);
-		addrs.setCodiceArchivio(codiceArchivio);		
+		addrs.setCodiceArchivio(codiceArchivio);
 		addrs.setProCom(proCom);
 		addrs.setDenominazioneComune(denominazioneComune);
 		addrs.setLocalitaOriginale(localitaOriginale);
@@ -71,14 +85,14 @@ public class AddressService {
 		addrs.setKmNorm(kmNorm);
 		addrs.setEsponenteNorm(esponenteNorm);
 		addrs.setValidazione(validazione);
-		addrs.setDugVal(dugVal);		
+		addrs.setDugVal(dugVal);
 		addrs.setDufVal(dufVal);
 		addrs.setCivicoVal(civicoVal);
 		addrs.setKmVal(kmVal);
-		addrs.setEsponenteVal(esponenteVal);	
+		addrs.setEsponenteVal(esponenteVal);
 		addrs.setLocalitaVal(localitaVal);
 		addrs.setCdpstrEgon(cdpstrEgon);
-		addrs.setCdpcivEgon(cdpcivEgon);		
+		addrs.setCdpcivEgon(cdpcivEgon);
 		addrs.setIdFonte(idFonte);
 		addrs.setStratoIndirizzo(stratoIndirizzo);
 		addrs.setIdRevisore(idRevisore);
@@ -88,27 +102,27 @@ public class AddressService {
 		addrs.setNomeFile(nomeFile);
 		return findAddressById(addressDao.save(addrs).getProgressivoIndirizzo());
 	}
+
 	public AddressDto findAddressById(Integer id) {
 
 		if (!addressDao.findById(id).isPresent())
 			throw new NoDataException("Address no present");
 		return Translators.translate(addressDao.findById(id).get());
 	}
-	public List<AddressDto> getAddressesByUser(Integer user, Short stato) throws NoDataException{
-		List<AddressDto> addresses = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
-				.collect(Collectors.toList());		
-		if (addresses.size()==0)
-				throw new NoDataException("Address no present");
+
+	public List<AddressDto> getAddressesByUser(Integer user, Short stato) {
+		List<AddressDto> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(user, stato).stream()
+				.map(x -> Translators.translate(x)).collect(Collectors.toList());
+
 		return addresses;
-		
+
 	}
-	public AddressDto getFirstAddressByUser(Integer user, Short stato) throws NoDataException{		
-		List<AddressDto> addresses = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
-				.collect(Collectors.toList());
-		if (addresses.size()==0)
+
+	public AddressDto getFirstAddressByUser(Integer user, Short stato) {
+		List<Address> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(user, stato);
+		if (addresses.size() == 0)
 			throw new NoDataException("Address no present");
-			AddressDto address = addresses.get(0);
-		return address;
-		
+		return Translators.translate(addresses.get(0));
+
 	}
 }

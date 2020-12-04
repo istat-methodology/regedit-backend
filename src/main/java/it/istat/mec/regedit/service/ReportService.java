@@ -36,14 +36,19 @@ public class ReportService {
 	@Autowired
 	AddressDao addressDao;
 
-	public List<ReportDto> getAddressStateByUser(Integer user) {
+	public List<ReportDto> getReportAddressState() {
 
-		return addressDao.getAddressStateByUser(user);
+		return addressDao.getReportAddressState();
 	}
 
-	public Optional<ReportDto> getAddressStateByUserAndState(Integer user, Short state) {
+	public List<ReportDto> getReportAddressStateByUser(Integer user) {
 
-		return addressDao.getAddressStateByUserAndState(user, state);
+		return addressDao.getReportAddressStateByUser(user);
+	}
+
+	public Optional<ReportDto> getReportAddressStateByUserAndState(Integer user, Short state) {
+
+		return addressDao.getReportAddressStateByUserAndState(user, state);
 	}
 
 }

@@ -44,18 +44,25 @@ public class ReportController {
 	@Autowired
 	private ReportService reportService;
 
+	@GetMapping
+	public List<ReportDto> getAddressStateByUser() {
+
+		return reportService.getReportAddressState();
+
+	}
 	@GetMapping(value = "/users/{user}")
 	public List<ReportDto> getAddressStateByUser(@PathVariable("user") Integer user) {
 
-		return reportService.getAddressStateByUser(user);
+		return reportService.getReportAddressStateByUser(user);
 
 	}
-	
-	@GetMapping(value = "/users/{user}/states/{state}")
-	public ResponseEntity<ReportDto>  getAddressStateByUser(@PathVariable("user") Integer user,@PathVariable("state") Short state) {
 
-	 
-		ReportDto reportDto=reportService.getAddressStateByUserAndState(user,state).orElseThrow(()->new NoDataException()) ;
+	@GetMapping(value = "/users/{user}/states/{state}")
+	public ResponseEntity<ReportDto> getAddressStateByUser(@PathVariable("user") Integer user,
+			@PathVariable("state") Short state) {
+
+		ReportDto reportDto = reportService.getReportAddressStateByUserAndState(user, state)
+				.orElseThrow(() -> new NoDataException());
 		return ResponseEntity.ok().body(reportDto);
 
 	}

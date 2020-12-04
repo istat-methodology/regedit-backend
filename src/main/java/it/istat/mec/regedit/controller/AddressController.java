@@ -22,11 +22,9 @@
  */
 package it.istat.mec.regedit.controller;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,47 +35,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.istat.mec.regedit.dto.AddressDto;
-import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
-import it.istat.mec.regedit.translators.Translators;
 
 @Slf4j
 @RestController
 @RequestMapping("/regedit")
-public class RegEditController {
+public class AddressController {
 
 	@Autowired
 	private AddressService addressService;
 
 	@GetMapping("/addresses")
-	public ResponseEntity<List<AddressDto>> getAll() {
+	public ResponseEntity<List<AddressDto>> getAllAddresses(@RequestParam(value = "user",required = false) Integer user,
+			@RequestParam(value = "stato",required = false) Short stato) {
 
-		return ResponseEntity.ok(addressService.findAllAddressess().stream().map(x -> Translators.translate(x))
-				.collect(Collectors.toList()));
+		return ResponseEntity.ok(addressService.findAllAddressess(user, stato));
 
-	}
-
-	@DeleteMapping(value = "/addresses/{addressId}")
-	public AddressDto deleteAddress(@PathVariable("addressId") Integer id) {
-
-		return addressService.deleteAddress(id);
-	}
-
-	@PostMapping("/addresses")
-	public AddressDto create(@RequestBody CreateAddressRequest request) {
-		return addressService.newAdress(request.getProgressivoIndirizzo(), request.getCodiceArchivio(),
-				request.getProCom(), request.getDenominazioneComune(), request.getLocalitaOriginale(), request.getIndirizzoOriginale(),
-				request.getLocalitaNorm(), request.getDugNorm(), request.getDufNorm(), request.getCivicoNorm(), request.getKmNorm(),
-				request.getEsponenteNorm(), request.getValidazione(), request.getDugVal(), request.getDufVal(),
-				request.getCivicoVal(), request.getKmVal(), request.getEsponenteVal(), request.getLocalitaVal(), request.getCdpstrEgon(),
-				request.getCdpcivEgon(), request.getIdFonte(), request.getStratoIndirizzo(), request.getIdRevisore(),
-				request.getStato(), request.getDataIns(), request.getDataMod(), request.getNomeFile());
 	}
 
 	@GetMapping(value = "/addresses/{id}")
@@ -86,27 +66,26 @@ public class RegEditController {
 		return addressService.findAddressById(id);
 
 	}
-	@GetMapping(value = "/addresses/user/{user}")
-	public List<AddressDto> getAddressesByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato) {
-		List<AddressDto> addresses = new ArrayList<AddressDto>();
-		try {
-			addresses = addressService.getAddressesByUser(user, stato);
-		} catch (Exception e) {			
-			e.printStackTrace();
-		}
-		return addresses;
-	}
-	
-	@GetMapping(value = "/address/user/{user}/state/{state}")
+
+	@GetMapping(value = "/first-address/user/{user}/state/{state}")
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato) {
-		AddressDto address = new AddressDto();
-		try {
-			address = addressService.getFirstAddressByUser(user, stato);
-		} catch (Exception e) {			
-			throw new NoDataException("Address no present");
-		}
-		return address;
+
+		return addressService.getFirstAddressByUser(user, stato);
+
 	}
+
+	@PostMapping("/addresses")
+	public AddressDto create(@RequestBody CreateAddressRequest request) {
+		return addressService.newAdress(request.getProgressivoIndirizzo(), request.getCodiceArchivio(),
+				request.getProCom(), request.getDenominazioneComune(), request.getLocalitaOriginale(),
+				request.getIndirizzoOriginale(), request.getLocalitaNorm(), request.getDugNorm(), request.getDufNorm(),
+				request.getCivicoNorm(), request.getKmNorm(), request.getEsponenteNorm(), request.getValidazione(),
+				request.getDugVal(), request.getDufVal(), request.getCivicoVal(), request.getKmVal(),
+				request.getEsponenteVal(), request.getLocalitaVal(), request.getCdpstrEgon(), request.getCdpcivEgon(),
+				request.getIdFonte(), request.getStratoIndirizzo(), request.getIdRevisore(), request.getStato(),
+				request.getDataIns(), request.getDataMod(), request.getNomeFile());
+	}
+
 	@PostMapping(value = "/addresses/{addressId}")
 	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request) {
 		AddressDto addressDto = addressService.findAddressById(request.getProgressivoIndirizzo());
@@ -124,22 +103,26 @@ public class RegEditController {
 		Calendar calendar = Calendar.getInstance();
 		Date now = calendar.getTime();
 		addressDto.setDataMod(now);
-		
-		return addressDto;	
+
+		return addressDto;
 	}
-	@PutMapping(value = "/addresses/{addressId}")
-	public AddressDto validateAddress(@PathVariable("addressId") Integer id) {
+
+	@PutMapping(value = "/addresses/{id}")
+	public AddressDto validateAddress(@PathVariable("id") Integer id) {
 		AddressDto addressDto = addressService.findAddressById(id);
 		// TODO: Da definire utilizzo e provenienza dello stato
 		addressDto.setStato((short) 1);
 		Calendar calendar = Calendar.getInstance();
 		Date now = calendar.getTime();
 		addressDto.setDataMod(now);
-		
-		return addressDto;	
+
+		return addressDto;
 	}
-	
-	
-	
-	
+
+	@DeleteMapping(value = "/addresses/{id}")
+	public AddressDto deleteAddress(@PathVariable("id") Integer id) {
+
+		return addressService.deleteAddress(id);
+	}
+
 }
