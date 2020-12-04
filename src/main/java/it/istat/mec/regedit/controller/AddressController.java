@@ -46,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/regedit")
+@RequestMapping("/api/regedit")
 public class AddressController {
 
 	@Autowired

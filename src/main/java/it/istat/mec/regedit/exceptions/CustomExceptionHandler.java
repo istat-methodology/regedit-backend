@@ -1,8 +1,5 @@
 package it.istat.mec.regedit.exceptions;
 
-import lombok.Data;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -11,7 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.Date;
+import it.istat.mec.regedit.bean.FaultResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
 @Slf4j
@@ -42,19 +40,5 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @Data
-    public static class FaultResponse {
-        @NonNull
-        private String errorCode;
-        @NonNull
-        private String errorMessage;
-        private Date timestamp;
-
-        public FaultResponse(String errorCode, String errorMessage) {
-            super();
-            this.errorCode = errorCode;
-            this.errorMessage = errorMessage;
-            this.timestamp = new Date();
-        }
-    }
+  
 }
