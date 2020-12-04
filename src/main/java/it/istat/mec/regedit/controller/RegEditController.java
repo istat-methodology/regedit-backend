@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.istat.mec.regedit.dto.AddressDto;
+import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.service.AddressService;
@@ -102,7 +103,7 @@ public class RegEditController {
 		try {
 			address = addressService.getFirstAddressByUser(user, stato);
 		} catch (Exception e) {			
-			e.printStackTrace();
+			throw new NoDataException("Address no present");
 		}
 		return address;
 	}

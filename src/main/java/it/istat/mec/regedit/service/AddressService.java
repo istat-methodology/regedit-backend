@@ -91,18 +91,23 @@ public class AddressService {
 	public AddressDto findAddressById(Integer id) {
 
 		if (!addressDao.findById(id).isPresent())
-			throw new NoDataException("Business Function no present");
+			throw new NoDataException("Address no present");
 		return Translators.translate(addressDao.findById(id).get());
 	}
-	public List<AddressDto> getAddressesByUser(Integer user, Short stato) throws Exception{
+	public List<AddressDto> getAddressesByUser(Integer user, Short stato) throws NoDataException{
 		List<AddressDto> addresses = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
 				.collect(Collectors.toList());		
+		if (addresses.size()==0)
+				throw new NoDataException("Address no present");
 		return addresses;
 		
 	}
-	public AddressDto getFirstAddressByUser(Integer user, Short stato) throws Exception{
-		AddressDto address = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
-				.collect(Collectors.toList()).get(0);		
+	public AddressDto getFirstAddressByUser(Integer user, Short stato) throws NoDataException{		
+		List<AddressDto> addresses = addressDao.getAddressesByUser(user, stato).stream().map(x -> Translators.translate(x))
+				.collect(Collectors.toList());
+		if (addresses==null)
+			throw new NoDataException("Address no present");
+			AddressDto address = addresses.get(0);
 		return address;
 		
 	}
