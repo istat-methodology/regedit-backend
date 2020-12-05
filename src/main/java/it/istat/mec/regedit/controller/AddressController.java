@@ -38,10 +38,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.service.AddressService;
+import it.istat.mec.regedit.translators.Translators;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -76,48 +78,19 @@ public class AddressController {
 
 	@PostMapping("/addresses")
 	public AddressDto create(@RequestBody CreateAddressRequest request) {
-		return addressService.newAdress(request.getProgressivoIndirizzo(), request.getCodiceArchivio(),
-				request.getProCom(), request.getDenominazioneComune(), request.getLocalitaOriginale(),
-				request.getIndirizzoOriginale(), request.getLocalitaNorm(), request.getDugNorm(), request.getDufNorm(),
-				request.getCivicoNorm(), request.getKmNorm(), request.getEsponenteNorm(), request.getValidazione(),
-				request.getDugVal(), request.getDufVal(), request.getCivicoVal(), request.getKmVal(),
-				request.getEsponenteVal(), request.getLocalitaVal(), request.getCdpstrEgon(), request.getCdpcivEgon(),
-				request.getIdFonte(), request.getStratoIndirizzo(), request.getIdRevisore(), request.getStato(),
-				request.getDataIns(), request.getDataMod(), request.getNomeFile());
+		
+		Address adr = new Address();
+		adr = Translators.translate(request);		
+		return addressService.newAdress(adr);
 	}
 
 	@PostMapping(value = "/addresses/{addressId}")
 	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request) {
-		AddressDto addressDto = addressService.findAddressById(request.getProgressivoIndirizzo());
-		addressDto.setValidazione(request.getValidazione());
-		addressDto.setDugVal(request.getDugVal());
-		addressDto.setDufVal(request.getDufVal());
-		addressDto.setCivicoVal(request.getCivicoVal());
-		addressDto.setKmVal(request.getKmVal());
-		addressDto.setEsponenteVal(request.getEsponenteVal());
-		addressDto.setLocalitaVal(request.getLocalitaVal());
-		addressDto.setCdpstrEgon(request.getCdpstrEgon());
-		addressDto.setCdpcivEgon(request.getCdpcivEgon());
-		addressDto.setIdFonte(request.getIdFonte());
-		addressDto.setStato(request.getStato());
-		Calendar calendar = Calendar.getInstance();
-		Date now = calendar.getTime();
-		addressDto.setDataMod(now);
-
-		return addressDto;
-	}
-
-	@PutMapping(value = "/addresses/{id}")
-	public AddressDto validateAddress(@PathVariable("id") Integer id) {
-		AddressDto addressDto = addressService.findAddressById(id);
-		// TODO: Da definire utilizzo e provenienza dello stato
-		addressDto.setStato((short) 1);
-		Calendar calendar = Calendar.getInstance();
-		Date now = calendar.getTime();
-		addressDto.setDataMod(now);
-
-		return addressDto;
-	}
+		
+		Address adr = new Address();
+		adr = Translators.translateUpdate(request, adr);
+		return addressService.updateAddress(adr);
+	}	
 
 	@DeleteMapping(value = "/addresses/{id}")
 	public AddressDto deleteAddress(@PathVariable("id") Integer id) {

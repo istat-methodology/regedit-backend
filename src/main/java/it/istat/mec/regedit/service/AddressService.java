@@ -22,6 +22,7 @@
  */
 package it.istat.mec.regedit.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,9 +56,12 @@ public class AddressService {
 
 	}
 
-	public Address updateAddress(Address address) {
-
-		return addressDao.save(address);
+	public AddressDto updateAddress(Address address) {
+		Calendar calendar = Calendar.getInstance();
+		Date now = calendar.getTime();
+		address.setDataMod(now);
+		addressDao.save(address);
+		return Translators.translate(address);
 	}
 
 	public AddressDto deleteAddress(Integer id) {
@@ -65,42 +69,12 @@ public class AddressService {
 		return addressDto;
 	}
 
-	public AddressDto newAdress(Integer progressivoIndirizzo, Integer codiceArchivio, String proCom,
-			String denominazioneComune, String localitaOriginale, String indirizzoOriginale, String localitaNorm,
-			String dugNorm, String dufNorm, Integer civicoNorm, String kmNorm, String esponenteNorm, String validazione,
-			String dugVal, String dufVal, Integer civicoVal, String kmVal, String esponenteVal, String localitaVal,
-			Integer cdpstrEgon, Integer cdpcivEgon, Integer idFonte, Integer stratoIndirizzo, Integer idRevisore,
-			Short stato, Date dataIns, Date dataMod, String nomeFile) {
-		final Address addrs = new Address();
-		addrs.setProgressivoIndirizzo(progressivoIndirizzo);
-		addrs.setCodiceArchivio(codiceArchivio);
-		addrs.setProCom(proCom);
-		addrs.setDenominazioneComune(denominazioneComune);
-		addrs.setLocalitaOriginale(localitaOriginale);
-		addrs.setIndirizzoOriginale(indirizzoOriginale);
-		addrs.setLocalitaOriginale(localitaOriginale);
-		addrs.setDugNorm(dugNorm);
-		addrs.setDufNorm(dufNorm);
-		addrs.setCivicoNorm(civicoNorm);
-		addrs.setKmNorm(kmNorm);
-		addrs.setEsponenteNorm(esponenteNorm);
-		addrs.setValidazione(validazione);
-		addrs.setDugVal(dugVal);
-		addrs.setDufVal(dufVal);
-		addrs.setCivicoVal(civicoVal);
-		addrs.setKmVal(kmVal);
-		addrs.setEsponenteVal(esponenteVal);
-		addrs.setLocalitaVal(localitaVal);
-		addrs.setCdpstrEgon(cdpstrEgon);
-		addrs.setCdpcivEgon(cdpcivEgon);
-		addrs.setIdFonte(idFonte);
-		addrs.setStratoIndirizzo(stratoIndirizzo);
-		addrs.setIdRevisore(idRevisore);
-		addrs.setStato(stato);
-		addrs.setDataIns(dataIns);
-		addrs.setDataMod(dataMod);
-		addrs.setNomeFile(nomeFile);
-		return findAddressById(addressDao.save(addrs).getProgressivoIndirizzo());
+	public AddressDto newAdress(Address address) {
+		Calendar calendar = Calendar.getInstance();
+		Date now = calendar.getTime();
+		address.setDataMod(now);
+		addressDao.save(address);		
+		return Translators.translate(address);
 	}
 
 	public AddressDto findAddressById(Integer id) {

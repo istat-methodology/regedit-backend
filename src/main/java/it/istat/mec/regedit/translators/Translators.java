@@ -29,6 +29,8 @@ import org.springframework.stereotype.Component;
 
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.dto.AddressDto;
+import it.istat.mec.regedit.request.CreateAddressRequest;
+import it.istat.mec.regedit.request.UpdateAddressRequest;
 
 
 @Component
@@ -40,6 +42,18 @@ public class Translators {
 		final ModelMapper modelMapper = new ModelMapper();
 		final AddressDto dTO = modelMapper.map(x, AddressDto.class);
 		return dTO;
+	}
+	public static Address translate(CreateAddressRequest x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final Address adr = modelMapper.map(x, Address.class);
+		return adr;
+	}
+	
+	public static Address translateUpdate(UpdateAddressRequest x, Address adr) {
+		final ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(x,adr);
+		return adr;
 	}
 	
 	public static <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
