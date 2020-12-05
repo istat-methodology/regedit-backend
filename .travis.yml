@@ -1,6 +1,9 @@
 language: java
+sudo: true
 jdk: openjdk11
  # would just use default install/script but the ./mvnw script errors on travis
 # obviously this only works for maven builds right now...
 install:
 - mvn install -DskipTests=true 
+before_install:
+  - chmod +x mvnw
