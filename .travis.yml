@@ -2,8 +2,10 @@ language: java
 sudo: true
 jdk: openjdk11
 install:
-- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+ - mvn install -DskipTests=true  
 script:
-- mvn test
+ - mvn test
 before_install:
-  - chmod +x mvnw
+ - chmod +x mvnw
+before_script:
+ - chmod +x mvnw
