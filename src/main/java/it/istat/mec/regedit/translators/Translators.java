@@ -34,7 +34,7 @@ import it.istat.mec.regedit.request.UpdateAddressRequest;
 
 
 @Component
-public class Translators {
+public class Translators { 
 	
 
 	public static AddressDto translate(Address x) {
@@ -50,7 +50,7 @@ public class Translators {
 		return adr;
 	}
 	
-	public static Address translateUpdate(UpdateAddressRequest x, Address adr) {
+	public static Address translateUpdate(UpdateAddressRequest x, Address adr) {  
 		final ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(x,adr);
 		return adr;

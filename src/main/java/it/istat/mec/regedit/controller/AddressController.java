@@ -93,8 +93,8 @@ public class AddressController {
 	}	
 
 	@DeleteMapping(value = "/addresses/{id}")
-	public AddressDto deleteAddress(@PathVariable("id") Integer id) {
-
+	public AddressDto deleteAddress(@PathVariable("id") Integer id) { 
+  
 		return addressService.deleteAddress(id);
 	}
 
