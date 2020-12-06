@@ -34,9 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.service.ReportService;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/report")
 public class ReportController {
@@ -50,6 +48,7 @@ public class ReportController {
 		return reportService.getReportAddressState();
 
 	}
+
 	@GetMapping(value = "/users/{user}")
 	public List<ReportDto> getAddressStateByUser(@PathVariable("user") Integer user) {
 
