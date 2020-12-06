@@ -22,6 +22,7 @@
  */
 package it.istat.mec.regedit.translators;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -43,6 +44,12 @@ public class Translators {
 		final AddressDto dTO = modelMapper.map(x, AddressDto.class);
 		return dTO;
 	}
+	public static AddressDto translate(Optional<Address> address) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final AddressDto dTO = modelMapper.map(address, AddressDto.class);
+		return dTO;
+	}
 	public static Address translate(CreateAddressRequest x) {
 
 		final ModelMapper modelMapper = new ModelMapper();
@@ -50,10 +57,10 @@ public class Translators {
 		return adr;
 	}
 	
-	public static Address translateUpdate(UpdateAddressRequest x, Address adr) {  
+	public static Optional <Address> translateUpdate(UpdateAddressRequest x, Optional<Address> address) {  
 		final ModelMapper modelMapper = new ModelMapper();
-		modelMapper.map(x,adr);
-		return adr;
+		modelMapper.map(x,address);
+		return address;
 	}
 	
 	public static <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {

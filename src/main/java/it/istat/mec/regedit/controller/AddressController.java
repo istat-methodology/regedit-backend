@@ -84,12 +84,11 @@ public class AddressController {
 		return addressService.newAdress(adr);
 	}
 
-	@PostMapping(value = "/addresses/{addressId}")
+	@PutMapping(value = "/addresses/{addressId}")
 	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request) {
 		
-		Address adr = new Address();
-		adr = Translators.translateUpdate(request, adr);
-		return addressService.updateAddress(adr);
+		
+		return addressService.updateAddress(request);
 	}	
 
 	@DeleteMapping(value = "/addresses/{id}")

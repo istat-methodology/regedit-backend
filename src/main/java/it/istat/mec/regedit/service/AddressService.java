@@ -25,6 +25,7 @@ package it.istat.mec.regedit.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
+import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.translators.Translators;
 
 @Service
@@ -56,10 +58,15 @@ public class AddressService {
 
 	}
 
-	public AddressDto updateAddress(Address address) {
-		Calendar calendar = Calendar.getInstance();
+	@SuppressWarnings("static-access")
+	public AddressDto updateAddress(UpdateAddressRequest request) {
+		Optional<Address> address = addressDao.findById(request.getProgressivoIndirizzo());
+		
+		address = Translators.translateUpdate(request, address);
+		Calendar calendar = Calendar.getInstance();		
 		Date now = calendar.getTime();
-		address.setDataMod(now);
+		// Da testare
+		address.of(now);
 		addressDao.save(address);
 		return Translators.translate(address);
 	}
