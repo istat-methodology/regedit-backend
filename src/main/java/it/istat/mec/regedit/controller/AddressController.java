@@ -77,11 +77,9 @@ public class AddressController {
 	}
 
 	@PostMapping("/addresses")
-	public AddressDto create(@RequestBody CreateAddressRequest request) {
-		
-		Address adr = new Address();
-		adr = Translators.translate(request);		
-		return addressService.newAdress(adr);
+	public AddressDto create(@RequestBody CreateAddressRequest request) {		
+			
+		return addressService.newAdress(request);
 	}
 
 	@PutMapping(value = "/addresses/{addressId}")

@@ -35,6 +35,7 @@ import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
+import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.translators.Translators;
 
@@ -76,7 +77,9 @@ public class AddressService {
 		return addressDto;
 	}
 
-	public AddressDto newAdress(Address address) {
+	public AddressDto newAdress(CreateAddressRequest request) {
+		Address address = new Address();
+		address = Translators.translate(request);	
 		Calendar calendar = Calendar.getInstance();
 		Date now = calendar.getTime();
 		address.setDataMod(now);
