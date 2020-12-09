@@ -18,6 +18,9 @@ spring:
     password: root
     driverClassName: com.mysql.cj.jdbc.Driver
     platform: mysql
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3
 server:
   port: 8081
 

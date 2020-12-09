@@ -1,4 +1,4 @@
-docker build -t mecdcme/is2-regedit  .
+docker build -t mecdcme/regedit-service  .
 
-docker push mecdcme/is2-regedit
+docker push mecdcme/regedit-service
 

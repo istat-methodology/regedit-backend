@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/istat-methodology/regedit-backend.svg?branch=main)](https://travis-ci.org/istat-methodology/regedit-backend) 
-[![Docker hub](https://img.shields.io/docker/cloud/automated/mecdcme/regedit.svg?label=regedit%20docker)](https://hub.docker.com/r/mecdcme/regedit)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=istat-methodology_regedit-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=istat-methodology_regedit-backend)
-# RegEdit Service
+# RegEdit Backend Service
 
-A JAVA REST API service to editing a register address table by user.
+An microservices architecture system with central authentication, redirect an incoming request to other microservices. The main advantage of this architecture you can easily add multiple microservices to the system and all authentication, authorization will be taken care from a central unit.
+
+ 1.  RegEdit API gateway service: A Eureka server that will act as a central authentication unit, ZUUL proxy server for redirection.
+ 2.  RegEdit service: This will act as a eureka client, which receive a request from gateway service.
 
 
 ## What you’ll need
