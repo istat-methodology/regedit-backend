@@ -1,6 +1,6 @@
 # RegEdit Backend Service
 
-An microservices architecture system with central authentication, redirect an incoming request to other microservices. The main advantage of this architecture you can easily add multiple microservices to the system and all authentication, authorization will be taken care from a central unit.
+A microservices architecture system with central authentication, redirect an incoming request to other microservices. The main advantage of this architecture you can easily add multiple microservices to the system and all authentication, authorization will be taken care from a central unit.
 
  1.  RegEdit API gateway service: A Eureka server that will act as a central authentication unit, ZUUL proxy server for redirection.
  2.  RegEdit service: This will act as a eureka client, which receive a request from gateway service.
