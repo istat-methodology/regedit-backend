@@ -36,13 +36,6 @@ CREATE TABLE `regedit`.`WP1_INDIRIZZI_DA_REVISIONARE` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-CREATE TABLE `regedit`.`edit_address` (
-  `user` integer ,
-  `address` integer ,
-  `state` text,
-  `date_time` TIMESTAMP 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE `regedit`.`DUG` (
   `id` integer ,
   `name` text ,
