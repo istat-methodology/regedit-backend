@@ -1,64 +1,13 @@
 # RegEdit Backend Service
 
-A microservices architecture system with central authentication, redirect an incoming request to other microservices. The main advantage of this architecture you can easily add multiple microservices to the system and all authentication, authorization will be taken care from a central unit.
+A microservices architecture system with central authentication.
+Main components
 
  1.  RegEdit API gateway service: A Eureka server that will act as a central authentication unit, ZUUL proxy server for redirection.
  2.  RegEdit service: This will act as a eureka client, which receive a request from gateway service.
 
-
-## What you’ll need
-In order to build the application, your environment should fulfill the following requirements:
-
-* A favorite text editor or IDE;
-* JDK 11+; 
-* Maven 3.0+;
-* Mysql Server 8.0+ or PostgreSQL 9.6+ ;  
-
-
-## How to build
-Download and unzip the source code in your developing folder `RegEdit_PATH`.
-
-Before building the application you must create and popolulate the RegEdit database.
-
-You can create a MySQL database using the script `regedit-create-mysql.sql` stored in the [RegEdit_PATH/db](db/regedit-create-mysql.sql) folder.
-Also you can create a PostgreSQL database using the script `regedit-create-postgres.sql` stored in the [RegEdit_PATH/db](db/regedit-create-postgres.sql) folder.
-
-Then yo can load the metadata and the test data, using the script `regedit-data.sql` stored in the [RegEdit_PATH/db](db/regedit-data.sql) folder.
-
-As a first step, configure the database connection in the 'application.yml' file, located in the path `[RegEdit_PATH]/src/main/resources`:
-
-Postgres connection
-```
-spring.datasource.url=jdbc:postgresql://localhost:5432/postgres?currentSchema=regedit&charset=UTF-8
-spring.datasource.username=db_username
-spring.datasource.password=db_password
-spring.datasource.driverClassName=org.postgresql.Driver
-```
-MySQL connection
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/regedit?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-spring.datasource.username=db_username
-spring.datasource.password=db_password
-spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
-```
-
-Now you can perform your first build of the application using Maven comand:
-```
-[RegEdit_PATH]> mvn package
-```
-If the build process ends successfully, you are ready to run the application:
-The application is built using the open source framework Spring Boot, which generates an 
-executable jar (that can be run from the command line). Spring Boot creates a stand-alone Spring 
-based Applications, with an embedded Tomcat, that you can "just run".
-```
-[RegEdit_PATH]> java –jar target/regedit.jar
-```
-or using Maven comand:
-```
-[RegEdit_PATH]> mvn spring-boot:run 
-```
 ## Docker compose
-You can run the RegEdit Service as Docker containers using docker compose: 
+You can run the RegEdit Backend Service as Docker containers using docker compose: 
 ```
 [RegEdit_PATH]> docker-compose up
 ```
