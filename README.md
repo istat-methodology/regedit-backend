@@ -11,12 +11,12 @@ Main components
  2.  RegEdit service: This will act as a eureka client, which receive a request from gateway service.
 
 
-#1 RegEdit API Gateway Service (ZUUL+Eureka+JWT)
+## 1 RegEdit API Gateway Service (ZUUL+Eureka+JWT)
 
 A EUREKA server that acts as a central authentication unit, ZUUL proxy server for redirection..
 
 
-## What you’ll need
+### What you’ll need
 In order to build the application, your environment should fulfill the following requirements:
 
 * A favorite text editor or IDE;
@@ -25,7 +25,7 @@ In order to build the application, your environment should fulfill the following
 * Mysql Server 8.0+ or PostgreSQL 9.6+ ;  
 
 
-## How to build
+### How to build
 Download and unzip the source code in your developing folder `RegEditAPI_PATH`.
 
 Before building the application you must create and popolulate the RegEdit database.
@@ -74,13 +74,13 @@ or using Maven comand:
 ```
 [RegEditAPI_PATH]> mvn spring-boot:run 
 ```
-## Docker compose
+### Docker compose
 You can run the RegEdit API Gateway as Docker containers using docker compose: 
 ```
 [RegEditAPI_PATH]> docker-compose up
 ```
 
-## Test the application 
+### Test the application 
 You can test the application and explore the available services, linking to API documentation  by Swagger tools:
 
 [http://localhost:8080/swagger-ui/index.html/](http://localhost:8080/swagger-ui/index.html) 
@@ -90,11 +90,7 @@ and EUREKA services at:
 [http://localhost:8080/](http://localhost:8080) 
 
 
-## License
-RegEdit Service is EUPL-licensed
-
-
-## Docker compose
+### Docker compose
 You can run the RegEdit Backend Service as Docker containers using docker compose: 
 ```
 [RegEdit_PATH]> docker-compose up
