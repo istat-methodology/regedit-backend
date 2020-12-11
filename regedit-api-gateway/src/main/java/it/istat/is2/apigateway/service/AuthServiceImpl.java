@@ -46,9 +46,9 @@ public class AuthServiceImpl implements AuthService
             if (user == null) {
                 throw new CustomException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
             }
-            String token =  jwtTokenProvider.createToken(username, List.of(user.getRole())
+            String token =  jwtTokenProvider.createToken(username,user.getId(), List.of(user.getRole())
                     .stream()
-                    .map((UserRolesEntity role) -> "ROLE_"+role.getRole()).filter(Objects::nonNull).collect(Collectors.toList()));
+                    .map((UserRolesEntity role) -> role.getRole()).filter(Objects::nonNull).collect(Collectors.toList()));
             return token;
 
         } catch (AuthenticationException e) {
@@ -70,8 +70,9 @@ public class AuthServiceImpl implements AuthService
     @Override
     public String createNewToken(String token) {
         String username = jwtTokenProvider.getUsername(token);
+        Integer userId= jwtTokenProvider.getUserId(token);
         List<String>roleList = jwtTokenProvider.getRoleList(token);
-        String newToken =  jwtTokenProvider.createToken(username,roleList);
+        String newToken =  jwtTokenProvider.createToken(username,userId, roleList);
         return newToken;
     }
 }

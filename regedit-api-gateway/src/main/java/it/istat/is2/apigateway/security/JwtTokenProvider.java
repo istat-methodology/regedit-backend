@@ -25,6 +25,7 @@ import java.util.List;
 @Component
 public class JwtTokenProvider {
     private static final String AUTH="auth";
+    private static final String USER_ID="userId";
     private static final String AUTHORIZATION="Authorization";
 
     @Value("${security.secret-key:secret-key}")
@@ -35,17 +36,16 @@ public class JwtTokenProvider {
     @Autowired
     private JwtTokenRepository jwtTokenRepository;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
+ 
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String username, List<String> roles) {
+    public String createToken(String username, Integer userid, List<String> roles) {
 
         Claims claims = Jwts.claims().setSubject(username);
+        claims.put(USER_ID,userid);
         claims.put(AUTH,roles);
 
         Date now = new Date();
@@ -85,6 +85,11 @@ public class JwtTokenProvider {
         List<String> roleList = getRoleList(token);
         UserDetails userDetails = new IS2UserDetails(userName,roleList.toArray(new String[roleList.size()]));
         return userDetails;
+    }
+    
+    public Integer getUserId(String token) {
+        return (Integer) Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).
+                getBody().get(USER_ID);
     }
     public List<String> getRoleList(String token) {
         return (List<String>) Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).
