@@ -25,7 +25,6 @@ package it.istat.mec.regedit.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,17 +57,17 @@ public class AddressService {
 					.map(x -> Translators.translate(x)).collect(Collectors.toList());
 
 	}
-
-	@SuppressWarnings("static-access")
-	public AddressDto updateAddress(UpdateAddressRequest request) {
-		Optional<Address> address = addressDao.findById(request.getProgressivoIndirizzo());
+	
+	public AddressDto updateAddress(UpdateAddressRequest request) {		
 		
-		address = Translators.translateUpdate(request, address);
+		if (!addressDao.findById(request.getProgressivoIndirizzo()).isPresent())
+			throw new NoDataException("Address no present");
+		
+		Address address = addressDao.findById(request.getProgressivoIndirizzo()).get();
 		Calendar calendar = Calendar.getInstance();		
 		Date now = calendar.getTime();
-		// Da testare
-		address.of(now);
-		addressDao.save(address);
+		address.setDataMod(now);
+		addressDao.save(address);		
 		return Translators.translate(address);
 	}
 
