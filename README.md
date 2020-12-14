@@ -5,7 +5,7 @@
 # RegEdit Backend Service
 
 A microservices architecture system with central authentication.
-Main components
+Main components:
 
  1.  RegEdit API gateway service: A Eureka server that will act as a central authentication unit, ZUUL proxy server for redirection.
  2.  RegEdit service: This will act as a eureka client, which receive a request from gateway service.
