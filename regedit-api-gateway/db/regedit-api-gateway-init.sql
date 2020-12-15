@@ -1,6 +1,7 @@
 
 INSERT INTO regedit_gateway.is2_user_roles VALUES (1, 'ROLE_ADMIN');
-INSERT INTO regedit_gateway.is2_user_roles VALUES (2, 'ROLE_USER');
+INSERT INTO regedit_gateway.is2_user_roles VALUES (2, 'ROLE_SUPERVISOR');
+INSERT INTO regedit_gateway.is2_user_roles VALUES (3, 'ROLE_REVIEWER');
 
 
 INSERT INTO regedit_gateway.is2_users VALUES (1, 'admin@is2.it', 'Administrator', 'Workbench', '$2a$10$VB7y/I.oD16QBVaExgH1K.VEuBUKRyXcCUVweUGhs1vDl0waTQPmC', 1);
