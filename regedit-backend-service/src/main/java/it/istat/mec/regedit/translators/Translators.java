@@ -33,6 +33,7 @@ import it.istat.mec.regedit.domain.Dug;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.DugDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
+import it.istat.mec.regedit.request.CreateDugRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 
 
@@ -63,6 +64,13 @@ public class Translators {
 		final ModelMapper modelMapper = new ModelMapper();
 		final Address adr = modelMapper.map(x, Address.class);
 		return adr;
+	}
+	
+	public static Dug translate(CreateDugRequest x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final Dug dug = modelMapper.map(x, Dug.class);
+		return dug;
 	}
 	
 	public static Optional <Address> translateUpdate(UpdateAddressRequest x, Optional<Address> address) {  

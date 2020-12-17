@@ -20,22 +20,23 @@
  * @author Stefano Macone <macone @ istat.it>
  * @version 1.0
  */
-package it.istat.mec.regedit.dao;
-import java.util.List;
-import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
-import it.istat.mec.regedit.domain.Dug;
+package it.istat.mec.regedit.request;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public interface DugDao extends CrudRepository<Dug, Integer> {
 
-	@Override
-	List<Dug> findAll();
+@Data
+@NoArgsConstructor
+public class CreateDugRequest  implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-	Optional<Dug> findById(@Param("id") Integer id);
-	
-	public void save(Optional<Dug> dug);
-	
-	public void delete(Dug dug);
-	
+	private Integer id;		
+	private String name;	
+	private String description;	
+
 }
