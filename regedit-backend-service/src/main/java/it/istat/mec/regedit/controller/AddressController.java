@@ -82,7 +82,7 @@ public class AddressController {
 			
 		return addressService.newAdress(request);
 	}
-	@CrossOrigin("*")
+
 	@PutMapping(value = "/addresses/{id}")
 	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request) {
 		
