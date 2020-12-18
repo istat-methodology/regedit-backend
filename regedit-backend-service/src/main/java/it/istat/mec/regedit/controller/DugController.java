@@ -56,7 +56,7 @@ public class DugController {
 			
 		return dugService.newDug(request);
 	}
-	@PutMapping(value = "/dug/{dugId}")
+	@PutMapping(value = "/dug/{id}")
 	public DugDto updateDug(@RequestBody CreateDugRequest request) {		
 		
 		return dugService.updateDug(request);
