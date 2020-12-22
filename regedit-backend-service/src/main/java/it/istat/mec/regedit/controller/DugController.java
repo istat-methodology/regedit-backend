@@ -50,6 +50,11 @@ public class DugController {
 
 		return dugService.findAllDug();
 	}
+	@GetMapping (value = "/dug/{id}")
+	public DugDto getDugById(@PathVariable("id") Integer id) { 
+
+		return dugService.findDugById(id);
+	}
 	
 	@PostMapping("/dug")
 	public DugDto create(@RequestBody CreateDugRequest request) {		

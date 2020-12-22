@@ -41,6 +41,12 @@ public class DugService {
 		return dugDao.findAll().stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
 	
+	public DugDto findDugById(Integer id) {
+		if (!dugDao.findById(id).isPresent())
+			throw new NoDataException("Dug not present");
+		return Translators.translate(dugDao.findById(id).get());
+	}
+	
 	public DugDto newDug(CreateDugRequest request) {
 		Dug dug = new Dug();
 		dug = Translators.translate(request);			
@@ -60,7 +66,9 @@ public class DugService {
 	public DugDto deleteDug(Integer id) {
 		if (!dugDao.findById(id).isPresent())
 			throw new NoDataException("Dug not present");
-		return Translators.translate(dugDao.findById(id).get());
+		Dug dug = dugDao.findById(id).get();
+		dugDao.delete(dug);
+		return Translators.translate(dug);
 	}
 
 }
