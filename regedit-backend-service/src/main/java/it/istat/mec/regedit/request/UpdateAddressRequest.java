@@ -25,7 +25,6 @@ package it.istat.mec.regedit.request;
 import java.io.Serializable;
 import java.util.Date;
 
-import it.istat.mec.regedit.dto.DugDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
@@ -35,7 +34,7 @@ public class UpdateAddressRequest implements Serializable {
 	private static final long serialVersionUID = 5939182470433987957L;
 	private Integer progressivoIndirizzo;	
 	private String validazione;		
-	private DugDto dugVal;	
+	private String dugVal;	
 	private String dufVal;	
 	private Integer civicoVal;	
 	private String kmVal;	
