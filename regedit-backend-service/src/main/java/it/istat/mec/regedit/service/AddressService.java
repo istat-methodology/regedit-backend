@@ -25,6 +25,7 @@ package it.istat.mec.regedit.service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +65,11 @@ public class AddressService {
 			throw new NoDataException("Address no present");
 		
 		Address address = addressDao.findById(request.getProgressivoIndirizzo()).get();
+		address = Translators.translateUpdate(request, address);		
 		Calendar calendar = Calendar.getInstance();		
 		Date now = calendar.getTime();
 		address.setDataMod(now);
+		
 		addressDao.save(address);		
 		return Translators.translate(address);
 	}

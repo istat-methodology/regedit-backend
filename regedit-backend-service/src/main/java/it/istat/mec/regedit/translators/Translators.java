@@ -73,7 +73,7 @@ public class Translators {
 		return dug;
 	}
 	
-	public static Optional <Address> translateUpdate(UpdateAddressRequest x, Optional<Address> address) {  
+	public static Address translateUpdate(UpdateAddressRequest x, Address address) {  
 		final ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(x,address);
 		return address;
