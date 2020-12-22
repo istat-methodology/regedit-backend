@@ -55,12 +55,12 @@
 			<artifactId>spring-boot-starter-log4j</artifactId>
 			<version>1.2.8.RELEASE</version>
 		</dependency>
-		<dependency>
+<!--  		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
 			<version>12.2.0.1</version>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
