@@ -58,7 +58,10 @@ public class DugService {
 		if (!dugDao.findById(request.getId()).isPresent())
 			throw new NoDataException("Dug not present");
 		
-		Dug dug = dugDao.findById(request.getId()).get();		
+		Dug dug = dugDao.findById(request.getId()).get();	
+		
+		dug = Translators.translateUpdate(request, dug);
+		
 		dugDao.save(dug);		
 		
 		return Translators.translate(dug);

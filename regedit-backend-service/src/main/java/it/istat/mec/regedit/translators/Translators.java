@@ -79,6 +79,12 @@ public class Translators {
 		return address;
 	}
 	
+	public static Dug translateUpdate(CreateDugRequest x, Dug dug) {  
+		final ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(x,dug);
+		return dug;
+	}
+	
 	public static <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
 		final ModelMapper modelMapper = new ModelMapper();
 	    return source
