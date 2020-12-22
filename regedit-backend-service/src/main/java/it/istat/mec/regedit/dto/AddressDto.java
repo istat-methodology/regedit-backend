@@ -57,7 +57,6 @@ public class AddressDto {
 	private Short stato;	
 	private Date dataIns;	
 	private Date dataMod;	
-	private String nomeFile;	
 	
 	
 }

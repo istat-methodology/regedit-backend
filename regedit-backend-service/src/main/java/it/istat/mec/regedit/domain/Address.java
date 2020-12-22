@@ -32,9 +32,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,17 +39,16 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "WP1_INDIRIZZI_DA_REVISIONARE")
-@JsonIgnoreProperties(ignoreUnknown=true)
 public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PROGRESSIVO_INDIRIZZO")
 	private Integer progressivoIndirizzo;
 	@Column(name = "CODICE_ARCHIVIO")
-	private Integer codiceArchivio;	
+	private Integer codiceArchivio;
 	@Column(name = "PRO_COM")
 	private String proCom;
 	@Column(name = "DENOMINAZIONE_COMUNE")
@@ -74,7 +70,7 @@ public class Address implements Serializable {
 	@Column(name = "ESPONENTE_NORM")
 	private String esponenteNorm;
 	@Column(name = "VALIDAZIONE")
-	private String validazione;	
+	private String validazione;
 	@Column(name = "DUG_VAL")
 	private String dugVal;
 	@Column(name = "DUF_VAL")
@@ -86,11 +82,11 @@ public class Address implements Serializable {
 	@Column(name = "ESPONENTE_VAL")
 	private String esponenteVal;
 	@Column(name = "LOCALITA_VAL")
-	private String localitaVal;	
+	private String localitaVal;
 	@Column(name = "CDPSTR_EGON")
-	private Integer cdpstrEgon;	
+	private Integer cdpstrEgon;
 	@Column(name = "CDPCIV_EGON")
-	private Integer cdpcivEgon;	
+	private Integer cdpcivEgon;
 	@Column(name = "ID_FONTE")
 	private Integer idFonte;
 	@Column(name = "STRATO_INDIRIZZO")
@@ -103,7 +99,5 @@ public class Address implements Serializable {
 	private Date dataIns;
 	@Column(name = "DATA_MOD")
 	private Date dataMod;
-	@Column(name = "NOME_FILE")
-	private String nomeFile;
 
 }

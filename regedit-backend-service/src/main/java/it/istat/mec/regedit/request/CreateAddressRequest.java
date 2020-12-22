@@ -62,6 +62,5 @@ public class CreateAddressRequest implements Serializable {
 	private Short stato;	
 	private Date dataIns;	
 	private Date dataMod;	
-	private String nomeFile;
 }
 
