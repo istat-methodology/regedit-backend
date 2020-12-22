@@ -37,6 +37,5 @@ public class CreateDugRequest  implements Serializable {
 	
 	private Integer id;		
 	private String name;	
-	private String description;	
-
+	
 }
