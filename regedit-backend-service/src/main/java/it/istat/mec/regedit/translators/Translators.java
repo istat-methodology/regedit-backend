@@ -76,6 +76,7 @@ public class Translators {
 	public static Address translateUpdate(UpdateAddressRequest x, Address address) {  
 		final ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(x,address);
+		if(x.getDugVal()!=null) address.setDugVal(x.getDugVal().getName());
 		return address;
 	}
 	
