@@ -1,0 +1,34 @@
+-- 
+-- Schema regedit_gateway
+-- 
+DROP SCHEMA IF EXISTS regedit_gateway;
+CREATE SCHEMA regedit_gateway DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+USE regedit_gateway;
+
+-- 
+-- USER ROLE
+-- 
+CREATE TABLE PD_RSA_SPER.WP1_user_roles (
+  ID 	 	NUMBER NOT NULL ,
+  ROLE 	VARCHAR2(50) NULL DEFAULT NULL,
+)
+
+-- 
+-- USER
+-- 
+CREATE TABLE PD_RSA_SPER.WP1_users (
+  ID 			NUMBER NOT NULL ,
+  EMAIL 		VARCHAR2(255) NULL,
+  NAME 		VARCHAR2(100) NULL,
+  SURNAME 	VARCHAR2(100) NULL,
+  PASSWORD 	VARCHAR2(500) NULL,
+  ROLE_ID 	NUMBER NOT NULL
+  
+)
+
+-- 
+-- CLASSIFICATION TABLES
+-- 
+CREATE TABLE PD_RSA_SPER.WP1_jwttoken (
+    token VARCHAR2(200)
+);
