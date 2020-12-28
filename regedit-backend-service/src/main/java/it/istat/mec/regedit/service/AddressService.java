@@ -22,10 +22,8 @@
  */
 package it.istat.mec.regedit.service;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +64,8 @@ public class AddressService {
 		
 		Address address = addressDao.findById(request.getProgressivoIndirizzo()).get();
 		address = Translators.translateUpdate(request, address);		
-		Calendar calendar = Calendar.getInstance();		
-		Date now = calendar.getTime();
-		address.setDataMod(now);
+		
+		address.setDataMod(new Timestamp(System.currentTimeMillis()));
 		
 		addressDao.save(address);		
 		return Translators.translate(address);
@@ -82,9 +79,7 @@ public class AddressService {
 	public AddressDto newAdress(CreateAddressRequest request) {
 		Address address = new Address();
 		address = Translators.translate(request);	
-		Calendar calendar = Calendar.getInstance();
-		Date now = calendar.getTime();
-		address.setDataMod(now);
+		address.setDataMod(new Timestamp(System.currentTimeMillis()));
 		addressDao.save(address);		    
 		return Translators.translate(address);
 	}
