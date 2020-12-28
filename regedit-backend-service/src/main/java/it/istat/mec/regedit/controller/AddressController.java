@@ -70,7 +70,7 @@ public class AddressController {
 
 	}
 
-	@GetMapping(value = "/first-address/user/{user}/state/{state}")
+	@GetMapping(value = "/addresses/first-address/user/{user}/state/{state}")
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato) {
 
 		return addressService.getFirstAddressByUser(user, stato);
