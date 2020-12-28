@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/istat-methodology/regedit-backend.svg?branch=main)](https://travis-ci.org/istat-methodology/regedit-backend) 
 [![Docker hub](https://img.shields.io/docker/cloud/automated/mecdcme/regedit.svg?label=regedit%20docker)](https://hub.docker.com/r/mecdcme/regedit)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=istat-methodology_regedit-backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=istat-methodology_regedit-backend)
+
 # RegEdit Backend Service
 
 A microservices architecture system with central authentication.
