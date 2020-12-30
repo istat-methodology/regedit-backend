@@ -33,12 +33,14 @@ public class ReportDto implements Serializable {
 	private Integer user;
 	private Short stato;
 	private Long count;
+	private String validazione;
 	
-	public ReportDto(Integer user, Short stato, Long count) {
+	public ReportDto(Integer user, Short stato,String validazione, Long count) {
 		super();
 		this.user = user;
 		this.stato = stato;
 		this.count = count;
+		this.validazione = validazione;
 	}
 
 }

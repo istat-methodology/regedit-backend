@@ -53,17 +53,17 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 	List<Address> findByIdRevisoreAndStatoOrderByProComAsc(@Param("idRevisore") Integer idRevisore, @Param("stato") Short stato);
 	
 	
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(*)) "
-			+ "FROM Address AS adr  GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato ,adr.validazione, COUNT(*)) "
+			+ "FROM Address AS adr  GROUP BY adr.idRevisore,adr.stato,adr.validazione ORDER BY adr.stato")
 	List<ReportDto> getReportAddressState();
 
 
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(*)) "
-			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione, COUNT(*)) "
+			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,adr.stato, adr.validazione ORDER BY adr.stato")
 	List<ReportDto> getReportAddressStateByUser(@Param("user") Integer user);
 
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato, COUNT(*)) "
-			+ "FROM Address AS adr WHERE adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato ORDER BY adr.stato")
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione, COUNT(*)) "
+			+ "FROM Address AS adr WHERE adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato,adr.validazione ORDER BY adr.stato")
 	Optional<ReportDto> getReportAddressStateByUserAndState(Integer user, Short state);
 
 	
