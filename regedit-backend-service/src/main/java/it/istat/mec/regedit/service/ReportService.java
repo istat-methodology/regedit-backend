@@ -61,7 +61,7 @@ public class ReportService {
 		return addressDao.getReportDailyAddressStateByUser(user);
 	}
 
-	public Optional<ReportDto> getReportDailyAddressStateByUserAndState(Integer user, Short state) {
+	public List<ReportDto> getReportDailyAddressStateByUserAndState(Integer user, Short state) {
 
 		return addressDao.getReportDailyAddressStateByUserAndState(user, state);
 	}

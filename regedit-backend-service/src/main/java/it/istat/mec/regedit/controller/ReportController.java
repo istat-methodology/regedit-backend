@@ -42,7 +42,7 @@ public class ReportController {
 	@Autowired
 	private ReportService reportService;
 
-	@GetMapping (value = "/report")
+	@GetMapping(value = "/report")
 	public List<ReportDto> getAddressStateByUser() {
 
 		return reportService.getReportAddressState();
@@ -65,7 +65,8 @@ public class ReportController {
 		return ResponseEntity.ok().body(reportDto);
 
 	}
-	@GetMapping (value = "/report-daily")
+
+	@GetMapping(value = "/report-daily")
 	public List<ReportDto> getDailyAddressStateByUser() {
 
 		return reportService.getReportDailyAddressState();
@@ -80,12 +81,10 @@ public class ReportController {
 	}
 
 	@GetMapping(value = "/report-daily/users/{user}/states/{state}")
-	public ResponseEntity<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user,
+	public List<ReportDto>  getDailyAddressStateByUser(@PathVariable("user") Integer user,
 			@PathVariable("state") Short state) {
-
-		ReportDto reportDto = reportService.getReportDailyAddressStateByUserAndState(user, state)
-				.orElseThrow(() -> new NoDataException());
-		return ResponseEntity.ok().body(reportDto);
+ 
+		return reportService.getReportDailyAddressStateByUserAndState(user, state);
 
 	}
 }
