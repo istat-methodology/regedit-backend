@@ -73,7 +73,7 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 	List<ReportDto> getReportDailyAddressState();
 
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione, cast(adr.dataMod as date) , COUNT(*)) "
-			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,cast(adr.dataMod as date), adr.validazione, adr.dataMod  ORDER BY adr.stato")
+			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,cast(adr.dataMod as date), adr.validazione, cast(adr.dataMod as date)   ORDER BY adr.stato")
 	List<ReportDto> getReportDailyAddressStateByUser(@Param("user") Integer user);
 
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione,cast(adr.dataMod as date) , COUNT(*)) "
