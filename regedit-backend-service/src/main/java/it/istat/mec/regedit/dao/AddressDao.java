@@ -58,13 +58,26 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 	List<ReportDto> getReportAddressState();
 
 
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione, COUNT(*)) "
-			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,adr.stato, adr.validazione ORDER BY adr.stato")
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione,  COUNT(*)) "
+			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,adr.stato, adr.validazione  ORDER BY adr.stato")
 	List<ReportDto> getReportAddressStateByUser(@Param("user") Integer user);
 
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione, COUNT(*)) "
 			+ "FROM Address AS adr WHERE adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato,adr.validazione ORDER BY adr.stato")
 	Optional<ReportDto> getReportAddressStateByUserAndState(Integer user, Short state);
-
 	
+	
+
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato ,adr.validazione, cast(adr.dataMod as date) , COUNT(*)) "
+			+ "FROM Address AS adr  GROUP BY adr.idRevisore,adr.stato,adr.validazione, cast(adr.dataMod as date)  ORDER BY adr.stato")
+	List<ReportDto> getReportDailyAddressState();
+
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione, cast(adr.dataMod as date) , COUNT(*)) "
+			+ "FROM Address AS adr WHERE  adr.idRevisore=:user GROUP BY adr.idRevisore,cast(adr.dataMod as date), adr.validazione, adr.dataMod  ORDER BY adr.stato")
+	List<ReportDto> getReportDailyAddressStateByUser(@Param("user") Integer user);
+
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione,cast(adr.dataMod as date) , COUNT(*)) "
+			+ "FROM Address AS adr WHERE adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato,adr.validazione, cast(adr.dataMod as date) ORDER BY adr.stato")
+	Optional<ReportDto> getReportDailyAddressStateByUserAndState(Integer user, Short state);
+
 }

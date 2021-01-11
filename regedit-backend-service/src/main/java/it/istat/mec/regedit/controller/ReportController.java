@@ -65,4 +65,27 @@ public class ReportController {
 		return ResponseEntity.ok().body(reportDto);
 
 	}
+	@GetMapping (value = "/report-daily")
+	public List<ReportDto> getDailyAddressStateByUser() {
+
+		return reportService.getReportDailyAddressState();
+
+	}
+
+	@GetMapping(value = "/report-daily/users/{user}")
+	public List<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user) {
+
+		return reportService.getReportDailyAddressStateByUser(user);
+
+	}
+
+	@GetMapping(value = "/report-daily/users/{user}/states/{state}")
+	public ResponseEntity<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user,
+			@PathVariable("state") Short state) {
+
+		ReportDto reportDto = reportService.getReportDailyAddressStateByUserAndState(user, state)
+				.orElseThrow(() -> new NoDataException());
+		return ResponseEntity.ok().body(reportDto);
+
+	}
 }

@@ -23,6 +23,7 @@
 package it.istat.mec.regedit.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -34,6 +35,7 @@ public class ReportDto implements Serializable {
 	private Short stato;
 	private Long count;
 	private String validazione;
+	private Date dataMod;
 	
 	public ReportDto(Integer user, Short stato,String validazione, Long count) {
 		super();
@@ -42,5 +44,12 @@ public class ReportDto implements Serializable {
 		this.count = count;
 		this.validazione = validazione;
 	}
-
+	public ReportDto(Integer user, Short stato,String validazione, Date dataMod,Long count) {
+		super();
+		this.user = user;
+		this.stato = stato;
+		this.count = count;
+		this.validazione = validazione;
+		this.dataMod=dataMod;
+	}
 }
