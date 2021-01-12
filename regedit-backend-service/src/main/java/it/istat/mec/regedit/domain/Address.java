@@ -93,6 +93,8 @@ public class Address implements Serializable {
 	private Integer stratoIndirizzo;
 	@Column(name = "ID_REVISORE")
 	private Integer idRevisore;
+	@Column(name = "ID_SUPERVISOR")
+	private Integer idSupervisor;
 	@Column(name = "STATO")
 	private Short stato;
 	@Column(name = "DATA_INS")

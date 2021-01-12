@@ -29,6 +29,7 @@ CREATE TABLE `regedit`.`WP1_INDIRIZZI_DA_REVISIONARE` (
   `ID_FONTE` integer,
   `STRATO_INDIRIZZO` integer,
   `ID_REVISORE` integer,
+  `ID_SUPERVISOR` integer,
   `STATO` integer,  
   `DATA_INS` DATETIME,
   `DATA_MOD` DATETIME,
