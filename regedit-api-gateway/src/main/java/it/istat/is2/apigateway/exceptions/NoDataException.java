@@ -7,6 +7,6 @@ public class NoDataException extends RuntimeException {
         super(message);
     }
     public NoDataException() {
-        super("No data found");
+        super("No data found"); 
     }
 }
