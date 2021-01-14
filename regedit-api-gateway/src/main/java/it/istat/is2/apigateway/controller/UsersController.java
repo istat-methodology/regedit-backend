@@ -19,13 +19,13 @@ public class UsersController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/user/users")
+	@GetMapping("/users")
 	@ResponseBody
 	public List<UsersDto> getAllUsers() {
 		return userService.findAllUsers();
 	}
 
-	@GetMapping(value = "/user/users/{id}")
+	@GetMapping(value = "/users/{id}")
 	@ResponseBody
 	public UsersDto getUser(@PathVariable("id") Integer id) {
 
