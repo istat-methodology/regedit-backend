@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 
 import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.dto.ReportDto;
+import it.istat.mec.regedit.dto.ReportPivotDto;
 
 @Service
 public class ReportService {
@@ -64,5 +65,12 @@ public class ReportService {
 	public List<ReportDto> getReportDailyAddressStateByUserAndState(Integer user, Short state) {
 
 		return addressDao.getReportDailyAddressStateByUserAndState(user, state);
+	}
+
+	public List<ReportPivotDto> getReportPivotAddressState(Integer user) {
+		if (user == null)
+			return addressDao.getReportPivotAddressState();
+		else
+			return addressDao.getReportPivotAddressStateUser(user);
 	}
 }

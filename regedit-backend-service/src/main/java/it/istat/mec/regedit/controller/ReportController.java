@@ -29,9 +29,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.istat.mec.regedit.dto.ReportDto;
+import it.istat.mec.regedit.dto.ReportPivotDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.service.ReportService;
 
@@ -81,10 +83,18 @@ public class ReportController {
 	}
 
 	@GetMapping(value = "/report-daily/users/{user}/states/{state}")
-	public List<ReportDto>  getDailyAddressStateByUser(@PathVariable("user") Integer user,
+	public List<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user,
 			@PathVariable("state") Short state) {
- 
+
 		return reportService.getReportDailyAddressStateByUserAndState(user, state);
 
 	}
+
+	@GetMapping(value = "/report-pivot")
+	public List<ReportPivotDto> getReportPivotAddressState(@RequestParam(value = "user",required = false) Integer user) {
+
+		return reportService.getReportPivotAddressState(user);
+
+	}
+
 }

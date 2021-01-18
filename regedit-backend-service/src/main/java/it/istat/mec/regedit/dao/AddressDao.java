@@ -32,6 +32,7 @@ import org.springframework.stereotype.Repository;
 
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.dto.ReportDto;
+import it.istat.mec.regedit.dto.ReportPivotDto;
 
 @Repository
 public interface AddressDao extends CrudRepository<Address, Integer> {
@@ -79,5 +80,19 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore,adr.stato,adr.validazione,cast(adr.dataMod as date) , COUNT(*)) "
 			+ "FROM Address AS adr WHERE adr.idRevisore=:user and adr.stato=:state GROUP BY adr.idRevisore,adr.stato,adr.validazione, cast(adr.dataMod as date) ORDER BY adr.stato")
 	List<ReportDto> getReportDailyAddressStateByUserAndState(Integer user, Short state);
+	
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='SI') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='NO') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
+			+ " FROM Address AS adr  GROUP BY adr.idRevisore ")
+	List<ReportPivotDto> getReportPivotAddressState();
+	
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='SI') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='NO') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
+			+ " FROM Address AS adr WHERE adr.idRevisore=:user  GROUP BY adr.idRevisore ")
+	List<ReportPivotDto> getReportPivotAddressStateUser(@Param("user") Integer user);
 
 }
