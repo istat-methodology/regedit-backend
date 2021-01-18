@@ -17,7 +17,7 @@ INSERT INTO `wp1_indirizzi_da_revisionare` VALUES (3620,40,'1097','Cumiana','','
 /*!40000 ALTER TABLE `wp1_indirizzi_da_revisionare` ENABLE KEYS */;
 
 UPDATE `wp1_indirizzi_da_revisionare` SET STATO=1;
-UPDATE `wp1_indirizzi_da_revisionare` SET id_revisore=1;
+UPDATE `wp1_indirizzi_da_revisionare` SET id_revisore=2;
 
 UNLOCK TABLES;
 
