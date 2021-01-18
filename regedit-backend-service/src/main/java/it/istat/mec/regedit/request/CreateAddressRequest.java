@@ -59,6 +59,7 @@ public class CreateAddressRequest implements Serializable {
 	private Integer idFonte;	
 	private Integer stratoIndirizzo;	
 	private Integer idRevisore;	
+	private Integer idSupervisor;	
 	private Short stato;	
 	private Date dataIns;	
 	private Date dataMod;	
