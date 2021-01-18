@@ -42,4 +42,10 @@ public class UserRolesEntity {
     public int hashCode() {
         return Objects.hash(id, role);
     }
+
+	@Override
+	public String toString() {
+		return role;
+	}
+    
 }

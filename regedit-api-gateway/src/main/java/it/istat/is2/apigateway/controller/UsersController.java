@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.istat.is2.apigateway.dto.UsersDto;
@@ -21,8 +22,8 @@ public class UsersController {
 
 	@GetMapping("/users")
 	@ResponseBody
-	public List<UsersDto> getAllUsers() {
-		return userService.findAllUsers();
+	public List<UsersDto> getAllUsers(@RequestParam(value = "role",required = false) String role) {
+		return userService.findAllUsers(role);
 	}
 
 	@GetMapping(value = "/users/{id}")
