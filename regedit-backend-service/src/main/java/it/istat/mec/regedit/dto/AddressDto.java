@@ -24,6 +24,8 @@ package it.istat.mec.regedit.dto;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
@@ -58,6 +60,8 @@ public class AddressDto {
 	private Short stato;	
 	private Date dataIns;	
 	private Date dataMod;	
+	private String note;
+	private String fittizio;
 	
 	
 }

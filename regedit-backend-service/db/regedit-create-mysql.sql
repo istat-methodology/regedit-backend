@@ -33,7 +33,10 @@ CREATE TABLE `regedit`.`WP1_INDIRIZZI_DA_REVISIONARE` (
   `STATO` integer,  
   `DATA_INS` DATETIME,
   `DATA_MOD` DATETIME,
-  `NOME_FILE` text
+  `NOME_FILE` text,
+  `NOTE` text,
+  `FLAG_FITTIZIO` varchar(1)
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 

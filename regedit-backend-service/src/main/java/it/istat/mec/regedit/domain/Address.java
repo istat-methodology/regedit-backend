@@ -101,5 +101,9 @@ public class Address implements Serializable {
 	private Date dataIns;
 	@Column(name = "DATA_MOD")
 	private Date dataMod;
+	@Column(name = "NOTE")
+	private String note;
+	@Column(name = "FLAG_FITTIZIO")
+	private String fittizio;
 
 }

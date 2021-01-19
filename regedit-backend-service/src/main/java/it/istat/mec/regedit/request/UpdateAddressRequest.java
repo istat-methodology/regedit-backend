@@ -47,4 +47,6 @@ public class UpdateAddressRequest implements Serializable {
 	private Integer idSupervisor;	
 	private Short stato;		
 	private Date dataMod;	
+	private String note;
+	private String fittizio;
 }
