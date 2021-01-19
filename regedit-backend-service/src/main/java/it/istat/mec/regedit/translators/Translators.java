@@ -47,6 +47,10 @@ public class Translators {
 		final AddressDto dTO = modelMapper.map(x, AddressDto.class);
 		return dTO;
 	}
+	
+	public static List<AddressDto> translate(List<Address> list) {
+		return mapList(list,AddressDto.class);
+	}
 	public static DugDto translate(Dug x) {
 
 		final ModelMapper modelMapper = new ModelMapper();

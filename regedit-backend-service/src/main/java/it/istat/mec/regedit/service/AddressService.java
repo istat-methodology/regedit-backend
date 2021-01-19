@@ -44,16 +44,13 @@ public class AddressService {
 
 	public List<AddressDto> findAllAddressess(Integer revisore, Short stato) {
 		if (revisore == null && stato == null)
-			return addressDao.findAll().stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
+			return Translators.translate(addressDao.findAll());
 		else if (stato == null)
-			return addressDao.findByIdRevisoreOrderByProComAsc(revisore).stream().map(x -> Translators.translate(x))
-					.collect(Collectors.toList());
+			return Translators.translate(addressDao.findByIdRevisoreOrderByProComAsc(revisore));
 		if (revisore == null && stato != null)
-			return addressDao.findByStatoOrderByProComAsc(stato).stream().map(x -> Translators.translate(x))
-					.collect(Collectors.toList());
+			return Translators.translate(addressDao.findByStatoOrderByProComAsc(stato));
 		else
-			return addressDao.findByIdRevisoreAndStatoOrderByProComAsc(revisore, stato).stream()
-					.map(x -> Translators.translate(x)).collect(Collectors.toList());
+			return Translators.translate(addressDao.findByIdRevisoreAndStatoOrderByProComAsc(revisore, stato));
 
 	}
 	
