@@ -1,13 +1,15 @@
 package it.istat.mec.users.dto;
+import java.io.Serializable;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
-public class UsersDto {
+public class UsersDto implements Serializable {
 	
-	private static final long serialVersionUID = -5524009610812626199L;
+	private static final long serialVersionUID = -4955160323170629969L;
 	private Integer id;
     private String email;
     private String name; 
-    private String role; 
+    private Integer IdRole; 
 }

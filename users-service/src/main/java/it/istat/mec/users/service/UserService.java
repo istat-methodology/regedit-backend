@@ -3,9 +3,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import it.istat.mec.users.dao.UsersDao;
+import it.istat.mec.users.domain.UsersEntity;
 import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.exceptions.NoDataException;
 import it.istat.mec.users.repository.UserRespository;
+import it.istat.mec.users.request.CreateUserRequest;
 import it.istat.mec.users.translators.Translators;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,5 +41,23 @@ public class UserService {
 	public UsersDto deleteUser(Integer id) {
 		UsersDto usersDto = findUserById(id);
 		return usersDto;
+	}
+	public UsersDto newUser(CreateUserRequest request) {
+		UsersEntity user = new UsersEntity();
+		user = Translators.translate(request);	
+		
+		usersDao.save(user);		    
+		return Translators.translate(user);
+	}
+	public UsersDto updateUser(CreateUserRequest request) {		
+		
+		if (!usersDao.findById(request.getId()).isPresent())
+			throw new NoDataException("User not present");
+		
+		UsersEntity user = usersDao.findById(request.getId()).get();
+		user = Translators.translateUpdate(request, user);	
+		
+		usersDao.save(user);		
+		return Translators.translate(user);
 	}
 }
