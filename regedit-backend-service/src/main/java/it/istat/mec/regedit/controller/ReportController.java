@@ -22,6 +22,7 @@
  */
 package it.istat.mec.regedit.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,4 +98,14 @@ public class ReportController {
 
 	}
 
+	@GetMapping(value = "/report-daily-pivot")
+	public List<ReportPivotDto> getReportDailyPivotAddressStateUser(@RequestParam(value = "user",required = false) Integer user,
+			                                                        @RequestParam(value = "dateModInf",required = false) Date dateModInf,
+			                                                        @RequestParam(value = "dateModSup",required = false) Date dateModSup) {
+
+		return reportService.getReportDailyPivotAddressStateUser(user,dateModInf,dateModSup);
+
+	}
+
+	
 }

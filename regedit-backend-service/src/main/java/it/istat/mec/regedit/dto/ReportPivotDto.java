@@ -36,6 +36,7 @@ public class ReportPivotDto implements Serializable {
 	private Long validati;
 	private Long revisionati;
 	private Long sospesi;
+	private Date dataMod;
 	
 	public ReportPivotDto(Integer user, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
 		super();
@@ -44,6 +45,18 @@ public class ReportPivotDto implements Serializable {
 		this.validati = validati;
 		this.revisionati = revisionati;
 		this.sospesi = sospesi;
+		this.dataMod=null;
+		
+	}
+	
+	public ReportPivotDto(Integer user, Date dataMod, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
+		super();
+		this.user = user;
+		this.dalavorare = dalavorare;
+		this.validati = validati;
+		this.revisionati = revisionati;
+		this.sospesi = sospesi;
+		this.dataMod=dataMod;
 	}
 	
 }

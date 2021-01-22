@@ -22,6 +22,7 @@
  */
 package it.istat.mec.regedit.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,5 +73,10 @@ public class ReportService {
 			return addressDao.getReportPivotAddressState();
 		else
 			return addressDao.getReportPivotAddressStateUser(user);
+	}
+
+	public List<ReportPivotDto> getReportDailyPivotAddressStateUser(Integer user, Date dateModInf, Date dateModSup) {
+		
+		return addressDao.getReportDailyPivotAddressStateUser(user, dateModInf, dateModSup);
 	}
 }

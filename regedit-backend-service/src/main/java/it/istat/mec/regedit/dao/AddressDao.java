@@ -22,6 +22,8 @@
  */
 package it.istat.mec.regedit.dao;
 
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,4 +97,13 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 			+ " FROM Address AS adr WHERE adr.idRevisore=:user  GROUP BY adr.idRevisore ")
 	List<ReportPivotDto> getReportPivotAddressStateUser(@Param("user") Integer user);
 
+ 	
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore,cast(adr.dataMod as date), SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='SI') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
+			+ " FROM Address AS adr WHERE 1=1 AND  ((:user is NULL) OR (adr.idRevisore=:user))"
+			+ " AND ((:dateModSup is NULL) OR (adr.dataMod <:dateModSup)) AND  ((:dateModInf is NULL) OR (adr.dataMod > :dateModInf))"
+			+ " GROUP BY adr.idRevisore, cast(adr.dataMod as date)")
+	List<ReportPivotDto> getReportDailyPivotAddressStateUser(@Param("user") Integer user,@Param("dateModInf") Date dateModInf,@Param("dateModSup") Date dateModSup);
 }
