@@ -82,15 +82,15 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 	List<ReportDto> getReportDailyAddressStateByUserAndState(Integer user, Short state);
 	
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
-			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='SI') THEN 1 ELSE 0 END)  , "
-			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='NO') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='SI') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
 			+ " FROM Address AS adr  GROUP BY adr.idRevisore ")
 	List<ReportPivotDto> getReportPivotAddressState();
 	
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
-			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='SI') THEN 1 ELSE 0 END)  , "
-			+ " SUM(CASE WHEN (adr.stato =  2 and adr.idRevisore='NO') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='SI') THEN 1 ELSE 0 END)  , "
+			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
 			+ " FROM Address AS adr WHERE adr.idRevisore=:user  GROUP BY adr.idRevisore ")
 	List<ReportPivotDto> getReportPivotAddressStateUser(@Param("user") Integer user);
