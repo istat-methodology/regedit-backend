@@ -102,8 +102,8 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='SI') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
-			+ " FROM Address AS adr WHERE 1=1 AND  ((:user is NULL) OR (adr.idRevisore=:user))"
-			+ " AND ((:dateModSup is NULL) OR (adr.dataMod <:dateModSup)) AND  ((:dateModInf is NULL) OR (adr.dataMod > :dateModInf))"
+			+ " FROM Address AS adr WHERE adr.dataMod IS NOT NULL AND  ((:user is NULL) OR (adr.idRevisore=:user))"
+			+ " AND ((:dateModSup is NULL) OR (adr.dataMod <=:dateModSup)) AND  ((:dateModInf is NULL) OR (adr.dataMod >= :dateModInf))"
 			+ " GROUP BY adr.idRevisore, cast(adr.dataMod as date)")
 	List<ReportPivotDto> getReportDailyPivotAddressStateUser(@Param("user") Integer user,@Param("dateModInf") Date dateModInf,@Param("dateModSup") Date dateModSup);
 }

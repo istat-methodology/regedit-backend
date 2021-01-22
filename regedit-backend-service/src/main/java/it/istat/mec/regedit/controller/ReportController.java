@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -100,8 +101,8 @@ public class ReportController {
 
 	@GetMapping(value = "/report-daily-pivot")
 	public List<ReportPivotDto> getReportDailyPivotAddressStateUser(@RequestParam(value = "user",required = false) Integer user,
-			                                                        @RequestParam(value = "dateModInf",required = false) Date dateModInf,
-			                                                        @RequestParam(value = "dateModSup",required = false) Date dateModSup) {
+			                                                        @RequestParam(value = "dateModInf",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModInf,
+			                                                        @RequestParam(value = "dateModSup",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModSup) {
 
 		return reportService.getReportDailyPivotAddressStateUser(user,dateModInf,dateModSup);
 
