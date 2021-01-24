@@ -31,14 +31,14 @@ import lombok.Data;
 public class ReportPivotDto implements Serializable {
 
 	private static final long serialVersionUID = 934918300270207348L;
-	private Integer user;
+	private String user;
 	private Long dalavorare;
 	private Long validati;
 	private Long revisionati;
 	private Long sospesi;
 	private Date dataMod;
 	
-	public ReportPivotDto(Integer user, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
+	public ReportPivotDto(String user, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
 		super();
 		this.user = user;
 		this.dalavorare = dalavorare;
@@ -49,7 +49,7 @@ public class ReportPivotDto implements Serializable {
 		
 	}
 	
-	public ReportPivotDto(Integer user, Date dataMod, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
+	public ReportPivotDto(String user, Date dataMod, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
 		super();
 		this.user = user;
 		this.dalavorare = dalavorare;

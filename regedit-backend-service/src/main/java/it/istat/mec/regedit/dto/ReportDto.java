@@ -31,20 +31,20 @@ import lombok.Data;
 public class ReportDto implements Serializable {
 
 	private static final long serialVersionUID = 934918300970207348L;
-	private Integer user;
+	private String user;
 	private Short stato;
 	private Long count;
 	private String validazione;
 	private Date dataMod;
 	
-	public ReportDto(Integer user, Short stato,String validazione, Long count) {
+	public ReportDto(String user, Short stato,String validazione, Long count) {
 		super();
 		this.user = user;
 		this.stato = stato;
 		this.count = count;
 		this.validazione = validazione;
 	}
-	public ReportDto(Integer user, Short stato,String validazione, Date dataMod,Long count) {
+	public ReportDto(String user, Short stato,String validazione, Date dataMod,Long count) {
 		super();
 		this.user = user;
 		this.stato = stato;

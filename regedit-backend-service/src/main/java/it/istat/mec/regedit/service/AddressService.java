@@ -31,6 +31,7 @@ import org.springframework.stereotype.Service;
 
 import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.domain.Address;
+import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateAddressRequest;
@@ -46,11 +47,11 @@ public class AddressService {
 		if (revisore == null && stato == null)
 			return Translators.translate(addressDao.findAll());
 		else if (stato == null)
-			return Translators.translate(addressDao.findByIdRevisoreOrderByProComAsc(revisore));
+			return Translators.translate(addressDao.findByIdRevisoreOrderByProComAsc(new UsersEntity(revisore)));
 		if (revisore == null && stato != null)
 			return Translators.translate(addressDao.findByStatoOrderByProComAsc(stato));
 		else
-			return Translators.translate(addressDao.findByIdRevisoreAndStatoOrderByProComAsc(revisore, stato));
+			return Translators.translate(addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(revisore), stato));
 
 	}
 	
@@ -89,7 +90,7 @@ public class AddressService {
 	}
 
 	public List<AddressDto> getAddressesByUser(Integer user, Short stato) {
-		List<AddressDto> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(user, stato).stream()
+		List<AddressDto> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(user), stato).stream()
 				.map(x -> Translators.translate(x)).collect(Collectors.toList());
 
 		return addresses;
@@ -97,7 +98,7 @@ public class AddressService {
 	}
 
 	public AddressDto getFirstAddressByUser(Integer user, Short stato) {
-		List<Address> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(user, stato);
+		List<Address> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(user), stato);
 		if (addresses.size() == 0)
 			throw new NoDataException("Address no present");
 		return Translators.translate(addresses.get(0));

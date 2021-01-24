@@ -27,9 +27,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -91,8 +94,10 @@ public class Address implements Serializable {
 	private Integer idFonte;
 	@Column(name = "STRATO_INDIRIZZO")
 	private Integer stratoIndirizzo;
-	@Column(name = "ID_REVISORE")
-	private Integer idRevisore;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_REVISORE")
+	private UsersEntity idRevisore;
 	@Column(name = "ID_SUPERVISOR")
 	private Integer idSupervisor;
 	@Column(name = "STATO")
