@@ -1099,6 +1099,10 @@ INSERT INTO regedit.wp1_indirizzi_da_revisionare (PROGRESSIVO_INDIRIZZO,CODICE_A
 UPDATE `wp1_indirizzi_da_revisionare` SET STATO=1;
 UPDATE `wp1_indirizzi_da_revisionare` SET id_revisore=2;
 
+update wp1_indirizzi_da_revisionare set ID_REVISORE = 3 where PRO_COM in (63049, 53011);
+
+update wp1_indirizzi_da_revisionare set ID_REVISORE = 4 where PRO_COM in (46033, 22161, 22205);
+
 UNLOCK TABLES;
 
 
@@ -1119,8 +1123,11 @@ INSERT INTO regedit.wp1_user_roles VALUES (3, 'ROLE_REVIEWER');
 
 
 INSERT INTO regedit.wp1_users VALUES (1, 'admin@is2.it', 'Administrator', 'Workbench', '$2a$10$VB7y/I.oD16QBVaExgH1K.VEuBUKRyXcCUVweUGhs1vDl0waTQPmC', 1);
-INSERT INTO regedit.wp1_users VALUES (2, 'user@is2.it', 'User', 'Workbench', '$2a$10$yK1pW21E8nlZd/YcOt6uB.n8l36a33RP3/hehbWFAcBsFJhVKlZ82', 3);
-INSERT INTO regedit.wp1_users VALUES (3, 'fra@fra.it', 'Francesco Amato', 'fra', '$2a$10$DIcyvIFwhDkEOT9nBugTleDM73OkZffZUdfmvjMCEXdJr3PZP8Kxm', 2);
+INSERT INTO regedit.wp1_users VALUES (2, 'user1@is2.it', 'User', 'Workbench', '$2a$10$yK1pW21E8nlZd/YcOt6uB.n8l36a33RP3/hehbWFAcBsFJhVKlZ82', 3);
+INSERT INTO regedit.wp1_users VALUES (3, 'user2@is2.it', 'User', 'Workbench', '$2a$10$yK1pW21E8nlZd/YcOt6uB.n8l36a33RP3/hehbWFAcBsFJhVKlZ82', 3);
+INSERT INTO regedit.wp1_users VALUES (4, 'user3@is2.it', 'User', 'Workbench', '$2a$10$yK1pW21E8nlZd/YcOt6uB.n8l36a33RP3/hehbWFAcBsFJhVKlZ82', 3);
+
+INSERT INTO regedit.wp1_users VALUES (5, 'super@is2.it', 'Super visore', 'super', '$2a$10$VB7y/I.oD16QBVaExgH1K.VEuBUKRyXcCUVweUGhs1vDl0waTQPmC', 2);
 
  
 
