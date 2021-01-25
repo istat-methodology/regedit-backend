@@ -84,28 +84,28 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 			+ "FROM Address AS adr WHERE adr.idRevisore.id=:user and adr.stato=:state GROUP BY adr.idRevisore.email,adr.stato,adr.validazione, cast(adr.dataMod as date) ORDER BY adr.stato")
 	List<ReportDto> getReportDailyAddressStateByUserAndState(Integer user, Short state);
 	
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore.email,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='SI') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
-			+ " FROM Address AS adr  GROUP BY adr.idRevisore.email ")
+			+ " FROM Address AS adr  GROUP BY adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role ")
 	List<ReportPivotDto> getReportPivotAddressState();
 	
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore.email,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role ,SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='SI') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
-			+ " FROM Address AS adr WHERE adr.idRevisore.id=:user  GROUP BY adr.idRevisore.email ")
+			+ " FROM Address AS adr WHERE adr.idRevisore.id=:user  GROUP BY adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role ")
 	List<ReportPivotDto> getReportPivotAddressStateUser(@Param("user") Integer user);
 
  	
-	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore.email,cast(adr.dataMod as date), SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
+	@Query("SELECT new it.istat.mec.regedit.dto.ReportPivotDto(adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role, cast(adr.dataMod as date), SUM(CASE WHEN  adr.stato =  1 THEN 1 ELSE 0 END)   ,"
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='SI') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
 			+ " FROM Address AS adr WHERE adr.dataMod IS NOT NULL AND  ((:user is NULL) OR (adr.idRevisore.id=:user))"
 			+ " AND ((:dateModSup is NULL) OR (adr.dataMod <=:dateModSup)) AND  ((:dateModInf is NULL) OR (adr.dataMod >= :dateModInf))"
-			+ " GROUP BY adr.idRevisore.email, cast(adr.dataMod as date)"
+			+ " GROUP BY adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role, cast(adr.dataMod as date)"
 			+ " ORDER By 1 ASC, 2 DESC")
 	List<ReportPivotDto> getReportDailyPivotAddressStateUser(@Param("user") Integer user,@Param("dateModInf") Date dateModInf,@Param("dateModSup") Date dateModSup);
 }

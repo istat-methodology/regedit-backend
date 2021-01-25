@@ -1099,9 +1099,9 @@ INSERT INTO regedit.wp1_indirizzi_da_revisionare (PROGRESSIVO_INDIRIZZO,CODICE_A
 UPDATE `wp1_indirizzi_da_revisionare` SET STATO=1;
 UPDATE `wp1_indirizzi_da_revisionare` SET id_revisore=2;
 
-update wp1_indirizzi_da_revisionare set ID_REVISORE = 3 where PRO_COM in (63049, 53011);
+update `wp1_indirizzi_da_revisionare` set ID_REVISORE = 3 where PRO_COM in (63049, 53011);
 
-update wp1_indirizzi_da_revisionare set ID_REVISORE = 4 where PRO_COM in (46033, 22161, 22205);
+update `wp1_indirizzi_da_revisionare` set ID_REVISORE = 4 where PRO_COM in (46033, 22161, 22205);
 
 UNLOCK TABLES;
 

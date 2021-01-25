@@ -31,16 +31,25 @@ import lombok.Data;
 public class ReportPivotDto implements Serializable {
 
 	private static final long serialVersionUID = 934918300270207348L;
-	private String user;
+	private Integer userId;
+    private String userEmail;
+    private String userName; 
+    private String userSurname; 
+    private String userRole; 
+    
 	private Long dalavorare;
 	private Long validati;
 	private Long revisionati;
 	private Long sospesi;
 	private Date dataMod;
 	
-	public ReportPivotDto(String user, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
+	public ReportPivotDto(Integer userId, String userEmail, String userName, String userSurname, String userRole, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
 		super();
-		this.user = user;
+		this.userId=userId;
+		this.userEmail=userEmail;
+		this.userName=userName; 
+		this.userSurname=userSurname; 
+		this.userRole=userRole; 
 		this.dalavorare = dalavorare;
 		this.validati = validati;
 		this.revisionati = revisionati;
@@ -49,9 +58,13 @@ public class ReportPivotDto implements Serializable {
 		
 	}
 	
-	public ReportPivotDto(String user, Date dataMod, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
+	public ReportPivotDto(Integer userId, String userEmail, String userName, String userSurname, String userRole, Date dataMod, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
 		super();
-		this.user = user;
+		this.userId=userId;
+		this.userEmail=userEmail;
+		this.userName=userName; 
+		this.userSurname=userSurname; 
+		this.userRole=userRole; 
 		this.dalavorare = dalavorare;
 		this.validati = validati;
 		this.revisionati = revisionati;
