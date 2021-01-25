@@ -3,9 +3,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import it.istat.mec.users.domain.UserRolesEntity;
 import it.istat.mec.users.domain.UsersEntity;
+import it.istat.mec.users.dto.UserRolesDto;
 import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.request.CreateUserRequest;
+import it.istat.mec.users.request.CreateUserRoleRequest;
 
  
 
@@ -16,6 +20,12 @@ public class Translators {
 
 		final ModelMapper modelMapper = new ModelMapper();
 		final UsersDto dTO = modelMapper.map(x, UsersDto.class);
+		return dTO;
+	}
+	public static UserRolesDto translate(UserRolesEntity x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final UserRolesDto dTO = modelMapper.map(x, UserRolesDto.class);
 		return dTO;
 	}
 
@@ -32,10 +42,22 @@ public class Translators {
 		final UsersEntity user = modelMapper.map(x, UsersEntity.class);
 		return user;
 	}
+	public static UserRolesEntity translate(CreateUserRoleRequest x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final UserRolesEntity role = modelMapper.map(x, UserRolesEntity.class);
+		return role;
+	}
 	public static UsersEntity translateUpdate(CreateUserRequest x, UsersEntity user) {  
 		final ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(x,user);
 		 
 		return user;
+	}
+	public static UserRolesEntity translateUpdate(CreateUserRoleRequest x, UserRolesEntity role) {  
+		final ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(x,role);
+		 
+		return role;
 	}
 }
