@@ -79,4 +79,9 @@ public class ReportService {
 		
 		return addressDao.getReportDailyPivotAddressStateUser(user, dateModInf, dateModSup);
 	}
+	
+	public List<ReportPivotDto> getReportTotalDailyPivotAddressStateUser( Date dateModInf, Date dateModSup) {
+		
+		return addressDao.getReportTotalDailyPivotAddressStateUser(dateModInf, dateModSup);
+	}
 }

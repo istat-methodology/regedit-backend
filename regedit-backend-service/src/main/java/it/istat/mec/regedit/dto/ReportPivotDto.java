@@ -72,4 +72,17 @@ public class ReportPivotDto implements Serializable {
 		this.dataMod=dataMod;
 	}
 	
+	public ReportPivotDto(Date dataMod, Long dalavorare, Long validati, Long revisionati, Long sospesi) {
+		super();
+		this.userId=null;
+		this.userEmail=null;
+		this.userName=null; 
+		this.userSurname=null; 
+		this.userRole=null; 
+		this.dalavorare = dalavorare;
+		this.validati = validati;
+		this.revisionati = revisionati;
+		this.sospesi = sospesi;
+		this.dataMod=dataMod;
+	}
 }

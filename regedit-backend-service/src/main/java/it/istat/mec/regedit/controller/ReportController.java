@@ -108,5 +108,12 @@ public class ReportController {
 
 	}
 
-	
+	@GetMapping(value = "/report-total-daily-pivot")
+	public List<ReportPivotDto> getReportTotalDailyPivotAddressStateUser(
+			                                                        @RequestParam(value = "dateModInf",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModInf,
+			                                                        @RequestParam(value = "dateModSup",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModSup) {
+
+		return reportService.getReportTotalDailyPivotAddressStateUser(dateModInf,dateModSup);
+
+	}
 }
