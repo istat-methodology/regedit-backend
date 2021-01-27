@@ -29,6 +29,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -39,11 +40,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "WP1_INDIRIZZI_DA_REVISIONARE")
-public class Address implements Serializable  {
+@Table(name = "WP1_INDIRIZZI_DA_REVISION_HISTORY")
+@IdClass(AddressBackupEditedID.class)
+public class AddressBackupEdited implements Serializable {
 
-	private static final long serialVersionUID = 563050040300013108L;
-
+	private static final long serialVersionUID = 1017941611796401267L;
+	
+	@Id
+	@Column(name = "editor")
+	private Integer editor;
+	
 	@Id
 	@Column(name = "PROGRESSIVO_INDIRIZZO")
 	private Integer progressivoIndirizzo;
@@ -107,6 +113,5 @@ public class Address implements Serializable  {
 	private String note;
 	@Column(name = "FLAG_FITTIZIO")
 	private String fittizio;
-
 	
 }

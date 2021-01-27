@@ -20,20 +20,15 @@
  * @author Stefano Macone <macone @ istat.it>
  * @version 1.0
  */
-package it.istat.mec.regedit.request;
-import java.io.Serializable;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package it.istat.mec.regedit.dao;
 
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-@Data
-@NoArgsConstructor
-public class CreateDugRequest  implements Serializable {
+import it.istat.mec.regedit.domain.AddressBackupEdited;
+import it.istat.mec.regedit.domain.AddressBackupEditedID;
 
-	 
-	private static final long serialVersionUID = 1L;
-	
-	private Integer id;		
-	private String name;	
-	
+@Repository
+public interface AddressBackupDao extends CrudRepository<AddressBackupEdited, AddressBackupEditedID> {
+
 }

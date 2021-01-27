@@ -54,8 +54,8 @@ public class CreateAddressRequest implements Serializable {
 	private String kmVal;	
 	private String esponenteVal;	
 	private String localitaVal;		
-	private Integer cdpstrEgon;		
-	private Integer cdpcivEgon;		
+	private Long cdpstrEgon;		
+	private Long cdpcivEgon;		
 	private Integer idFonte;	
 	private Integer stratoIndirizzo;	
 	private Integer idRevisore;	

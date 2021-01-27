@@ -22,29 +22,26 @@
  */
 package it.istat.mec.regedit.controller;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
+import it.istat.mec.regedit.security.JwtTokenProvider;
 import it.istat.mec.regedit.service.AddressService;
-import it.istat.mec.regedit.translators.Translators;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -84,10 +81,10 @@ public class AddressController {
 	}
 
 	@PutMapping(value = "/addresses/{id}")
-	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request) {
+	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request, @RequestHeader(name = "Authorization") final String jwt) {
 		
 		
-		return addressService.updateAddress(request);
+		return addressService.updateAddress(request,JwtTokenProvider.getUserId(jwt));
 	}	
 
 	@DeleteMapping(value = "/addresses/{id}")

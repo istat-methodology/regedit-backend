@@ -27,10 +27,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import it.istat.mec.regedit.dao.AddressBackupDao;
 import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.domain.Address;
+import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
@@ -40,8 +43,15 @@ import it.istat.mec.regedit.translators.Translators;
 
 @Service
 public class AddressService {
+
+	@Value("${app.editing.backup:false}")
+	private Boolean editingBackup;
+
 	@Autowired
 	AddressDao addressDao;
+
+	@Autowired
+	AddressBackupDao addressBackupDao;
 
 	public List<AddressDto> findAllAddressess(Integer revisore, Short stato) {
 		if (revisore == null && stato == null)
@@ -51,21 +61,29 @@ public class AddressService {
 		if (revisore == null && stato != null)
 			return Translators.translate(addressDao.findByStatoOrderByProComAsc(stato));
 		else
-			return Translators.translate(addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(revisore), stato));
+			return Translators
+					.translate(addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(revisore), stato));
 
 	}
-	
-	public AddressDto updateAddress(UpdateAddressRequest request) {		
-		
+
+	public AddressDto updateAddress(UpdateAddressRequest request,Integer editor) {
+
 		if (!addressDao.findById(request.getProgressivoIndirizzo()).isPresent())
 			throw new NoDataException("Address no present");
-		
+
 		Address address = addressDao.findById(request.getProgressivoIndirizzo()).get();
-		address = Translators.translateUpdate(request, address);		
-		
+		address = Translators.translateUpdate(request, address);
+
 		address.setDataMod(new Timestamp(System.currentTimeMillis()));
+
+		addressDao.save(address);
 		
-		addressDao.save(address);		
+		if (editingBackup) {
+			AddressBackupEdited addressBackupEdited = new AddressBackupEdited();
+			addressBackupEdited = Translators.translate(address, addressBackupEdited);
+			addressBackupEdited.setEditor(editor);
+			addressBackupDao.save(addressBackupEdited);
+		}
 		return Translators.translate(address);
 	}
 
@@ -76,9 +94,9 @@ public class AddressService {
 
 	public AddressDto newAdress(CreateAddressRequest request) {
 		Address address = new Address();
-		address = Translators.translate(request);	
+		address = Translators.translate(request);
 		address.setDataMod(new Timestamp(System.currentTimeMillis()));
-		addressDao.save(address);		    
+		addressDao.save(address);
 		return Translators.translate(address);
 	}
 
@@ -90,8 +108,8 @@ public class AddressService {
 	}
 
 	public List<AddressDto> getAddressesByUser(Integer user, Short stato) {
-		List<AddressDto> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(user), stato).stream()
-				.map(x -> Translators.translate(x)).collect(Collectors.toList());
+		List<AddressDto> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(user), stato)
+				.stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 
 		return addresses;
 

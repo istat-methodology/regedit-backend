@@ -21,6 +21,7 @@
  * @version 1.0
  */
 package it.istat.mec.regedit.translators;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +30,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import it.istat.mec.regedit.domain.Address;
+import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.Dug;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.DugDto;
@@ -36,10 +38,8 @@ import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.CreateDugRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 
-
 @Component
-public class Translators { 
-	
+public class Translators {
 
 	public static AddressDto translate(Address x) {
 
@@ -47,54 +47,62 @@ public class Translators {
 		final AddressDto dTO = modelMapper.map(x, AddressDto.class);
 		return dTO;
 	}
-	
+
 	public static List<AddressDto> translate(List<Address> list) {
-		return mapList(list,AddressDto.class);
+		return mapList(list, AddressDto.class);
 	}
+
 	public static DugDto translate(Dug x) {
 
 		final ModelMapper modelMapper = new ModelMapper();
 		final DugDto dTO = modelMapper.map(x, DugDto.class);
 		return dTO;
 	}
+
 	public static AddressDto translate(Optional<Address> address) {
 
 		final ModelMapper modelMapper = new ModelMapper();
 		final AddressDto dTO = modelMapper.map(address, AddressDto.class);
 		return dTO;
 	}
+
 	public static Address translate(CreateAddressRequest x) {
 
 		final ModelMapper modelMapper = new ModelMapper();
 		final Address adr = modelMapper.map(x, Address.class);
 		return adr;
 	}
-	
+
 	public static Dug translate(CreateDugRequest x) {
 
 		final ModelMapper modelMapper = new ModelMapper();
 		final Dug dug = modelMapper.map(x, Dug.class);
 		return dug;
 	}
-	
-	public static Address translateUpdate(UpdateAddressRequest x, Address address) {  
+
+	public static Address translateUpdate(UpdateAddressRequest x, Address address) {
 		final ModelMapper modelMapper = new ModelMapper();
-		modelMapper.map(x,address);
-		 
+		modelMapper.map(x, address);
+
 		return address;
 	}
+
+	public static AddressBackupEdited translate(Address address, AddressBackupEdited addressBackupEdited) {
 	
-	public static Dug translateUpdate(CreateDugRequest x, Dug dug) {  
 		final ModelMapper modelMapper = new ModelMapper();
-		modelMapper.map(x,dug);
+		modelMapper.map(address, addressBackupEdited);
+
+		return addressBackupEdited;
+	}
+
+	public static Dug translateUpdate(CreateDugRequest x, Dug dug) {
+		final ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(x, dug);
 		return dug;
 	}
-	
+
 	public static <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {
 		final ModelMapper modelMapper = new ModelMapper();
-	    return source
-	      .stream()
-	      .map(element -> modelMapper.map(element, targetClass))
-	      .collect(Collectors.toList());
+		return source.stream().map(element -> modelMapper.map(element, targetClass)).collect(Collectors.toList());
 	}
 }
