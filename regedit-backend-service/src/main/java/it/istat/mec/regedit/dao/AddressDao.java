@@ -106,6 +106,6 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 			+ " FROM Address AS adr WHERE adr.dataMod IS NOT NULL AND  ((:user is NULL) OR (adr.idRevisore.id=:user))"
 			+ " AND ((:dateModSup is NULL) OR (adr.dataMod <=:dateModSup)) AND  ((:dateModInf is NULL) OR (adr.dataMod >= :dateModInf))"
 			+ " GROUP BY adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role, cast(adr.dataMod as date)"
-			+ " ORDER By 1 ASC, 2 DESC")
+			+ " ORDER By 1 ASC, 6 ASC ")
 	List<ReportPivotDto> getReportDailyPivotAddressStateUser(@Param("user") Integer user,@Param("dateModInf") Date dateModInf,@Param("dateModSup") Date dateModSup);
 }
