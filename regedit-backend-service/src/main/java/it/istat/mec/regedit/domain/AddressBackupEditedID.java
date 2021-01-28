@@ -12,4 +12,15 @@ public class AddressBackupEditedID implements Serializable {
 	private Integer editor;
 	private Integer progressivoIndirizzo;
 
+	public AddressBackupEditedID(Integer editor, Integer progressivoIndirizzo) {
+		super();
+		this.editor = editor;
+		this.progressivoIndirizzo = progressivoIndirizzo;
+	}
+
+	public AddressBackupEditedID() {
+		super();
+
+	}
+
 }

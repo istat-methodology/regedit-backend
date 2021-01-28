@@ -23,15 +23,11 @@
 package it.istat.mec.regedit.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -42,76 +38,17 @@ import lombok.Setter;
 @Entity
 @Table(name = "WP1_INDIRIZZI_DA_REVISION_HISTORY")
 @IdClass(AddressBackupEditedID.class)
-public class AddressBackupEdited implements Serializable {
+public class AddressBackupEdited extends AddressBase implements Serializable {
 
 	private static final long serialVersionUID = 1017941611796401267L;
-	
+
 	@Id
 	@Column(name = "editor")
 	private Integer editor;
-	
+
 	@Id
 	@Column(name = "PROGRESSIVO_INDIRIZZO")
 	private Integer progressivoIndirizzo;
-	@Column(name = "CODICE_ARCHIVIO")
-	private Integer codiceArchivio;
-	@Column(name = "PRO_COM")
-	private String proCom;
-	@Column(name = "DENOMINAZIONE_COMUNE")
-	private String denominazioneComune;
-	@Column(name = "LOCALITA_ORIGINALE")
-	private String localitaOriginale;
-	@Column(name = "INDIRIZZO_ORIGINALE")
-	private String indirizzoOriginale;
-	@Column(name = "LOCALITA_NORM")
-	private String localitaNorm;
-	@Column(name = "DUG_NORM")
-	private String dugNorm;
-	@Column(name = "DUF_NORM")
-	private String dufNorm;
-	@Column(name = "CIVICO_NORM")
-	private Integer civicoNorm;
-	@Column(name = "KM_NORM")
-	private String kmNorm;
-	@Column(name = "ESPONENTE_NORM")
-	private String esponenteNorm;
-	@Column(name = "VALIDAZIONE")
-	private String validazione;
-	@Column(name = "DUG_VAL")
-	private String dugVal;
-	@Column(name = "DUF_VAL")
-	private String dufVal;
-	@Column(name = "CIVICO_VAL")
-	private Integer civicoVal;
-	@Column(name = "KM_VAL")
-	private String kmVal;
-	@Column(name = "ESPONENTE_VAL")
-	private String esponenteVal;
-	@Column(name = "LOCALITA_VAL")
-	private String localitaVal;
-	@Column(name = "CDPSTR_EGON")
-	private Long cdpstrEgon;
-	@Column(name = "CDPCIV_EGON")
-	private Long cdpcivEgon;
-	@Column(name = "ID_FONTE")
-	private Integer idFonte;
-	@Column(name = "STRATO_INDIRIZZO")
-	private Integer stratoIndirizzo;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_REVISORE")
-	private UsersEntity idRevisore;
-	@Column(name = "ID_SUPERVISOR")
-	private Integer idSupervisor;
-	@Column(name = "STATO")
-	private Short stato;
-	@Column(name = "DATA_INS")
-	private Date dataIns;
-	@Column(name = "DATA_MOD")
-	private Date dataMod;
-	@Column(name = "NOTE")
-	private String note;
-	@Column(name = "FLAG_FITTIZIO")
-	private String fittizio;
 	
 }
