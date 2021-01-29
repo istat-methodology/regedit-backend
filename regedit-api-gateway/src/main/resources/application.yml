@@ -26,7 +26,6 @@ spring:
       maximum-pool-size: 3
 
 zuul:
-  prefix: /api
   sensitiveHeaders: Cookie,Set-Cookie
   ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
   host:
@@ -34,7 +33,7 @@ zuul:
     connect-timeout-millis: 60000 #important
   routes:
     service_regedit:
-      path: /regedit/**
+      path: /api/regedit/**
       url: http://localhost:8081/regedit
  
 eureka:
