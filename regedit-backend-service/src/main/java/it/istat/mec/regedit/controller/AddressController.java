@@ -53,10 +53,14 @@ public class AddressController {
 	private AddressService addressService;
 
 	@GetMapping("/addresses")
-	public ResponseEntity<List<AddressDto>> getAllAddresses(@RequestParam(value = "user",required = false) Integer user,
-			@RequestParam(value = "stato",required = false) Short stato) {
+	public ResponseEntity<List<AddressDto>> getAllAddresses(
+			@RequestParam(value = "user", required = false) Integer user,
+			@RequestParam(value = "stato", required = false) Short stato,
+			@RequestParam(value = "proCom", required = false) String proCom,
+			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith
+			) {
 
-		return ResponseEntity.ok(addressService.findAllAddressess(user, stato));
+		return ResponseEntity.ok(addressService.findAllAddressess(user, stato,proCom,indirizzoOriginaleStartWith));
 
 	}
 
@@ -68,28 +72,30 @@ public class AddressController {
 	}
 
 	@GetMapping(value = "/addresses/first-address/user/{user}/state/{state}")
-	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato) {
+	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato,
+			@RequestParam(value = "proCom", required = false) String proCom,
+			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith) {
 
-		return addressService.getFirstAddressByUser(user, stato);
+		return addressService.getFirstAddressByUser(user, stato,proCom,indirizzoOriginaleStartWith);
 
 	}
 
 	@PostMapping("/addresses")
-	public AddressDto create(@RequestBody CreateAddressRequest request) {		
-			
+	public AddressDto create(@RequestBody CreateAddressRequest request) {
+
 		return addressService.newAdress(request);
 	}
 
 	@PutMapping(value = "/addresses/{id}")
-	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request, @RequestHeader(name = "Authorization") final String jwt) {
-		
-		
-		return addressService.updateAddress(request,JwtTokenProvider.getUserId(jwt));
-	}	
+	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request,
+			@RequestHeader(name = "Authorization") final String jwt) {
+
+		return addressService.updateAddress(request, JwtTokenProvider.getUserId(jwt));
+	}
 
 	@DeleteMapping(value = "/addresses/{id}")
-	public AddressDto deleteAddress(@PathVariable("id") Integer id) { 
-  
+	public AddressDto deleteAddress(@PathVariable("id") Integer id) {
+
 		return addressService.deleteAddress(id);
 	}
 

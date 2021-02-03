@@ -53,16 +53,10 @@ public class AddressService {
 	@Autowired
 	AddressBackupDao addressBackupDao;
 
-	public List<AddressDto> findAllAddressess(Integer revisore, Short stato) {
-		if (revisore == null && stato == null)
-			return Translators.translate(addressDao.findAll());
-		else if (stato == null)
-			return Translators.translate(addressDao.findByIdRevisoreOrderByProComAsc(new UsersEntity(revisore)));
-		if (revisore == null && stato != null)
-			return Translators.translate(addressDao.findByStatoOrderByProComAsc(stato));
-		else
+	public List<AddressDto> findAllAddressess(Integer revisore, Short stato,String proCom, String indirizzoOriginaleStartWith) {
+	
 			return Translators
-					.translate(addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(revisore), stato));
+					.translate(addressDao.findAllWithFilter(new UsersEntity(revisore), stato,proCom,indirizzoOriginaleStartWith));
 
 	}
 
@@ -115,8 +109,8 @@ public class AddressService {
 
 	}
 
-	public AddressDto getFirstAddressByUser(Integer user, Short stato) {
-		List<Address> addresses = addressDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(user), stato);
+	public AddressDto getFirstAddressByUser(Integer user, Short stato, String proCom, String indirizzoOriginaleStartWith) {
+		List<Address> addresses = addressDao.findAllWithFilter(new UsersEntity(user), stato,proCom,indirizzoOriginaleStartWith);
 		if (addresses.size() == 0)
 			throw new NoDataException("Address no present");
 		return Translators.translate(addresses.get(0));
