@@ -1,6 +1,7 @@
 package it.istat.mec.regedit.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -11,11 +12,13 @@ public class AddressBackupEditedID implements Serializable {
 
 	private Integer editor;
 	private Integer progressivoIndirizzo;
+	private Date dataMod;
 
-	public AddressBackupEditedID(Integer editor, Integer progressivoIndirizzo) {
+	public AddressBackupEditedID(Integer editor, Integer progressivoIndirizzo,Date dataMod) {
 		super();
 		this.editor = editor;
 		this.progressivoIndirizzo = progressivoIndirizzo;
+		this.dataMod = dataMod;
 	}
 
 	public AddressBackupEditedID() {

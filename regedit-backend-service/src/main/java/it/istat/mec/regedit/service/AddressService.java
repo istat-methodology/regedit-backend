@@ -23,7 +23,9 @@
 package it.istat.mec.regedit.service;
 
 import java.sql.Timestamp;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,14 +55,15 @@ public class AddressService {
 	@Autowired
 	AddressBackupDao addressBackupDao;
 
-	public List<AddressDto> findAllAddressess(Integer revisore, Short stato,String proCom, String indirizzoOriginaleStartWith) {
-	
-			return Translators
-					.translate(addressDao.findAllWithFilter(new UsersEntity(revisore), stato,proCom,indirizzoOriginaleStartWith));
+	public List<AddressDto> findAllAddressess(Integer revisore, Short stato, String proCom,
+			String indirizzoOriginaleStartWith) {
+
+		return Translators.translate(
+				addressDao.findAllWithFilter(new UsersEntity(revisore), stato, proCom, indirizzoOriginaleStartWith));
 
 	}
 
-	public AddressDto updateAddress(UpdateAddressRequest request,Integer editor) {
+	public AddressDto updateAddress(UpdateAddressRequest request, Integer editor) {
 
 		if (!addressDao.findById(request.getProgressivoIndirizzo()).isPresent())
 			throw new NoDataException("Address no present");
@@ -71,7 +74,7 @@ public class AddressService {
 		address.setDataMod(new Timestamp(System.currentTimeMillis()));
 
 		addressDao.save(address);
-		
+
 		if (editingBackup) {
 			AddressBackupEdited addressBackupEdited = new AddressBackupEdited();
 			addressBackupEdited = Translators.translate(address, addressBackupEdited);
@@ -109,11 +112,51 @@ public class AddressService {
 
 	}
 
-	public AddressDto getFirstAddressByUser(Integer user, Short stato, String proCom, String indirizzoOriginaleStartWith) {
-		List<Address> addresses = addressDao.findAllWithFilter(new UsersEntity(user), stato,proCom,indirizzoOriginaleStartWith);
+	public AddressDto getFirstAddressByUser(Integer user, Short stato, String proCom,
+			String indirizzoOriginaleStartWith) {
+		List<Address> addresses = addressDao.findAllWithFilter(new UsersEntity(user), stato, proCom,
+				indirizzoOriginaleStartWith);
 		if (addresses.size() == 0)
 			throw new NoDataException("Address no present");
 		return Translators.translate(addresses.get(0));
 
+	}
+
+	public Integer updateAddressList(final List<Integer> addressList, final String dugVal, final String dufVal,
+			final Short stato, final String note, final Integer editor) {
+		if (addressList.size() == 0)
+			throw new NoDataException("Address List empty");
+
+		Integer countUpdate = 0;
+		for (Iterator<Integer> iterator = addressList.iterator(); iterator.hasNext();) {
+			Integer progressivoIndirizzo = (Integer) iterator.next();
+
+			final Optional<Address> optAddress = addressDao.findById(progressivoIndirizzo);
+			if (!optAddress.isPresent())
+				throw new NoDataException("Address no present");
+
+			final Address address = optAddress.get();
+			if (dugVal != null)
+				address.setDugVal(dugVal);
+			if (dufVal != null)
+				address.setDufVal(dufVal);
+			if (note != null)
+				address.setNote(note);
+			if (stato != null)
+				address.setStato(stato);
+
+			address.setDataMod(new Timestamp(System.currentTimeMillis()));
+
+			addressDao.save(address);
+			countUpdate++;
+			if (editingBackup) {
+				AddressBackupEdited addressBackupEdited = new AddressBackupEdited();
+				addressBackupEdited = Translators.translate(address, addressBackupEdited);
+				addressBackupEdited.setEditor(editor);
+				addressBackupDao.save(addressBackupEdited);
+			}
+
+		}
+		return countUpdate;
 	}
 }

@@ -57,10 +57,9 @@ public class AddressController {
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith
-			) {
+			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith) {
 
-		return ResponseEntity.ok(addressService.findAllAddressess(user, stato,proCom,indirizzoOriginaleStartWith));
+		return ResponseEntity.ok(addressService.findAllAddressess(user, stato, proCom, indirizzoOriginaleStartWith));
 
 	}
 
@@ -76,7 +75,7 @@ public class AddressController {
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith) {
 
-		return addressService.getFirstAddressByUser(user, stato,proCom,indirizzoOriginaleStartWith);
+		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleStartWith);
 
 	}
 
@@ -91,6 +90,18 @@ public class AddressController {
 			@RequestHeader(name = "Authorization") final String jwt) {
 
 		return addressService.updateAddress(request, JwtTokenProvider.getUserId(jwt));
+	}
+
+	@PutMapping(value = "/addresses-list")
+	public Integer updateAddressList(@RequestParam(value = "addressList", required = true) List<Integer> addressList,
+			@RequestParam(value = "dugVal", required = false) String dugVal,
+			@RequestParam(value = "dufVal", required = false) String dufVal,
+			@RequestParam(value = "state", required = false) Short stato,
+			@RequestParam(value = "note", required = false) String note,
+			@RequestHeader(name = "Authorization") final String jwt) {
+
+		return addressService.updateAddressList(addressList, dugVal, dufVal, stato, note,
+				JwtTokenProvider.getUserId(jwt));
 	}
 
 	@DeleteMapping(value = "/addresses/{id}")

@@ -92,8 +92,7 @@ public class AddressBase {
 	private Short stato;
 	@Column(name = "DATA_INS")
 	private Date dataIns;
-	@Column(name = "DATA_MOD")
-	private Date dataMod;
+
 	@Column(name = "NOTE")
 	private String note;
 	@Column(name = "FLAG_FITTIZIO")

@@ -23,6 +23,7 @@
 package it.istat.mec.regedit.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,5 +44,8 @@ public class Address extends AddressBase implements Serializable  {
 	@Id
 	@Column(name = "PROGRESSIVO_INDIRIZZO")
 	private Integer progressivoIndirizzo;
+	
+	@Column(name = "DATA_MOD")
+	private Date dataMod;
 	 
 }
