@@ -83,9 +83,10 @@ public class AddressController {
 	@GetMapping(value = "/addresses/first-address/user/{user}/state/{state}")
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith) {
+			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith,
+			@RequestParam(value = "offset", required = false) Integer offset) {
 
-		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleStartWith);
+		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleStartWith,offset);
 
 	}
 

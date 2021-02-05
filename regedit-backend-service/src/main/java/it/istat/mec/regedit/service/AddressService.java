@@ -120,12 +120,13 @@ public class AddressService {
 	}
 
 	public AddressDto getFirstAddressByUser(Integer user, Short stato, String proCom,
-			String indirizzoOriginaleStartWith) {
+			String indirizzoOriginaleStartWith,Integer offsetInt) {
 		List<Address> addresses = addressDao.findAllWithFilter(new UsersEntity(user), stato, proCom,
 				indirizzoOriginaleStartWith);
-		if (addresses.size() == 0)
+		int offset=offsetInt!=null?offsetInt.intValue():0;
+		if (addresses.size() == 0||offset>=addresses.size())        
 			throw new NoDataException("Address no present");
-		return Translators.translate(addresses.get(0));
+		return Translators.translate(addresses.get(offset));
 
 	}
 
