@@ -34,6 +34,7 @@ import org.springframework.stereotype.Repository;
 
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.UsersEntity;
+import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.dto.ReportPivotDto;
 
@@ -61,9 +62,19 @@ public interface AddressDao extends CrudRepository<Address, Integer> {
 			+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
 			+ " AND ((:proCom is NULL) OR (adr.proCom = :proCom)) "
 			+ " AND ((:indirizzoOriginale is NULL) OR (UPPER(adr.indirizzoOriginale) like CONCAT(UPPER(:indirizzoOriginale),'%') )) "
-			+ " ORDER BY adr.proCom ASC, adr.indirizzoOriginale ASC ")
+			+ " ORDER BY adr.proCom ASC, adr.indirizzoOriginale ASC ")	
+	
 	List<Address> findAllWithFilter(@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short stato, @Param("proCom") String proCom, @Param("indirizzoOriginale") String indirizzoOriginale);
-	 
+	
+	@Query("SELECT distinct new it.istat.mec.regedit.dto.ComuneDto (adr.denominazioneComune,adr.proCom) FROM Address AS adr "
+			+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
+			+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "						
+			+ " ORDER BY adr.denominazioneComune ASC, adr.proCom ASC ")
+	List<ComuneDto> findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short statoCom);
+	
+	
+	
+	
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore.email,adr.stato ,adr.validazione, COUNT(*)) "
 			+ "FROM Address AS adr  GROUP BY adr.idRevisore.email,adr.stato,adr.validazione ORDER BY adr.stato")
 	List<ReportDto> getReportAddressState();

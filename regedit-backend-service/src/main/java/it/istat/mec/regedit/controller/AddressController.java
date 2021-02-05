@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.istat.mec.regedit.dto.AddressDto;
+import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.security.JwtTokenProvider;
@@ -60,6 +61,15 @@ public class AddressController {
 			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith) {
 
 		return ResponseEntity.ok(addressService.findAllAddressess(user, stato, proCom, indirizzoOriginaleStartWith));
+
+	}
+	
+	@GetMapping("/addresses/comuni")
+	public List<ComuneDto> getAllComuni(
+			@RequestParam(value = "user", required = false) Integer user,
+			@RequestParam(value = "stato", required = false) Short stato) {
+
+		return addressService.findAllComuniByStatoAndRevisore(user, stato);
 
 	}
 

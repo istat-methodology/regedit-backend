@@ -38,6 +38,7 @@ import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.AddressDto;
+import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
@@ -60,6 +61,12 @@ public class AddressService {
 
 		return Translators.translate(
 				addressDao.findAllWithFilter(new UsersEntity(revisore), stato, proCom, indirizzoOriginaleStartWith));
+
+	}
+	
+	public List<ComuneDto> findAllComuniByStatoAndRevisore(Integer revisore, Short stato) {
+
+		return addressDao.findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(new UsersEntity(revisore), stato);
 
 	}
 
