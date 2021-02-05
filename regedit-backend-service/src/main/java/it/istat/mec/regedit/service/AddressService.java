@@ -60,13 +60,13 @@ public class AddressService {
 			String indirizzoOriginaleStartWith) {
 
 		return Translators.translate(
-				addressDao.findAllWithFilter(new UsersEntity(revisore), stato, proCom, indirizzoOriginaleStartWith));
+				addressDao.findAllWithFilter((revisore!=null)?new UsersEntity(revisore):null, stato, proCom, indirizzoOriginaleStartWith));
 
 	}
 	
 	public List<ComuneDto> findAllComuniByStatoAndRevisore(Integer revisore, Short stato) {
 
-		return addressDao.findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(new UsersEntity(revisore), stato);
+		return addressDao.findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc((revisore!=null)?new UsersEntity(revisore):null, stato);
 
 	}
 

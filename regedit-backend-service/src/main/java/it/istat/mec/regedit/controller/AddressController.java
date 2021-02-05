@@ -64,7 +64,7 @@ public class AddressController {
 
 	}
 	
-	@GetMapping("/addresses/comuni")
+	@GetMapping("/addresses-comuni")
 	public List<ComuneDto> getAllComuni(
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato) {
