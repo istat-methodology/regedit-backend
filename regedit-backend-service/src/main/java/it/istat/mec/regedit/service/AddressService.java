@@ -23,6 +23,7 @@
 package it.istat.mec.regedit.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import it.istat.mec.regedit.dao.AddressBackupDao;
@@ -57,16 +60,25 @@ public class AddressService {
 	AddressBackupDao addressBackupDao;
 
 	public List<AddressDto> findAllAddressess(Integer revisore, Short stato, String proCom,
-			String indirizzoOriginaleStartWith) {
+			String indirizzoOriginaleStartWith, String[] orderBy, String[] sort) {
 
-		return Translators.translate(
-				addressDao.findAllWithFilter((revisore!=null)?new UsersEntity(revisore):null, stato, proCom, indirizzoOriginaleStartWith));
+		List<Order> orders = new ArrayList<Order>();
+		for (int i = 0; i < orderBy.length; i++) {
+			Order order = new Order((i<sort.length &&  Sort.Direction.DESC.name().equalsIgnoreCase(sort[i]))? Sort.Direction.DESC:Sort.Direction.ASC,orderBy[i]);
+			orders.add(order);
+
+		}
+
+		Sort sortQuery = Sort.by(orders);
+		return Translators.translate(addressDao.findAllWithFilter((revisore != null) ? new UsersEntity(revisore) : null,
+				stato, proCom, indirizzoOriginaleStartWith, sortQuery));
 
 	}
-	
+
 	public List<ComuneDto> findAllComuniByStatoAndRevisore(Integer revisore, Short stato) {
 
-		return addressDao.findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc((revisore!=null)?new UsersEntity(revisore):null, stato);
+		return addressDao.findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
+				(revisore != null) ? new UsersEntity(revisore) : null, stato);
 
 	}
 
@@ -120,11 +132,21 @@ public class AddressService {
 	}
 
 	public AddressDto getFirstAddressByUser(Integer user, Short stato, String proCom,
-			String indirizzoOriginaleStartWith,Integer offsetInt) {
+			String indirizzoOriginaleStartWith, Integer offsetInt, String[] orderBy, String[] sort) {
+		
+		List<Order> orders = new ArrayList<Order>();
+		for (int i = 0; i < orderBy.length; i++) {
+			Order order = new Order((i<sort.length &&  Sort.Direction.DESC.name().equalsIgnoreCase(sort[i]))? Sort.Direction.DESC:Sort.Direction.ASC,orderBy[i]);
+			orders.add(order);
+
+		}
+
+		Sort sortQuery = Sort.by(orders);
 		List<Address> addresses = addressDao.findAllWithFilter(new UsersEntity(user), stato, proCom,
-				indirizzoOriginaleStartWith);
-		int offset=offsetInt!=null?offsetInt.intValue():0;
-		if (addresses.size() == 0||offset>=addresses.size())        
+				indirizzoOriginaleStartWith, sortQuery);
+		
+		int offset = offsetInt != null ? offsetInt.intValue() : 0;
+		if (addresses.size() == 0 || offset >= addresses.size())
 			throw new NoDataException("Address no present");
 		return Translators.translate(addresses.get(offset));
 

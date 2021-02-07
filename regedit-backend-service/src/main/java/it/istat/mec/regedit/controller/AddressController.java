@@ -58,15 +58,17 @@ public class AddressController {
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith) {
+			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith,
+			@RequestParam(value = "orderBy", required = false,defaultValue = "proCom,indirizzoOriginale") String[] orderBy,
+			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
-		return ResponseEntity.ok(addressService.findAllAddressess(user, stato, proCom, indirizzoOriginaleStartWith));
+		return ResponseEntity
+				.ok(addressService.findAllAddressess(user, stato, proCom, indirizzoOriginaleStartWith, orderBy,sort));
 
 	}
-	
+
 	@GetMapping("/addresses-comuni")
-	public List<ComuneDto> getAllComuni(
-			@RequestParam(value = "user", required = false) Integer user,
+	public List<ComuneDto> getAllComuni(@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato) {
 
 		return addressService.findAllComuniByStatoAndRevisore(user, stato);
@@ -84,9 +86,11 @@ public class AddressController {
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith,
-			@RequestParam(value = "offset", required = false) Integer offset) {
+			@RequestParam(value = "offset", required = false) Integer offset,
+			@RequestParam(value = "orderBy", required = false,defaultValue = "proCom,indirizzoOriginale") String[] orderBy,
+			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
-		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleStartWith,offset);
+		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleStartWith, offset, orderBy,sort);
 
 	}
 
