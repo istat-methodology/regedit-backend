@@ -60,7 +60,7 @@ public class AddressService {
 	AddressBackupDao addressBackupDao;
 
 	public List<AddressDto> findAllAddressess(Integer revisore, Short stato, String proCom,
-			String indirizzoOriginaleStartWith, String[] orderBy, String[] sort) {
+			String indirizzoOriginaleContains, String[] orderBy, String[] sort) {
 
 		List<Order> orders = new ArrayList<Order>();
 		for (int i = 0; i < orderBy.length; i++) {
@@ -71,7 +71,7 @@ public class AddressService {
 
 		Sort sortQuery = Sort.by(orders);
 		return Translators.translate(addressDao.findAllWithFilter((revisore != null) ? new UsersEntity(revisore) : null,
-				stato, proCom, indirizzoOriginaleStartWith, sortQuery));
+				stato, proCom, indirizzoOriginaleContains, sortQuery));
 
 	}
 
@@ -132,7 +132,7 @@ public class AddressService {
 	}
 
 	public AddressDto getFirstAddressByUser(Integer user, Short stato, String proCom,
-			String indirizzoOriginaleStartWith, Integer offsetInt, String[] orderBy, String[] sort) {
+			String indirizzoOriginaleContains, Integer offsetInt, String[] orderBy, String[] sort) {
 		
 		List<Order> orders = new ArrayList<Order>();
 		for (int i = 0; i < orderBy.length; i++) {
@@ -143,7 +143,7 @@ public class AddressService {
 
 		Sort sortQuery = Sort.by(orders);
 		List<Address> addresses = addressDao.findAllWithFilter(new UsersEntity(user), stato, proCom,
-				indirizzoOriginaleStartWith, sortQuery);
+				indirizzoOriginaleContains, sortQuery);
 		
 		int offset = offsetInt != null ? offsetInt.intValue() : 0;
 		if (addresses.size() == 0 || offset >= addresses.size())

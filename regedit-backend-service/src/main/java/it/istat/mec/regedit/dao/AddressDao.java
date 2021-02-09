@@ -62,7 +62,7 @@ public interface AddressDao extends JpaRepository<Address, Integer> {
 			+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
 			+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
 			+ " AND ((:proCom is NULL) OR (adr.proCom = :proCom)) "
-			+ " AND ((:indirizzoOriginale is NULL) OR (UPPER(adr.indirizzoOriginale) like CONCAT(UPPER(:indirizzoOriginale),'%') )) ")	
+			+ " AND ((:indirizzoOriginale is NULL) OR (UPPER(adr.indirizzoOriginale) like CONCAT('%',UPPER(:indirizzoOriginale),'%') )) ")	
 		List<Address> findAllWithFilter(@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short stato, @Param("proCom") String proCom, @Param("indirizzoOriginale") String indirizzoOriginale, Sort sort);
 
 	@Query("SELECT distinct new it.istat.mec.regedit.dto.ComuneDto (adr.denominazioneComune,adr.proCom) FROM Address AS adr "

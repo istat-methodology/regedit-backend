@@ -58,12 +58,12 @@ public class AddressController {
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith,
+			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
 			@RequestParam(value = "orderBy", required = false,defaultValue = "proCom,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
 		return ResponseEntity
-				.ok(addressService.findAllAddressess(user, stato, proCom, indirizzoOriginaleStartWith, orderBy,sort));
+				.ok(addressService.findAllAddressess(user, stato, proCom, indirizzoOriginaleContains, orderBy,sort));
 
 	}
 
@@ -83,14 +83,14 @@ public class AddressController {
 	}
 
 	@GetMapping(value = "/addresses/first-address/user/{user}/state/{state}")
-	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("state") Short stato,
+	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "indirizzoOriginaleStartWith", required = false) String indirizzoOriginaleStartWith,
+			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
 			@RequestParam(value = "offset", required = false) Integer offset,
 			@RequestParam(value = "orderBy", required = false,defaultValue = "proCom,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
-		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleStartWith, offset, orderBy,sort);
+		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleContains, offset, orderBy,sort);
 
 	}
 
