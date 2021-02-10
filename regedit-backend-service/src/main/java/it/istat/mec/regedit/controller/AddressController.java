@@ -82,7 +82,7 @@ public class AddressController {
 
 	}
 
-	@GetMapping(value = "/addresses/first-address/user/{user}/state/{state}")
+	@GetMapping(value = "/addresses/first-address/user/{user}/state/{stato}")
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
