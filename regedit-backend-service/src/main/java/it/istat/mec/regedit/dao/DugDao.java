@@ -23,11 +23,13 @@
 package it.istat.mec.regedit.dao;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
+
 import it.istat.mec.regedit.domain.Dug;
 
-public interface DugDao extends CrudRepository<Dug, Integer> {
+public interface DugDao extends JpaRepository<Dug, Integer> {
 
 	@Override
 	List<Dug> findAll();

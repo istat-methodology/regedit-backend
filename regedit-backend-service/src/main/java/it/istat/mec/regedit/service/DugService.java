@@ -24,6 +24,7 @@ package it.istat.mec.regedit.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import it.istat.mec.regedit.dao.DugDao;
 import it.istat.mec.regedit.domain.Dug;
@@ -38,7 +39,7 @@ public class DugService {
 	DugDao dugDao;
 	
 	public List<DugDto> findAllDug() {
-		return dugDao.findAll().stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
+		return dugDao.findAll(Sort.by(Sort.Direction.ASC, "name")).stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
 	
 	public DugDto findDugById(Integer id) {
