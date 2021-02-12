@@ -39,6 +39,7 @@ public class DugService {
 	DugDao dugDao;
 	
 	public List<DugDto> findAllDug() {
+		
 		return dugDao.findAll(Sort.by(Sort.Direction.ASC, "name")).stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
 	
