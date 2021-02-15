@@ -59,7 +59,7 @@ public class AddressController {
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
-			@RequestParam(value = "orderBy", required = false,defaultValue = "proCom,indirizzoOriginale") String[] orderBy,
+			@RequestParam(value = "orderBy", required = false,defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
 		return ResponseEntity
@@ -87,7 +87,7 @@ public class AddressController {
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
 			@RequestParam(value = "offset", required = false) Integer offset,
-			@RequestParam(value = "orderBy", required = false,defaultValue = "proCom,indirizzoOriginale") String[] orderBy,
+			@RequestParam(value = "orderBy", required = false,defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
 		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleContains, offset, orderBy,sort);
