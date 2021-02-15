@@ -115,7 +115,7 @@ public interface AddressDao extends JpaRepository<Address, Integer> {
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
 			+ " FROM Address AS adr WHERE adr.dataMod IS NOT NULL AND  ((:user is NULL) OR (adr.idRevisore.id=:user))"
-			+ " AND ((:dateModSup is NULL) OR (adr.dataMod <=:dateModSup)) AND  ((:dateModInf is NULL) OR (adr.dataMod >= :dateModInf))"
+			+ " AND ((:dateModSup is NULL) OR (cast(adr.dataMod as date) <= :dateModSup )) AND  ((:dateModInf is NULL) OR (cast(adr.dataMod as date) >= :dateModInf ))"
 			+ " GROUP BY adr.idRevisore.id,adr.idRevisore.email,adr.idRevisore.name,adr.idRevisore.surname,adr.idRevisore.role.role, cast(adr.dataMod as date)"
 			+ " ORDER By 1 ASC, 6 ASC ")
 	List<ReportPivotDto> getReportDailyPivotAddressStateUser(@Param("user") Integer user,
@@ -126,7 +126,7 @@ public interface AddressDao extends JpaRepository<Address, Integer> {
 			+ " SUM(CASE WHEN (adr.stato =  2 and adr.validazione='NO') THEN 1 ELSE 0 END)  , "
 			+ " SUM(CASE WHEN adr.stato =  3 THEN 1 ELSE 0 END)  ) "
 			+ " FROM Address AS adr WHERE adr.dataMod IS NOT NULL "
-			+ " AND ((:dateModSup is NULL) OR (adr.dataMod <=:dateModSup)) AND  ((:dateModInf is NULL) OR (adr.dataMod >= :dateModInf))"
+			+ " AND ((:dateModSup is NULL) OR (cast(adr.dataMod as date) <=  :dateModSup )) AND  ((:dateModInf is NULL) OR (cast(adr.dataMod as date) >=  :dateModInf ))"
 			+ " GROUP BY cast(adr.dataMod as date)" + " ORDER By 1 ASC ")
 	List<ReportPivotDto> getReportTotalDailyPivotAddressStateUser(@Param("dateModInf") Date dateModInf,
 			@Param("dateModSup") Date dateModSup);
