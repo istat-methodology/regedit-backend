@@ -37,7 +37,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "WP1_INDIRIZZI_DA_REVISION_HISTORY")
+@Table(name = "WP1_INDIRIZZI_DA_REV_HISTORY")
 @IdClass(AddressBackupEditedID.class)
 public class AddressBackupEdited extends AddressBase implements Serializable {
 

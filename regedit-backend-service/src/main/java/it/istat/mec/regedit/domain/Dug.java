@@ -38,7 +38,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "DUG")
+@Table(name = "WP1_DUG")
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Dug implements Serializable {
 
