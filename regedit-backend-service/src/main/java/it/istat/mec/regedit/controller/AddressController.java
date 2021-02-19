@@ -58,12 +58,13 @@ public class AddressController {
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
+			@RequestParam(value = "validazione", required = false) String validazione,
 			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
 			@RequestParam(value = "orderBy", required = false,defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
 		return ResponseEntity
-				.ok(addressService.findAllAddressess(user, stato, proCom, indirizzoOriginaleContains, orderBy,sort));
+				.ok(addressService.findAllAddressess(user, stato, proCom,validazione, indirizzoOriginaleContains, orderBy,sort));
 
 	}
 
@@ -85,12 +86,13 @@ public class AddressController {
 	@GetMapping(value = "/addresses/first-address/user/{user}/state/{stato}")
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
+			@RequestParam(value = "validazione", required = false) String validazione,
 			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
 			@RequestParam(value = "offset", required = false) Integer offset,
 			@RequestParam(value = "orderBy", required = false,defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
-		return addressService.getFirstAddressByUser(user, stato, proCom, indirizzoOriginaleContains, offset, orderBy,sort);
+		return addressService.getFirstAddressByUser(user, stato, proCom,validazione, indirizzoOriginaleContains, offset, orderBy,sort);
 
 	}
 
