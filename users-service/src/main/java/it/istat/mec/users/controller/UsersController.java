@@ -23,7 +23,7 @@ public class UsersController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/users")
+	@GetMapping("/users/userlist")
 	@ResponseBody
 	public List<UsersDto> getAllUsers(@RequestParam(value = "role",required = false) String role) {
 		return userService.findAllUsers(role);
@@ -36,7 +36,7 @@ public class UsersController {
 		return userService.findUserById(id);
 
 	}
-	@PostMapping("/users")
+	@PostMapping("/users/newuser")
 	@ResponseBody
 	public UsersDto create(@RequestBody CreateUserRequest request) {		
 			

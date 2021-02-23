@@ -1,5 +1,6 @@
 package it.istat.mec.users.service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import it.istat.mec.users.dao.UsersDao;
@@ -45,6 +46,8 @@ public class UserService {
 	public UsersDto newUser(CreateUserRequest request) {
 		UsersEntity user = new UsersEntity();
 		user = Translators.translate(request);	
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		user.setPassword(passwordEncoder.encode(request.getPassword()));
 		
 		usersDao.save(user);		    
 		return Translators.translate(user);
