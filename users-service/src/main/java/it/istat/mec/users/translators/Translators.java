@@ -1,5 +1,6 @@
 package it.istat.mec.users.translators;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,12 @@ public class Translators {
 		final UsersDto dTO = modelMapper.map(x, UsersDto.class);
 		return dTO;
 	}
+	public static UsersDto translate(Optional<UsersEntity> optional) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final UsersDto dTO = modelMapper.map(optional, UsersDto.class);
+		return dTO;
+	}
 	public static UserRolesDto translate(UserRolesEntity x) {
 
 		final ModelMapper modelMapper = new ModelMapper();
@@ -42,6 +49,7 @@ public class Translators {
 		final UsersEntity user = modelMapper.map(x, UsersEntity.class);
 		return user;
 	}
+	
 	public static UserRolesEntity translate(CreateUserRoleRequest x) {
 
 		final ModelMapper modelMapper = new ModelMapper();

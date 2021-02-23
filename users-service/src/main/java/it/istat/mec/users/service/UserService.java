@@ -63,4 +63,37 @@ public class UserService {
 		usersDao.save(user);		
 		return Translators.translate(user);
 	}
+	public UsersDto updatePasswordByEmail(CreateUserRequest request) throws Exception {
+        
+		if (!usersDao.findByEmail(request.getEmail()).isPresent())
+			throw new NoDataException("User not present");		
+		
+		UsersEntity user = usersDao.findByEmail(request.getEmail()).get();
+		user = Translators.translateUpdate(request, user);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		user.setPassword(passwordEncoder.encode(request.getPassword()));		
+        
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        usersDao.save(user);        
+        
+        return Translators.translate(user);
+    }
+
+    public UsersDto updatePasswordById(CreateUserRequest request) throws Exception {
+    	if (!usersDao.findById(request.getId()).isPresent())
+			throw new NoDataException("User not present");		
+		
+		UsersEntity user = usersDao.findById(request.getId()).get();
+		user = Translators.translateUpdate(request, user);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		user.setPassword(passwordEncoder.encode(request.getPassword()));		
+        
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        usersDao.save(user);        
+        
+        return Translators.translate(user);
+    }
+	
 }
