@@ -36,17 +36,17 @@ import it.istat.mec.users.domain.UsersEntity;
 public interface UsersDao extends CrudRepository<UsersEntity, Integer> {
 
 	@Override
-	public List<UsersEntity> findAll();
+	List<UsersEntity> findAll();
 	
 	@Query("SELECT u from UsersEntity u where u.role.role=:role")
-	public List<UsersEntity> findByRole(@Param("role") String role);
+	List<UsersEntity> findByRole(@Param("role") String role);
 	
 	@Override
-	public Optional<UsersEntity> findById(Integer id);
+	Optional<UsersEntity> findById(Integer id);
 	
 	public void save(Optional<UsersEntity> address);
 
 	public void delete(UsersEntity address);
 	
-	public Optional<UsersEntity> findByEmail(String email);
+	Optional<UsersEntity> findByEmail(String email);
 }
