@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
+import it.istat.mec.regedit.request.UpdateAddressListRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.security.JwtTokenProvider;
 import it.istat.mec.regedit.service.AddressService;
@@ -60,11 +61,11 @@ public class AddressController {
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "validazione", required = false) String validazione,
 			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
-			@RequestParam(value = "orderBy", required = false,defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
+			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
-		return ResponseEntity
-				.ok(addressService.findAllAddressess(user, stato, proCom,validazione, indirizzoOriginaleContains, orderBy,sort));
+		return ResponseEntity.ok(addressService.findAllAddressess(user, stato, proCom, validazione,
+				indirizzoOriginaleContains, orderBy, sort));
 
 	}
 
@@ -89,10 +90,11 @@ public class AddressController {
 			@RequestParam(value = "validazione", required = false) String validazione,
 			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
 			@RequestParam(value = "offset", required = false) Integer offset,
-			@RequestParam(value = "orderBy", required = false,defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
+			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
 
-		return addressService.getFirstAddressByUser(user, stato, proCom,validazione, indirizzoOriginaleContains, offset, orderBy,sort);
+		return addressService.getFirstAddressByUser(user, stato, proCom, validazione, indirizzoOriginaleContains,
+				offset, orderBy, sort);
 
 	}
 
@@ -110,14 +112,10 @@ public class AddressController {
 	}
 
 	@PutMapping(value = "/addresses-list")
-	public Integer updateAddressList(@RequestParam(value = "addressList", required = true) List<Integer> addressList,
-			@RequestParam(value = "dugVal", required = false) String dugVal,
-			@RequestParam(value = "dufVal", required = false) String dufVal,
-			@RequestParam(value = "state", required = false) Short stato,
-			@RequestParam(value = "note", required = false) String note,
+	public Integer updateAddressList(@RequestBody UpdateAddressListRequest updateAddressListRequest,
 			@RequestHeader(name = "Authorization") final String jwt) {
 
-		return addressService.updateAddressList(addressList, dugVal, dufVal, stato, note,
+		return addressService.updateAddressList(updateAddressListRequest.getAddressList(), updateAddressListRequest.getDugVal(), updateAddressListRequest.getDufVal(), updateAddressListRequest.getState(), updateAddressListRequest.getNote(),
 				JwtTokenProvider.getUserId(jwt));
 	}
 
