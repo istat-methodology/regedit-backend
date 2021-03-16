@@ -39,6 +39,7 @@ public class UpdateAddressListRequest implements Serializable {
 	List<Integer> addressList;
 	String dugVal;
 	String dufVal;
+	String validazione;
 	Short state;
 	String note;
 }

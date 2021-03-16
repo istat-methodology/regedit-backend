@@ -152,7 +152,7 @@ public class AddressService {
 
 	}
 
-	public Integer updateAddressList(final List<Integer> addressList, final String dugVal, final String dufVal,
+	public Integer updateAddressList(final List<Integer> addressList,final String validazione, final String dugVal, final String dufVal,
 			final Short stato, final String note, final Integer editor) {
 		if (addressList.size() == 0)
 			throw new NoDataException("Address List empty");
@@ -166,6 +166,8 @@ public class AddressService {
 				throw new NoDataException("Address no present");
 
 			final Address address = optAddress.get();
+			if (validazione != null)
+				address.setValidazione(validazione);
 			if (dugVal != null)
 				address.setDugVal(dugVal);
 			if (dufVal != null)

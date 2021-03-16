@@ -115,7 +115,7 @@ public class AddressController {
 	public Integer updateAddressList(@RequestBody UpdateAddressListRequest updateAddressListRequest,
 			@RequestHeader(name = "Authorization") final String jwt) {
 
-		return addressService.updateAddressList(updateAddressListRequest.getAddressList(), updateAddressListRequest.getDugVal(), updateAddressListRequest.getDufVal(), updateAddressListRequest.getState(), updateAddressListRequest.getNote(),
+		return addressService.updateAddressList(updateAddressListRequest.getAddressList(), updateAddressListRequest.getValidazione(),updateAddressListRequest.getDugVal(), updateAddressListRequest.getDufVal(), updateAddressListRequest.getState(), updateAddressListRequest.getNote(),
 				JwtTokenProvider.getUserId(jwt));
 	}
 
