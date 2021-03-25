@@ -40,6 +40,8 @@ public class UpdateAddressListRequest implements Serializable {
 	String dugVal;
 	String dufVal;
 	String validazione;
+	String localitaVal;
+	Long cdpstrEgon;
 	Short state;
 	String note;
 }

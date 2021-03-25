@@ -44,6 +44,7 @@ import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateAddressRequest;
+import it.istat.mec.regedit.request.UpdateAddressListRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.translators.Translators;
 
@@ -152,13 +153,12 @@ public class AddressService {
 
 	}
 
-	public Integer updateAddressList(final List<Integer> addressList,final String validazione, final String dugVal, final String dufVal,
-			final Short stato, final String note, final Integer editor) {
-		if (addressList.size() == 0)
+	public Integer updateAddressList(final UpdateAddressListRequest updateAddressListRequest, final Integer editor) {
+		if ( updateAddressListRequest.getAddressList()==null||updateAddressListRequest.getAddressList().size() == 0)
 			throw new NoDataException("Address List empty");
 
 		Integer countUpdate = 0;
-		for (Iterator<Integer> iterator = addressList.iterator(); iterator.hasNext();) {
+		for (Iterator<Integer> iterator = updateAddressListRequest.getAddressList().iterator(); iterator.hasNext();) {
 			Integer progressivoIndirizzo = (Integer) iterator.next();
 
 			final Optional<Address> optAddress = addressDao.findById(progressivoIndirizzo);
@@ -166,16 +166,21 @@ public class AddressService {
 				throw new NoDataException("Address no present");
 
 			final Address address = optAddress.get();
-			if (validazione != null)
-				address.setValidazione(validazione);
-			if (dugVal != null)
-				address.setDugVal(dugVal);
-			if (dufVal != null)
-				address.setDufVal(dufVal);
-			if (note != null)
-				address.setNote(note);
-			if (stato != null)
-				address.setStato(stato);
+			if (updateAddressListRequest.getValidazione() != null)
+				address.setValidazione(updateAddressListRequest.getValidazione());
+			if (updateAddressListRequest.getDugVal() != null)
+				address.setDugVal(updateAddressListRequest.getDugVal());
+			if (updateAddressListRequest.getDufVal() != null)
+				address.setDufVal(updateAddressListRequest.getDufVal());
+			if (updateAddressListRequest.getLocalitaVal() != null)
+				address.setLocalitaVal(updateAddressListRequest.getLocalitaVal());
+			if (updateAddressListRequest.getCdpstrEgon() != null)
+				address.setCdpstrEgon(updateAddressListRequest.getCdpstrEgon());
+			
+			if (updateAddressListRequest.getNote() != null)
+				address.setNote(updateAddressListRequest.getNote());
+			if (updateAddressListRequest.getState() != null)
+				address.setStato(updateAddressListRequest.getState());
 
 			address.setDataMod(new Timestamp(System.currentTimeMillis()));
 
