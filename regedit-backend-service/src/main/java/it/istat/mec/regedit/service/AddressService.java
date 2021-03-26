@@ -176,6 +176,8 @@ public class AddressService {
 				address.setLocalitaVal(updateAddressListRequest.getLocalitaVal());
 			if (updateAddressListRequest.getCdpstrEgon() != null)
 				address.setCdpstrEgon(updateAddressListRequest.getCdpstrEgon());
+			if (updateAddressListRequest.getIdFonte() != null)
+				address.setIdFonte(updateAddressListRequest.getIdFonte());
 			
 			if (updateAddressListRequest.getNote() != null)
 				address.setNote(updateAddressListRequest.getNote());
