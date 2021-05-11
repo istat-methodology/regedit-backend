@@ -41,6 +41,7 @@ public class UserService {
 
 	public UsersDto deleteUser(Integer id) {
 		UsersDto usersDto = findUserById(id);
+		usersDao.deleteById(id);
 		return usersDto;
 	}
 	public UsersDto newUser(CreateUserRequest request) {

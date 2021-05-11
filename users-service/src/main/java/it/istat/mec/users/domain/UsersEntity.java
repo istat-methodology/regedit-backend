@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "regedit_users", schema = "regedit_users")
+@Table(name = "users", schema = "regedit_users")
 public class UsersEntity {
     private Integer id;
     private String email;

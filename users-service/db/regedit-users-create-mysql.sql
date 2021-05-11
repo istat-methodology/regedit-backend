@@ -1,7 +1,15 @@
 -- 
+-- Schema regedit_user
+-- 
+DROP SCHEMA IF EXISTS `regedit_users`;
+CREATE SCHEMA `regedit_users` DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+USE `regedit_users`;
+
+
+-- 
 -- USER ROLE
 -- 
-CREATE TABLE `regedit_user_roles` (
+CREATE TABLE `regedit_users`.`roles` (
   `ID` 	 	INT NOT NULL AUTO_INCREMENT,
   `ROLE` 	VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`)
@@ -10,7 +18,7 @@ CREATE TABLE `regedit_user_roles` (
 -- 
 -- USER
 -- 
-CREATE TABLE `regedit_users` (
+CREATE TABLE `regedit_users`.`users` (
   `ID` 			INT NOT NULL AUTO_INCREMENT,
   `EMAIL` 		VARCHAR(255) NULL,
   `NAME` 		VARCHAR(100) NULL,
@@ -18,7 +26,7 @@ CREATE TABLE `regedit_users` (
   `PASSWORD` 	VARCHAR(500) NULL,
   `ROLE_ID` 	INT NOT NULL,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `fk_regedit_user_roles` FOREIGN KEY (`ROLE_ID`)
-        REFERENCES `regedit_user_roles` (`ID`)
+  CONSTRAINT `fk_regedit_users_roles` FOREIGN KEY (`ROLE_ID`)
+        REFERENCES `regedit_users`.`roles` (`ID`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
