@@ -17,20 +17,20 @@ import it.istat.is2.apigateway.service.UserService;
 @RequestMapping("/api")
 public class UsersController {
 
-	@Autowired
-	private UserService userService;
-
-	@GetMapping("/users")
-	@ResponseBody
-	public List<UsersDto> getAllUsers(@RequestParam(value = "role",required = false) String role) {
-		return userService.findAllUsers(role);
-	}
-
-	@GetMapping(value = "/users/{id}")
-	@ResponseBody
-	public UsersDto getUser(@PathVariable("id") Integer id) {
-
-		return userService.findUserById(id);
-
-	}
+//	@Autowired
+//	private UserService userService;
+//
+//	@GetMapping("/users")
+//	@ResponseBody
+//	public List<UsersDto> getAllUsers(@RequestParam(value = "role",required = false) String role) {
+//		return userService.findAllUsers(role);
+//	}
+//
+//	@GetMapping(value = "/users/{id}")
+//	@ResponseBody
+//	public UsersDto getUser(@PathVariable("id") Integer id) {
+//
+//		return userService.findUserById(id);
+//
+//	}
 }

@@ -35,6 +35,10 @@ zuul:
     service_regedit:
       path: /api/regedit/**
       url: http://localhost:8081/regedit
+      
+    service_users:
+      path: /api/users/**
+      url: http://localhost:8082/users
  
 eureka:
   instance:
