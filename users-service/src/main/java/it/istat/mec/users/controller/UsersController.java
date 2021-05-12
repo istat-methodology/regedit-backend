@@ -17,13 +17,13 @@ import it.istat.mec.users.service.UserService;
 
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/users")
 public class UsersController {
 
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/users/userlist")
+	@GetMapping("/users")
 	@ResponseBody
 	public List<UsersDto> getAllUsers(@RequestParam(value = "role",required = false) String role) {
 		return userService.findAllUsers(role);
@@ -36,7 +36,7 @@ public class UsersController {
 		return userService.findUserById(id);
 
 	}
-	@PostMapping("/users/newuser")
+	@PostMapping("/users")
 	@ResponseBody
 	public UsersDto create(@RequestBody CreateUserRequest request) {		
 			
