@@ -61,7 +61,12 @@ public class UserService {
 		UsersEntity user = usersDao.findById(request.getId()).get();
 		user = Translators.translateUpdate(request, user);	
 		
-		usersDao.save(user);		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		user.setPassword(passwordEncoder.encode(request.getPassword()));		
+        
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        usersDao.save(user); 	
 		return Translators.translate(user);
 	}
 	public UsersDto updatePasswordByEmail(CreateUserRequest request) throws Exception {

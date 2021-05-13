@@ -42,18 +42,7 @@ public class UsersController {
 			
 		return userService.newUser(request);
 	}
-	@PostMapping("/users/updateuser")
-	@ResponseBody
-	public UsersDto updateuser(@RequestBody CreateUserRequest request) {	
-		UsersDto userDto = new UsersDto();
-		try {
-			userDto =  userService.updatePasswordById(request);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return userDto;
-	}
+	
 	@PutMapping(value = "/users/{id}")
 	@ResponseBody
 	public UsersDto updateUser(@RequestBody CreateUserRequest request) {
