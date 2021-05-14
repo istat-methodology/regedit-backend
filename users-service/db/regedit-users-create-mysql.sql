@@ -1,7 +1,7 @@
 -- 
 -- USER ROLE
 -- 
-CREATE TABLE `regedit_users`.`wp1_user_roles` (
+CREATE TABLE `regedit`.`wp1_user_roles` (
   `ID` 	 	INT NOT NULL AUTO_INCREMENT,
   `ROLE` 	VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`)
@@ -10,7 +10,7 @@ CREATE TABLE `regedit_users`.`wp1_user_roles` (
 -- 
 -- USER
 -- 
-CREATE TABLE `regedit_users`.`wp1_users` (
+CREATE TABLE `regedit`.`wp1_users` (
   `ID` 			INT NOT NULL AUTO_INCREMENT,
   `EMAIL` 		VARCHAR(255) NULL,
   `NAME` 		VARCHAR(100) NULL,
