@@ -4,7 +4,7 @@
 DROP SCHEMA IF EXISTS regedit_gateway;
 CREATE SCHEMA regedit_gateway DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 USE regedit_gateway;
-
+/*
 -- 
 -- USER ROLE
 -- 
@@ -25,7 +25,7 @@ CREATE TABLE PD_RSA_SPER.WP1_users (
   ROLE_ID 	NUMBER NOT NULL
   
 )
-
+*/
 -- 
 -- CLASSIFICATION TABLES
 -- 

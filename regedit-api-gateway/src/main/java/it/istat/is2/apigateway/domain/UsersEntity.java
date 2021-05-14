@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "is2_users", schema = "is2")
+@Table(name = "wp1_users", schema = "regedit_users")
 public class UsersEntity {
     private Integer id;
     private String email;

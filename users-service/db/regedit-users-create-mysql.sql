@@ -1,5 +1,5 @@
 -- 
--- Schema regedit_user
+-- Schema regedit_users
 -- 
 DROP SCHEMA IF EXISTS `regedit_users`;
 CREATE SCHEMA `regedit_users` DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

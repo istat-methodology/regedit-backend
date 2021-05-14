@@ -4,7 +4,7 @@
 DROP SCHEMA IF EXISTS `regedit_gateway`;
 CREATE SCHEMA `regedit_gateway` DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 USE `regedit_gateway`;
-
+/*
 -- 
 -- USER ROLE
 -- 
@@ -29,7 +29,7 @@ CREATE TABLE `regedit_gateway`.`is2_users` (
         REFERENCES `is2_user_roles` (`ID`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+*/
 -- 
 -- CLASSIFICATION TABLES
 -- 

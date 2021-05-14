@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "roles", schema = "regedit_users", catalog = "")
+@Table(name = "wp1_user_roles", schema = "regedit_users", catalog = "")
 public class UserRolesEntity {
     private int id;
     private String role;

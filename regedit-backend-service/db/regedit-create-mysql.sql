@@ -81,7 +81,7 @@ CREATE TABLE `regedit`.`WP1_DUG` (
   `name` text 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
  
-
+/*
 -- 
 -- USER ROLE
 -- 
@@ -106,3 +106,4 @@ CREATE TABLE `regedit`.`wp1_users` (
         REFERENCES `wp1_user_roles` (`ID`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+*/
