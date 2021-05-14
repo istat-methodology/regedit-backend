@@ -1,27 +1,10 @@
---
--- PostgreSQL database dump
--- Dumped from database version 11.5
--- Dumped by pg_dump version 11.2
 
-DROP SCHEMA IF EXISTS regedit_users CASCADE;
-CREATE SCHEMA regedit_users;
-
-DO '
-BEGIN
-execute ''alter database ''||current_database()||'' set search_path to is2,public;'';
-END;
-';
-
-SET search_path to regedit_users,public;
-SET default_tablespace = '';
-SET default_with_oids = false;
-
-CREATE TABLE regedit_users.wp1_user_roles (
+CREATE TABLE regedit.wp1_user_roles (
     id integer NOT NULL,
     role character varying(50) DEFAULT NULL::character varying
 );
 
-CREATE TABLE regedit_users.wp1_users (
+CREATE TABLE regedit.wp1_users (
     id integer NOT NULL,
     email character varying(255),
     name character varying(100),
