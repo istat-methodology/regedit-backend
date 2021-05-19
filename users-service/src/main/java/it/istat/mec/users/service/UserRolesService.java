@@ -31,6 +31,7 @@ public class UserRolesService {
 	
 	public UserRolesDto deleteUserRole(Integer id) {
 		UserRolesDto userRolesDto = findUserRolesById(id);
+		userRolesDao.deleteById(id);
 		return userRolesDto;
 	}
 	
