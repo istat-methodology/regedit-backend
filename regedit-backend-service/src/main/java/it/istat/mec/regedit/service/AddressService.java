@@ -42,6 +42,7 @@ import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ComuneDto;
+import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressListRequest;
@@ -131,6 +132,12 @@ public class AddressService {
 		return addresses;
 
 	}
+	
+	public List<UsersDto> getUsersByAddresses() {
+		List<UsersDto> users = addressDao.findAllUsersWithAddressesAssigned();
+		return users;
+	}
+	
 
 	public AddressDto getFirstAddressByUser(Integer user, Short stato, String proCom,String validazione,
 			String indirizzoOriginaleContains, Integer offsetInt, String[] orderBy, String[] sort) {

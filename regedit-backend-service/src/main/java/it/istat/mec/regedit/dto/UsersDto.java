@@ -11,5 +11,15 @@ public class UsersDto implements Serializable {
 	private Integer id;
     private String email;
     private String name; 
-    private String role; 
+    private String surname;
+    private Integer role; 
+    
+    public UsersDto(Integer id, String email, String name, String surname, Integer role) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.surname = surname;
+		this.role = role;
+	}
 }

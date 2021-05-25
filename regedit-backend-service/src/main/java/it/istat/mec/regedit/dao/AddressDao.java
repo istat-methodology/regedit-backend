@@ -37,6 +37,7 @@ import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.dto.ReportPivotDto;
+import it.istat.mec.regedit.dto.UsersDto;
 
 @Repository
 public interface AddressDao extends JpaRepository<Address, Integer> {
@@ -131,4 +132,10 @@ public interface AddressDao extends JpaRepository<Address, Integer> {
 			+ " GROUP BY cast(adr.dataMod as date)" + " ORDER By 1 ASC ")
 	List<ReportPivotDto> getReportTotalDailyPivotAddressStateUser(@Param("dateModInf") Date dateModInf,
 			@Param("dateModSup") Date dateModSup);
+	
+	@Query("SELECT distinct new it.istat.mec.regedit.dto.UsersDto(adr.idRevisore.id, adr.idRevisore.email, adr.idRevisore.name, adr.idRevisore.surname, adr.idRevisore.role.id) FROM Address AS adr "			
+			+ " where adr.stato is not NULL "
+			+ " ORDER BY adr.idRevisore.name ASC ")
+	List<UsersDto> findAllUsersWithAddressesAssigned();
+	
 }

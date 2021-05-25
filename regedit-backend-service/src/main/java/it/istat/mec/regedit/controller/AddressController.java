@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ComuneDto;
+import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.UpdateAddressListRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
@@ -81,6 +82,12 @@ public class AddressController {
 	public AddressDto getAddress(@PathVariable("id") Integer id) {
 
 		return addressService.findAddressById(id);
+
+	}
+	@GetMapping(value = "/users")
+	public List<UsersDto> getUsersByAddressesAssigned() {
+
+		return addressService.getUsersByAddresses();
 
 	}
 
