@@ -13,6 +13,8 @@ public class UsersEntity {
     private String name;
     private String surname;
     private String password;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ROLE_ID")
     private UserRolesEntity role;
 
     @Id
@@ -65,8 +67,7 @@ public class UsersEntity {
         this.password = password;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ROLE_ID")
+    
     public UserRolesEntity getRole() {
         return role;
     }

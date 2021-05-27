@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import it.istat.mec.users.dao.UsersDao;
+import it.istat.mec.users.domain.UserRolesEntity;
 import it.istat.mec.users.domain.UsersEntity;
 import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.exceptions.NoDataException;
@@ -58,8 +59,14 @@ public class UserService {
 		if (!usersDao.findById(request.getId()).isPresent())
 			throw new NoDataException("User not present");
 		
+		UserRolesEntity userRole = new UserRolesEntity();
+		String idRole = Integer.toString(request.getIdRole());
+		userRole.setRole(idRole);
+		
+		
 		UsersEntity user = usersDao.findById(request.getId()).get();
 		user = Translators.translateUpdate(request, user);	
+		user.setRole(userRole);
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
