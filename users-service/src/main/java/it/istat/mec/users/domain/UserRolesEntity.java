@@ -4,12 +4,15 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+@Setter
+@Getter
 @Entity
 @Table(name = "wp1_user_roles", schema = "regedit_users", catalog = "")
 public class UserRolesEntity implements Serializable{
@@ -17,33 +20,20 @@ public class UserRolesEntity implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long id;
-    private String role;
-
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
     @Column(name = "ID")
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "ROLE")
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+	private Long id;
+	
+    private String role;
     
     @JsonBackReference    
     @OneToMany(mappedBy = "role")
-    private List<UsersEntity> userEntity= new ArrayList<>();
+    private List<UsersEntity> usersEntity= new ArrayList<>();
+    
+
+    
+   
 
     @Override
     public boolean equals(Object o) {

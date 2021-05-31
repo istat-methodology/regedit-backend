@@ -79,7 +79,7 @@ public class UsersEntity implements Serializable {
         this.password = password;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ROLE_ID")
     public UserRolesEntity getRole() {
         return role;

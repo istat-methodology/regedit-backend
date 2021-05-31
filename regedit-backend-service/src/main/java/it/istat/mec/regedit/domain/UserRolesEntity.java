@@ -1,6 +1,12 @@
 package it.istat.mec.regedit.domain;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +34,10 @@ public class UserRolesEntity {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    @JsonBackReference    
+    @OneToMany(mappedBy = "role")
+    private List<UsersEntity> userEntity= new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

@@ -3,6 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import it.istat.mec.users.dao.UserRolesDao;
 import it.istat.mec.users.dao.UsersDao;
 import it.istat.mec.users.domain.UserRolesEntity;
 import it.istat.mec.users.domain.UsersEntity;
@@ -20,6 +22,8 @@ public class UserService {
 	private final UserRespository userRepository;
 	@Autowired
 	UsersDao usersDao;
+	@Autowired
+	UserRolesDao userRolesDao;
 
 	public UserService(UserRespository userRepository) {
 		this.userRepository = userRepository;
@@ -33,14 +37,14 @@ public class UserService {
 			return usersDao.findAll().stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
 
-	public UsersDto findUserById(Integer id) {
+	public UsersDto findUserById(Long id) {
 
 		if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");
 		return Translators.translate(usersDao.findById(id).get());
 	}
 
-	public UsersDto deleteUser(Integer id) {
+	public UsersDto deleteUser(Long id) {
 		UsersDto usersDto = findUserById(id);
 		usersDao.deleteById(id);
 		return usersDto;
@@ -57,22 +61,22 @@ public class UserService {
 	public UsersDto updateUser(CreateUserRequest request) {		
 		
 		if (!usersDao.findById(request.getId()).isPresent())
-			throw new NoDataException("User not present");
-		
-		UserRolesEntity userRole = new UserRolesEntity();
-		String idRole = Integer.toString(request.getIdRole());
-		userRole.setRole(idRole);
-		
-		
+			throw new NoDataException("User not present");		
 		UsersEntity user = usersDao.findById(request.getId()).get();
+		
+		if (!userRolesDao.findById(request.getIdRole()).isPresent())
+			throw new NoDataException("Role not present");	
+		UserRolesEntity userRole = userRolesDao.findById(request.getIdRole()).get();		
+		
+		
 		user = Translators.translateUpdate(request, user);	
 		user.setRole(userRole);
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
-		user.setPassword(passwordEncoder.encode(request.getPassword()));		
+		if(request.getPassword()!=null)
+		user.setPassword(passwordEncoder.encode(request.getPassword()));       
         
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
         usersDao.save(user); 	
 		return Translators.translate(user);
 	}

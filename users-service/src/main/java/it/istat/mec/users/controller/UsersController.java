@@ -31,7 +31,7 @@ public class UsersController {
 
 	@GetMapping(value = "/users/{id}")
 	@ResponseBody
-	public UsersDto getUser(@PathVariable("id") Integer id) {
+	public UsersDto getUser(@PathVariable("id") Long id) {
 
 		return userService.findUserById(id);
 
@@ -52,7 +52,7 @@ public class UsersController {
 	}
 	@DeleteMapping(value = "/users/{id}")
 	@ResponseBody
-	public UsersDto deleteUser(@PathVariable("id") Integer id) { 
+	public UsersDto deleteUser(@PathVariable("id") Long id) { 
   
 		return userService.deleteUser(id);
 	}
