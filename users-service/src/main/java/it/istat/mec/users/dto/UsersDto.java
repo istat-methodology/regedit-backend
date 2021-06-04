@@ -13,5 +13,5 @@ public class UsersDto implements Serializable {
     private String name; 
     private String surname; 
     private String password;
-    private Integer IdRole; 
+    private UserRolesDto role; 
 }

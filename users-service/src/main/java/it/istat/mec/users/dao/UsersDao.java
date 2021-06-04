@@ -33,7 +33,7 @@ import org.springframework.stereotype.Repository;
 import it.istat.mec.users.domain.UsersEntity;
 
 @Repository
-public interface UsersDao extends CrudRepository<UsersEntity, Long> {
+public interface UsersDao extends CrudRepository<UsersEntity, Integer> {
 
 	@Override
 	List<UsersEntity> findAll();
@@ -42,7 +42,7 @@ public interface UsersDao extends CrudRepository<UsersEntity, Long> {
 	List<UsersEntity> findByRole(@Param("role") String role);
 	
 	@Override
-	Optional<UsersEntity> findById(Long id);
+	Optional<UsersEntity> findById(Integer id);
 	
 	public void save(Optional<UsersEntity> address);
 

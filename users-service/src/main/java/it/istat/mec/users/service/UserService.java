@@ -37,14 +37,14 @@ public class UserService {
 			return usersDao.findAll().stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
 
-	public UsersDto findUserById(Long id) {
+	public UsersDto findUserById(Integer id) {
 
 		if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");
 		return Translators.translate(usersDao.findById(id).get());
 	}
 
-	public UsersDto deleteUser(Long id) {
+	public UsersDto deleteUser(Integer id) {
 		UsersDto usersDto = findUserById(id);
 		usersDao.deleteById(id);
 		return usersDto;
@@ -58,24 +58,26 @@ public class UserService {
 		usersDao.save(user);		    
 		return Translators.translate(user);
 	}
-	public UsersDto updateUser(CreateUserRequest request) {		
+	public UsersDto updateUser(Integer id, CreateUserRequest request) {		
 		
-		if (!usersDao.findById(request.getId()).isPresent())
+		if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");		
-		UsersEntity user = usersDao.findById(request.getId()).get();
+		UsersEntity user = usersDao.findById(id).get();
 		
-		if (!userRolesDao.findById(request.getIdRole()).isPresent())
+		if (!userRolesDao.findById(request.getRole()).isPresent())
 			throw new NoDataException("Role not present");	
-		UserRolesEntity userRole = userRolesDao.findById(request.getIdRole()).get();		
+		UserRolesEntity userRole = userRolesDao.findById(request.getRole()).get();		
 		
 		
 		user = Translators.translateUpdate(request, user);	
 		user.setRole(userRole);
 		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
-		if(request.getPassword()!=null)
-		user.setPassword(passwordEncoder.encode(request.getPassword()));       
+		
+		if(request.getPassword()!=null) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			user.setPassword(passwordEncoder.encode(request.getPassword()));       
+		}
         
         usersDao.save(user); 	
 		return Translators.translate(user);
@@ -97,11 +99,11 @@ public class UserService {
         return Translators.translate(user);
     }
 
-    public UsersDto updatePasswordById(CreateUserRequest request) throws Exception {
-    	if (!usersDao.findById(request.getId()).isPresent())
+    public UsersDto updatePasswordById(Integer id, CreateUserRequest request) throws Exception {
+    	if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");		
 		
-		UsersEntity user = usersDao.findById(request.getId()).get();
+		UsersEntity user = usersDao.findById(id).get();
 		user = Translators.translateUpdate(request, user);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		

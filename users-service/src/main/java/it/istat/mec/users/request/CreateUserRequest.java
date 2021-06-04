@@ -13,7 +13,7 @@ public class CreateUserRequest implements Serializable {
 
 	
 	private static final long serialVersionUID = 4145077658932991811L;
-	private Long id;
+	
 	
 	@NotNull
     @Size(min = 2, max = 100)
@@ -29,5 +29,5 @@ public class CreateUserRequest implements Serializable {
     private String password;
     
     @NotNull
-    private Integer idRole;
+    private Integer role;
 }

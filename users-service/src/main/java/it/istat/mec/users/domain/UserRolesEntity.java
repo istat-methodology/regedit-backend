@@ -2,7 +2,6 @@ package it.istat.mec.users.domain;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,20 +15,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "wp1_user_roles", schema = "regedit_users", catalog = "")
 public class UserRolesEntity implements Serializable{
-    /**
-	 * 
-	 */
+   
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)	
     @Column(name = "ID")
-	private Long id;
+	private Integer id;
 	
     private String role;
     
-    @JsonBackReference    
-    @OneToMany(mappedBy = "role")
-    private List<UsersEntity> usersEntity= new ArrayList<>();
+    
+//    @OneToMany(mappedBy = "role")
+//    private List<UsersEntity> usersEntity= new ArrayList<>();
     
 
     

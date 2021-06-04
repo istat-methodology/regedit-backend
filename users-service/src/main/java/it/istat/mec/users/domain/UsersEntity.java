@@ -20,7 +20,7 @@ public class UsersEntity implements Serializable{
 	private static final long serialVersionUID = 5107899009417460806L;
 	@Id
     @Column(name = "ID")
-    private Long id;
+    private Integer id;
     private String email;
     private String name;
     private String surname;
@@ -28,7 +28,7 @@ public class UsersEntity implements Serializable{
     //(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "ROLE_ID")
-    @JsonManagedReference
+    
     UserRolesEntity role;
 
   
