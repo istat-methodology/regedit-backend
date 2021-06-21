@@ -2,8 +2,6 @@ package it.istat.mec.users.domain;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +16,7 @@ public class UsersEntity implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 5107899009417460806L;
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)	
     @Column(name = "ID")
     private Integer id;
     private String email;

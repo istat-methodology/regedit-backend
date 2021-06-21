@@ -12,6 +12,7 @@ import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.exceptions.NoDataException;
 import it.istat.mec.users.repository.UserRespository;
 import it.istat.mec.users.request.CreateUserRequest;
+import it.istat.mec.users.request.UpdateUserRequest;
 import it.istat.mec.users.translators.Translators;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,15 +52,18 @@ public class UserService {
 	}
 	public UsersDto newUser(CreateUserRequest request) {
 		UsersEntity user = new UsersEntity();
+		UserRolesEntity userRole = userRolesDao.findById(request.getRole()).get();
 		user = Translators.translate(request);	
+		user.setRole(userRole);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		user.setPassword(passwordEncoder.encode(request.getPassword()));
 		
 		usersDao.save(user);		    
 		return Translators.translate(user);
 	}
-	public UsersDto updateUser(Integer id, CreateUserRequest request) {		
+	public String updateUser(Integer id, UpdateUserRequest request) {		
 		
+		String msg = "";
 		if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");		
 		UsersEntity user = usersDao.findById(id).get();
@@ -68,21 +72,29 @@ public class UserService {
 			throw new NoDataException("Role not present");	
 		UserRolesEntity userRole = userRolesDao.findById(request.getRole()).get();		
 		
-		
 		user = Translators.translateUpdate(request, user);	
-		user.setRole(userRole);
-		
+		user.setRole(userRole);		
 		
 		
 		if(request.getPassword()!=null) {
+			
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			user.setPassword(passwordEncoder.encode(request.getPassword()));       
-		}
-        
-        usersDao.save(user); 	
-		return Translators.translate(user);
+			String newPass = passwordEncoder.encode(request.getPassword());
+			String oldPass = passwordEncoder.encode(request.getOldPassword());
+			
+			if(user.getPassword().equals(oldPass)) {
+				user.setPassword(newPass);   
+				usersDao.save(user);
+				msg = "Aggiornamento avvenuto con successo!";
+			}else {
+				msg = "La vecchia password inserita non corrisponde a quella dell'utente";
+			}
+			    
+		}        	
+		//return Translators.translate(user);
+        return msg;
 	}
-	public UsersDto updatePasswordByEmail(CreateUserRequest request) throws Exception {
+	public UsersDto updatePasswordByEmail(UpdateUserRequest request) throws Exception {
         
 		if (!usersDao.findByEmail(request.getEmail()).isPresent())
 			throw new NoDataException("User not present");		
@@ -99,7 +111,7 @@ public class UserService {
         return Translators.translate(user);
     }
 
-    public UsersDto updatePasswordById(Integer id, CreateUserRequest request) throws Exception {
+    public UsersDto updatePasswordById(Integer id, UpdateUserRequest request) throws Exception {
     	if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");		
 		

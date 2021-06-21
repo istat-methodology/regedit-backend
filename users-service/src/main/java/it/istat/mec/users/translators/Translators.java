@@ -11,6 +11,7 @@ import it.istat.mec.users.dto.UserRolesDto;
 import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.request.CreateUserRequest;
 import it.istat.mec.users.request.CreateUserRoleRequest;
+import it.istat.mec.users.request.UpdateUserRequest;
 
  
 
@@ -56,7 +57,7 @@ public class Translators {
 		final UserRolesEntity role = modelMapper.map(x, UserRolesEntity.class);
 		return role;
 	}
-	public static UsersEntity translateUpdate(CreateUserRequest x, UsersEntity user) {  
+	public static UsersEntity translateUpdate(UpdateUserRequest x, UsersEntity user) {  
 		final ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(x,user);
 		 

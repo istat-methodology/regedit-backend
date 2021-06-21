@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.request.CreateUserRequest;
+import it.istat.mec.users.request.UpdateUserRequest;
 import it.istat.mec.users.service.UserService;
 
 
@@ -44,12 +45,11 @@ public class UsersController {
 	
 	@PutMapping(value = "/users/{id}")
 	
-	public UsersDto updateUser(@PathVariable("id") Integer id, @RequestBody CreateUserRequest request) {
-		System.out.println("ID User: "+id);
+	public String updateUser(@PathVariable("id") Integer id, @RequestBody UpdateUserRequest request) {	
 		
-		return userService.updateUser(id, request);
-		
+		return userService.updateUser(id, request);		
 	}
+	
 	@DeleteMapping(value = "/users/{id}")
 	
 	public UsersDto deleteUser(@PathVariable("id") Integer id) { 
