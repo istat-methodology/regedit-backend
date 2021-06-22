@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.request.CreateUserRequest;
+import it.istat.mec.users.request.UpdatePasswordRequest;
 import it.istat.mec.users.request.UpdateUserRequest;
 import it.istat.mec.users.service.UserService;
 
@@ -45,10 +46,25 @@ public class UsersController {
 	
 	@PutMapping(value = "/users/{id}")
 	
-	public String updateUser(@PathVariable("id") Integer id, @RequestBody UpdateUserRequest request) {	
+	public String updateUser(@PathVariable("id") Integer id, @RequestBody UpdateUserRequest request) throws Exception {	
 		
 		return userService.updateUser(id, request);		
 	}
+	
+	@PutMapping(value = "/users/password/{email}")
+	
+	public String updateUserPasswordByEmail(@PathVariable("email") String email, @RequestBody UpdatePasswordRequest request) throws Exception {		
+		
+		return userService.updatePasswordByEmail(email, request);
+			
+	}
+
+	@PutMapping(value = "/users/password/{id}")
+
+	public String updateUserPasswordById(@PathVariable("id") Integer id, @RequestBody UpdatePasswordRequest request) throws Exception {	
+	
+	return userService.updatePasswordById(id, request);		
+}
 	
 	@DeleteMapping(value = "/users/{id}")
 	

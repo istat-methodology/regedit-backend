@@ -12,6 +12,7 @@ import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.exceptions.NoDataException;
 import it.istat.mec.users.repository.UserRespository;
 import it.istat.mec.users.request.CreateUserRequest;
+import it.istat.mec.users.request.UpdatePasswordRequest;
 import it.istat.mec.users.request.UpdateUserRequest;
 import it.istat.mec.users.translators.Translators;
 import java.util.List;
@@ -61,7 +62,7 @@ public class UserService {
 		usersDao.save(user);		    
 		return Translators.translate(user);
 	}
-	public String updateUser(Integer id, UpdateUserRequest request) {		
+	public String updateUser(Integer id, UpdateUserRequest request) throws Exception {	
 		
 		String msg = "";
 		if (!usersDao.findById(id).isPresent())
@@ -74,57 +75,64 @@ public class UserService {
 		
 		user = Translators.translateUpdate(request, user);	
 		user.setRole(userRole);		
+		usersDao.save(user);  
+		msg = "User succesfully updated!";
 		
-		
-		if(request.getPassword()!=null) {
-			
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String newPass = passwordEncoder.encode(request.getPassword());
-			String oldPass = passwordEncoder.encode(request.getOldPassword());
-			
-			if(user.getPassword().equals(oldPass)) {
-				user.setPassword(newPass);   
-				usersDao.save(user);
-				msg = "Aggiornamento avvenuto con successo!";
-			}else {
-				msg = "La vecchia password inserita non corrisponde a quella dell'utente";
-			}
-			    
-		}        	
-		//return Translators.translate(user);
         return msg;
 	}
-	public UsersDto updatePasswordByEmail(UpdateUserRequest request) throws Exception {
-        
-		if (!usersDao.findByEmail(request.getEmail()).isPresent())
+	
+	public String updatePasswordByEmail(String email, UpdatePasswordRequest request) throws Exception {
+		String msg = "";
+		if (!usersDao.findByEmail(email).isPresent())
 			throw new NoDataException("User not present");		
+		UsersEntity user = usersDao.findByEmail(email).get();		
 		
-		UsersEntity user = usersDao.findByEmail(request.getEmail()).get();
-		user = Translators.translateUpdate(request, user);
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
-		user.setPassword(passwordEncoder.encode(request.getPassword()));		
+		if(request.getNewpass()!=null && request.getOldpass()!=null) {
+			
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String newPass = passwordEncoder.encode(request.getNewpass());
+			
+			if(passwordEncoder.matches(request.getOldpass(), user.getPassword())) {
+				user.setPassword(newPass);   
+				usersDao.save(user);
+				msg = "Password succesfully updated!";
+			}else {
+				msg = "The old password doesn't match with password stored in db";
+			}
+			    
+		} else {
+			msg = "The Old password and New password fields are mandatory";
+		}		
         
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
         usersDao.save(user);        
-        
-        return Translators.translate(user);
+        return msg;
     }
 
-    public UsersDto updatePasswordById(Integer id, UpdateUserRequest request) throws Exception {
+    public String updatePasswordById(Integer id, UpdatePasswordRequest request) throws Exception {
+    	String msg = "";
     	if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");		
-		
 		UsersEntity user = usersDao.findById(id).get();
-		user = Translators.translateUpdate(request, user);
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		
-		user.setPassword(passwordEncoder.encode(request.getPassword()));		
+		if(request.getNewpass()!=null && request.getOldpass()!=null) {
+			
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String newPass = passwordEncoder.encode(request.getNewpass());
+			
+			if(passwordEncoder.matches(request.getOldpass(), user.getPassword())) {
+				user.setPassword(newPass);   
+				usersDao.save(user);
+				msg = "Password succesfully updated!";
+			}else {
+				msg = "The old password doesn't match with password stored in db";
+			}
+			    
+		} else {
+			msg = "The Old password and New password fields are mandatory";
+		}		
         
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
         usersDao.save(user);        
-        
-        return Translators.translate(user);
+        return msg;
     }
 	
 }

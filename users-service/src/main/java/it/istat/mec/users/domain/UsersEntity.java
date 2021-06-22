@@ -24,7 +24,7 @@ public class UsersEntity implements Serializable{
     private String surname;
     private String password;
     //(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "ROLE_ID")
     
     UserRolesEntity role;

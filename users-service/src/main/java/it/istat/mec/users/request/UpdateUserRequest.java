@@ -22,14 +22,7 @@ public class UpdateUserRequest implements Serializable {
 	
     private String name;
     
-    private String surname;
-    
-    @NotNull
-    @Size(min = 2, max = 50)
-    private String password;
-    
-    @NotNull
-    private String oldPassword;
+    private String surname;  
     
     @NotNull
     private Integer role;
