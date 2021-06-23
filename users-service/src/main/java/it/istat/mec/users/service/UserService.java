@@ -69,12 +69,14 @@ public class UserService {
 			throw new NoDataException("User not present");		
 		UsersEntity user = usersDao.findById(id).get();
 		
-		if (!userRolesDao.findById(request.getRole()).isPresent())
-			throw new NoDataException("Role not present");	
-		UserRolesEntity userRole = userRolesDao.findById(request.getRole()).get();		
-		
 		user = Translators.translateUpdate(request, user);	
-		user.setRole(userRole);		
+		
+		if(request.getRoleid() !=null) {
+			if (!userRolesDao.findById(request.getRoleid()).isPresent())
+				throw new NoDataException("Role not present");	
+			UserRolesEntity userRole = userRolesDao.findById(request.getRoleid()).get();			
+			user.setRole(userRole);	
+		}
 		usersDao.save(user);  
 		msg = "User succesfully updated!";
 		

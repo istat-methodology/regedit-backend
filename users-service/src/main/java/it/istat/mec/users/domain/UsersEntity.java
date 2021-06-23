@@ -24,6 +24,7 @@ public class UsersEntity implements Serializable{
     private String surname;
     private String password;
     //(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    // updatable = false, insertable = false
     @ManyToOne
     @JoinColumn(name = "ROLE_ID")
     

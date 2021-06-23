@@ -51,7 +51,7 @@ public class UsersController {
 		return userService.updateUser(id, request);		
 	}
 	
-	@PutMapping(value = "/users/password/{email}")
+	@PutMapping(value = "/users/password-email/{email}")
 	
 	public String updateUserPasswordByEmail(@PathVariable("email") String email, @RequestBody UpdatePasswordRequest request) throws Exception {		
 		
@@ -59,7 +59,7 @@ public class UsersController {
 			
 	}
 
-	@PutMapping(value = "/users/password/{id}")
+	@PutMapping(value = "/users/password-id/{id}")
 
 	public String updateUserPasswordById(@PathVariable("id") Integer id, @RequestBody UpdatePasswordRequest request) throws Exception {	
 	

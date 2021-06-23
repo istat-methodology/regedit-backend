@@ -25,8 +25,8 @@ public class UserRolesEntity implements Serializable{
     private String role;
     
     
-//    @OneToMany(mappedBy = "role")
-//    private List<UsersEntity> usersEntity= new ArrayList<>();
+    @OneToMany(mappedBy = "role")
+    private List<UsersEntity> usersEntity= new ArrayList<>();
     
 
     

@@ -25,5 +25,5 @@ public class UpdateUserRequest implements Serializable {
     private String surname;  
     
     @NotNull
-    private Integer role;
+    private Integer roleid;
 }
