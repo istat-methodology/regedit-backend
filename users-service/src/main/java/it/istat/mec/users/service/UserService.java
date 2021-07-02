@@ -89,7 +89,7 @@ public class UserService {
 			throw new NoDataException("User not present");		
 		UsersEntity user = usersDao.findByEmail(email).get();		
 		
-		if(request.getNewpass()!=null && request.getOldpass()!=null) {
+		if((request.getNewpass()!=null && !request.getNewpass().equals("")) && (request.getOldpass()!=null && !request.getOldpass().equals(""))) {
 			
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String newPass = passwordEncoder.encode(request.getNewpass());
@@ -97,13 +97,13 @@ public class UserService {
 			if(passwordEncoder.matches(request.getOldpass(), user.getPassword())) {
 				user.setPassword(newPass);   
 				usersDao.save(user);
-				msg = "Password succesfully updated!";
+				msg = "01 Password succesfully updated!";
 			}else {
-				msg = "The old password doesn't match with password stored in db";
+				msg = "02 The old password doesn't match with password stored in db";
 			}
 			    
 		} else {
-			msg = "The Old password and New password fields are mandatory";
+			msg = "03 The Old password and New password fields are mandatory";
 		}		
         
         usersDao.save(user);        
@@ -116,7 +116,7 @@ public class UserService {
 			throw new NoDataException("User not present");		
 		UsersEntity user = usersDao.findById(id).get();
 		
-		if(request.getNewpass()!=null && request.getOldpass()!=null) {
+		if( (request.getNewpass()!=null && !request.getNewpass().equals("")) && (request.getOldpass()!=null && !request.getOldpass().equals("")) ) {
 			
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String newPass = passwordEncoder.encode(request.getNewpass());
@@ -124,13 +124,13 @@ public class UserService {
 			if(passwordEncoder.matches(request.getOldpass(), user.getPassword())) {
 				user.setPassword(newPass);   
 				usersDao.save(user);
-				msg = "Password succesfully updated!";
+				msg = "01 Password succesfully updated!";
 			}else {
-				msg = "The old password doesn't match with password stored in db";
+				msg = "02 The old password doesn't match with password stored in db";
 			}
 			    
 		} else {
-			msg = "The Old password and New password fields are mandatory";
+			msg = "03 The Old password and New password fields are mandatory";
 		}		
         
         usersDao.save(user);        
