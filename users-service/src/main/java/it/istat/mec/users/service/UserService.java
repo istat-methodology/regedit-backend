@@ -136,5 +136,28 @@ public class UserService {
         usersDao.save(user);        
         return msg;
     }
+    
+    public String resetPasswordById(Integer id, String password) throws Exception {
+    	String msg = "";
+    	if (!usersDao.findById(id).isPresent())
+			throw new NoDataException("User not present");		
+		UsersEntity user = usersDao.findById(id).get();
+		
+		if( (password!=null && !password.equals("")) ) {
+			
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String newPass = passwordEncoder.encode(password);
+						
+			user.setPassword(newPass);   
+			usersDao.save(user);
+			msg = "01 Password succesfully updated!";			
+			    
+		} else {
+			msg = "02 The password field is mandatory";
+		}		
+        
+        usersDao.save(user);        
+        return msg;
+    }
 	
 }
