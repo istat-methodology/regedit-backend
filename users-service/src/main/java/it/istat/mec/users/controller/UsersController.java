@@ -68,7 +68,7 @@ public class UsersController {
 	
 	@PutMapping(value = "/users/password-reset/{id}")
 
-	public String resetUserPasswordById(@PathVariable("id") Integer id, @PathVariable("pasword") String password) throws Exception {	
+	public String resetUserPasswordById(@PathVariable("id") Integer id,  @RequestBody String password) throws Exception {	
 	
 	return userService.resetPasswordById(id, password);		
 	}
