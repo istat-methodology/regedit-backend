@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.request.CreateUserRequest;
+import it.istat.mec.users.request.ResetPasswordRequest;
 import it.istat.mec.users.request.UpdatePasswordRequest;
 import it.istat.mec.users.request.UpdateUserRequest;
 import it.istat.mec.users.service.UserService;
@@ -68,7 +69,7 @@ public class UsersController {
 	
 	@PutMapping(value = "/users/password-reset/{id}")
 
-	public String resetUserPasswordById(@PathVariable("id") Integer id,  @RequestBody String password) throws Exception {	
+	public String resetUserPasswordById(@PathVariable("id") Integer id,  @RequestBody ResetPasswordRequest password) throws Exception {	
 	
 	return userService.resetPasswordById(id, password);		
 	}

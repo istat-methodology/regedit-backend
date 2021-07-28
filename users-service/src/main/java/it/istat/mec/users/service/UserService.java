@@ -12,6 +12,7 @@ import it.istat.mec.users.dto.UsersDto;
 import it.istat.mec.users.exceptions.NoDataException;
 import it.istat.mec.users.repository.UserRespository;
 import it.istat.mec.users.request.CreateUserRequest;
+import it.istat.mec.users.request.ResetPasswordRequest;
 import it.istat.mec.users.request.UpdatePasswordRequest;
 import it.istat.mec.users.request.UpdateUserRequest;
 import it.istat.mec.users.translators.Translators;
@@ -137,16 +138,16 @@ public class UserService {
         return msg;
     }
     
-    public String resetPasswordById(Integer id, String password) throws Exception {
+    public String resetPasswordById(Integer id, ResetPasswordRequest request) throws Exception {
     	String msg = "";
     	if (!usersDao.findById(id).isPresent())
 			throw new NoDataException("User not present");		
 		UsersEntity user = usersDao.findById(id).get();
 		
-		if( (password!=null && !password.equals("")) ) {
+		if( (request.getPassword()!=null && !request.getPassword().equals("")) ) {
 			
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String newPass = passwordEncoder.encode(password);
+			String newPass = passwordEncoder.encode(request.getPassword());
 						
 			user.setPassword(newPass);   
 			usersDao.save(user);
