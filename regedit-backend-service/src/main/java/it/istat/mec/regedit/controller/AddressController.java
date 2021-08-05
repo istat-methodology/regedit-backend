@@ -79,7 +79,7 @@ public class AddressController {
 	}
 
 	@GetMapping(value = "/addresses/{id}")
-	public AddressDto getAddress(@PathVariable("id") Integer id) {
+	public AddressDto getAddress(@PathVariable("id") Long id) {
 
 		return addressService.findAddressById(id);
 
@@ -127,7 +127,7 @@ public class AddressController {
 	}
 
 	@DeleteMapping(value = "/addresses/{id}")
-	public AddressDto deleteAddress(@PathVariable("id") Integer id) {
+	public AddressDto deleteAddress(@PathVariable("id") Long id) {
 
 		return addressService.deleteAddress(id);
 	}

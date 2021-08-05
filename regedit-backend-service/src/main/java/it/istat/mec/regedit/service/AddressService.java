@@ -105,7 +105,7 @@ public class AddressService {
 		return Translators.translate(address);
 	}
 
-	public AddressDto deleteAddress(Integer id) {
+	public AddressDto deleteAddress(Long id) {
 		AddressDto addressDto = findAddressById(id);
 		return addressDto;
 	}
@@ -118,7 +118,7 @@ public class AddressService {
 		return Translators.translate(address);
 	}
 
-	public AddressDto findAddressById(Integer id) {
+	public AddressDto findAddressById(Long id) {
 
 		if (!addressDao.findById(id).isPresent())
 			throw new NoDataException("Address no present");
@@ -165,8 +165,8 @@ public class AddressService {
 			throw new NoDataException("Address List empty");
 
 		Integer countUpdate = 0;
-		for (Iterator<Integer> iterator = updateAddressListRequest.getAddressList().iterator(); iterator.hasNext();) {
-			Integer progressivoIndirizzo = (Integer) iterator.next();
+		for (Iterator<Long> iterator = updateAddressListRequest.getAddressList().iterator(); iterator.hasNext();) {
+			Long progressivoIndirizzo = (Long) iterator.next();
 
 			final Optional<Address> optAddress = addressDao.findById(progressivoIndirizzo);
 			if (!optAddress.isPresent())

@@ -49,7 +49,7 @@ public class AddressBackupEdited extends AddressBase implements Serializable {
 
 	@Id
 	@Column(name = "PROGRESSIVO_INDIRIZZO")
-	private Integer progressivoIndirizzo;
+	private Long progressivoIndirizzo;
 
 	@Id
 	@Column(name = "DATA_MOD")

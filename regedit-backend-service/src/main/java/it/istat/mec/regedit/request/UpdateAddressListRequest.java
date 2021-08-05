@@ -36,7 +36,7 @@ public class UpdateAddressListRequest implements Serializable {
 
 	private static final long serialVersionUID = 5939182470433987957L;
 	@NotEmpty
-	List<Integer> addressList;
+	List<Long> addressList;
 	String dugVal;
 	String dufVal;
 	String validazione;

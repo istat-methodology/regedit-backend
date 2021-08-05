@@ -43,7 +43,7 @@ public class Address extends AddressBase implements Serializable  {
 
 	@Id
 	@Column(name = "PROGRESSIVO_INDIRIZZO")
-	private Integer progressivoIndirizzo;
+	private Long progressivoIndirizzo;
 	
 	@Column(name = "DATA_MOD")
 	private Date dataMod;

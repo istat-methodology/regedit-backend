@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 public class UpdateAddressRequest implements Serializable {
 
 	private static final long serialVersionUID = 5939182470433987957L;
-	private Integer progressivoIndirizzo;	
+	private Long progressivoIndirizzo;	
 	private String validazione;		
 	private String dugVal;	
 	private String dufVal;	

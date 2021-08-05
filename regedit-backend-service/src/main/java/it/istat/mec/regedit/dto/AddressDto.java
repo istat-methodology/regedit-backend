@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddressDto {
 	
-	private Integer progressivoIndirizzo;	
+	private Long progressivoIndirizzo;	
 	private Integer codiceArchivio;		
 	private String proCom;	
 	private String denominazioneComune;	

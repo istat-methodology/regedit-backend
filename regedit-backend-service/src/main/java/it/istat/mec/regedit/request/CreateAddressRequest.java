@@ -35,7 +35,7 @@ public class CreateAddressRequest implements Serializable {
 
 	private static final long serialVersionUID = 5939182470433987956L;
 	
-	private Integer progressivoIndirizzo;	
+	private Long progressivoIndirizzo;	
 	private Integer codiceArchivio;		
 	private String proCom;	
 	private String denominazioneComune;	

@@ -40,13 +40,13 @@ import it.istat.mec.regedit.dto.ReportPivotDto;
 import it.istat.mec.regedit.dto.UsersDto;
 
 @Repository
-public interface AddressDao extends JpaRepository<Address, Integer> {
+public interface AddressDao extends JpaRepository<Address, Long> {
 
 	@Override
 	List<Address> findAll();
 
 	@Override
-	Optional<Address> findById(Integer id);
+	Optional<Address> findById(Long id);
 
 	public void save(Optional<Address> address);
 

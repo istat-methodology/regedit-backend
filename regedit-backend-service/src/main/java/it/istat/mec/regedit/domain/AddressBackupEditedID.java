@@ -11,10 +11,10 @@ public class AddressBackupEditedID implements Serializable {
 	private static final long serialVersionUID = 1017941611791401267L;
 
 	private Integer editor;
-	private Integer progressivoIndirizzo;
+	private Long progressivoIndirizzo;
 	private Date dataMod;
 
-	public AddressBackupEditedID(Integer editor, Integer progressivoIndirizzo,Date dataMod) {
+	public AddressBackupEditedID(Integer editor, Long progressivoIndirizzo,Date dataMod) {
 		super();
 		this.editor = editor;
 		this.progressivoIndirizzo = progressivoIndirizzo;
