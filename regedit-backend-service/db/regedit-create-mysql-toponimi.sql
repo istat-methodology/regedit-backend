@@ -66,7 +66,7 @@ CREATE TABLE WP1_INDIRIZZI_NO_LINKED
 
    CREATE TABLE WP1_TOPONIMI_DA_REVISIONARE
 (	
-    PROGRESSIVO_TOPONIMO INT NOT NULL, -- sequence seq_wp1_toponimi_da_revisionare
+    PROGRESSIVO_TOPONIMO INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- sequence seq_wp1_toponimi_da_revisionare
     CODICE_ARCHIVIO INT(3) NOT NULL, -- 156 per ora
     PRO_COM TEXT(6),  -- per ora per il filtro della provincia usaimo i primi 3 caratteri del pro_com
     DENOMINAZIONE_COMUNE TEXT(300), 
