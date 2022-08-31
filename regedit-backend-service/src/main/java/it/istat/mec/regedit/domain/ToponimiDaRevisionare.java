@@ -2,11 +2,9 @@ package it.istat.mec.regedit.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -15,14 +13,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@IdClass(NoLinkedAddressId.class)
 @Table(name = "WP1_TOPONIMI_DA_REVISIONARE")
 public class ToponimiDaRevisionare implements Serializable {
 
 	
 	private static final long serialVersionUID = -4595102097449110502L;
 	@Id
-	@Column(name = "PROGRESSIVO")
+	@Column(name = "PROGRESSIVO_TOPONIMO")
 	private int progressivoToponimo;
 	@Column(name = "CODICE_ARCHIVIO")
 	private int codiceArchivio;
