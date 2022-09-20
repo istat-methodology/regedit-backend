@@ -28,14 +28,16 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.Dug;
+import it.istat.mec.regedit.domain.ToponimiDaRevisionare;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.DugDto;
+import it.istat.mec.regedit.dto.ToponimiDaRevisionareDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.CreateDugRequest;
+import it.istat.mec.regedit.request.CreateToponimiDRRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 
 @Component
@@ -46,6 +48,17 @@ public class Translators {
 		final ModelMapper modelMapper = new ModelMapper();
 		final AddressDto dTO = modelMapper.map(x, AddressDto.class);
 		return dTO;
+	}
+	
+	public static ToponimiDaRevisionareDto translate(ToponimiDaRevisionare x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final ToponimiDaRevisionareDto dTO = modelMapper.map(x, ToponimiDaRevisionareDto.class);
+		return dTO;
+	}
+	
+	public static List<ToponimiDaRevisionareDto> translateToponimiDR(List<ToponimiDaRevisionare> list) {
+		return mapList(list, ToponimiDaRevisionareDto.class);
 	}
 
 	public static List<AddressDto> translate(List<Address> list) {
@@ -79,6 +92,13 @@ public class Translators {
 		final Dug dug = modelMapper.map(x, Dug.class);
 		return dug;
 	}
+	
+	public static ToponimiDaRevisionare translate(CreateToponimiDRRequest x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final ToponimiDaRevisionare toponimiDaRevisionare = modelMapper.map(x, ToponimiDaRevisionare.class);
+		return toponimiDaRevisionare;
+	}
 
 	public static Address translateUpdate(UpdateAddressRequest x, Address address) {
 		final ModelMapper modelMapper = new ModelMapper();
@@ -99,6 +119,12 @@ public class Translators {
 		final ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(x, dug);
 		return dug;
+	}
+	
+	public static ToponimiDaRevisionare translateUpdate(CreateToponimiDRRequest x, ToponimiDaRevisionare toponimiDaRevisionare) {
+		final ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(x, toponimiDaRevisionare);
+		return toponimiDaRevisionare;
 	}
 
 	public static <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {

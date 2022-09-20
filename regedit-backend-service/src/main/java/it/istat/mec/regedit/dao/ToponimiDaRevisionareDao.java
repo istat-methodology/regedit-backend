@@ -9,12 +9,11 @@ import org.springframework.stereotype.Repository;
 import it.istat.mec.regedit.domain.ToponimiDaRevisionare;
 
 @Repository
-public interface ToponimiDaRevisionareDao extends JpaRepository<ToponimiDaRevisionare, Long> {
+public interface ToponimiDaRevisionareDao extends JpaRepository<ToponimiDaRevisionare, Integer> {
 	@Override
 	List<ToponimiDaRevisionare> findAll();
 
-	@Override
-	Optional<ToponimiDaRevisionare> findById(Long id);
+	Optional<ToponimiDaRevisionare> findById(Integer id);
 
 	public void save(Optional<ToponimiDaRevisionare> toponimiDaRevisionare);
 
