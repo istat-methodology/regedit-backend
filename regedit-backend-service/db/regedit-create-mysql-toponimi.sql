@@ -71,12 +71,14 @@ CREATE TABLE WP1_INDIRIZZI_NO_LINKED
     PRO_COM TEXT(6),  -- per ora per il filtro della provincia usaimo i primi 3 caratteri del pro_com
     DENOMINAZIONE_COMUNE TEXT(300), 
     -- TOPONIMO ORIGINALE
-    CDPSTR_RSBL INT(12), -- Codice strada Egon degli indirizzi riconosciuti in egon con l'ultima normalizzazione 
+    -- CDPSTR_RSBL INT(12), -- Codice strada Egon degli indirizzi riconosciuti in egon con l'ultima normalizzazione -- Trasfomato in DOUBLE per errori durante l'inserimento dei dati
+    CDPSTR_RSBL DOUBLE,
 	LOCALITA_ORIG TEXT(300),  -- Località Originale
     DUG_ORIG TEXT(300), -- Dug Originale
     DUF_ORIG TEXT(300), -- Duf Originale
     -- TOPONIMO PROBABIBILISTICO
-    CDPSTR_PROB INT(12), -- Codice strada Egon estratto dal probabilistico
+    -- CDPSTR_PROB INT(12), -- Codice strada Egon estratto dal probabilistico -- Trasfomato in DOUBLE per errori durante l'inserimento dei dati
+    CDPSTR_PROB DOUBLE,
     LOCALITA_PROB  TEXT(300), -- Località Suggerita
     DUG_PROB  TEXT(300), -- Dug Suggerita
     DUF_PROB  TEXT(300), -- Duff Suggerita
@@ -104,7 +106,8 @@ CREATE TABLE WP1_INDIRIZZI_NO_LINKED
     -- CAMPI GESTIONE REGEDIT
     ID_REVISORE INT(3), -- id revisore assegnato al toponimo (WP1_REVISORI)
 	STATO INT(3), -- stato di lavorazione: null --> non visibile, 1--> da lavorare , 2--> lavorato, 3--> sospeso
-	DATA_INS DATE NOT NULL, -- data sistema
+	-- DATA_INS DATE NOT NULL, -- data sistema -- Rimosso il NOT NULL per errori durante l'inserimento dei dati
+	DATA_INS DATE, -- data sistema
 	DATA_MOD TIMESTAMP (6),  -- data sistema
 	ID_SUPERVISOR INT(3),  -- id eventuale supervisore (WP1_REVISORI)
 	NOTE TEXT(4000) 

@@ -14,11 +14,11 @@ public class ToponimiDaRevisionareDto implements Serializable {
 	private int codiceArchivio;	
 	private String proCom;	
 	private String denominazioneComune;	
-    private int cdpstrRsbl;    
+    private double cdpstrRsbl;    
     private String localitaOrig;    
     private String dugOrig;    
     private String dufOrig;    
-    private int cdpstrProb;    
+    private double cdpstrProb;    
     private String dugProb;      
     private String dufProb;    
     private String validazione;   

@@ -30,7 +30,7 @@ public class ToponimiDaRevisionare implements Serializable {
 	@Column(name = "DENOMINAZIONE_COMUNE")
 	private String denominazioneComune;
 	@Column(name = "CDPSTR_RSBL")
-    private int cdpstrRsbl;
+    private double cdpstrRsbl;
     @Column(name = "LOCALITA_ORIG")
     private String localitaOrig;
     @Column(name = "DUG_ORIG")
@@ -38,7 +38,7 @@ public class ToponimiDaRevisionare implements Serializable {
     @Column(name = "DUF_ORIG")
     private String dufOrig;
     @Column(name = "CDPSTR_PROB")
-    private int cdpstrProb;
+    private double cdpstrProb;
     @Column(name = "DUG_PROB")
     private String dugProb;  
     @Column(name = "DUF_PROB")
