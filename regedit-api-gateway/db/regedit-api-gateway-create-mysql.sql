@@ -1,6 +1,6 @@
 -- 
 -- CLASSIFICATION TABLES
 -- 
-CREATE TABLE regedit.is2_jwttoken (
+CREATE TABLE regedit.wp1_jwttoken (
     token character varying(200)
 );
