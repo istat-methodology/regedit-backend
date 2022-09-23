@@ -36,8 +36,8 @@ public class CreateToponimiDRRequest implements Serializable {
     private String falsiPositivi;     
     private String falsiNegativi;     
     private int flagVerifica;   
-    private int idRevisore;     
-    private int stato;     
+    private Integer idRevisore;     
+    private Integer stato;     
 	private Date dataIns;    
     private Date dataMod;    
     private int idSupervisor;    

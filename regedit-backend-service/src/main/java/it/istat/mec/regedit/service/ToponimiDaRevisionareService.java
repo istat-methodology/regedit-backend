@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import it.istat.mec.regedit.dao.ToponimiDaRevisionareDao;
 import it.istat.mec.regedit.domain.ToponimiDaRevisionare;
+import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ToponimiDaRevisionareDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateToponimiDRRequest;
@@ -18,6 +19,13 @@ public class ToponimiDaRevisionareService {
 	public List<ToponimiDaRevisionareDto> findAllToponimi() {		
 		
 		return Translators.translateToponimiDR(toponimiDaRevisionareDao.findAll());
+	}
+	
+	public List<ToponimiDaRevisionareDto> findAllToponimiDRByStatoAndRevisore(Integer revisore, Short stato) {
+
+		return Translators.translateToponimiDR(toponimiDaRevisionareDao.findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
+				(revisore != null) ? new UsersEntity(revisore) : null, stato));
+
 	}
 	
 	public ToponimiDaRevisionareDto findToponimoDRById(Integer id) {

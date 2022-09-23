@@ -36,10 +36,16 @@ public class ToponimiDaRevisionareDto implements Serializable {
     private String falsiPositivi;     
     private String falsiNegativi;     
     private int flagVerifica;   
-    private int idRevisore;     
-    private int stato;     
+    private Integer idRevisore;     
+    private Short stato;     
 	private Date dataIns;    
     private Date dataMod;    
     private int idSupervisor;    
     private String note; 
+    
+    public ToponimiDaRevisionareDto(String denominazioneComune, String proCom) {
+		super();	
+		this.denominazioneComune = denominazioneComune;		
+		this.proCom = proCom;
+	}
 }

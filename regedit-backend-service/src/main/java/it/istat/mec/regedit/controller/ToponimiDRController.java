@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.regedit.dto.ToponimiDaRevisionareDto;
 import it.istat.mec.regedit.request.CreateToponimiDRRequest;
@@ -25,6 +26,13 @@ public class ToponimiDRController {
 	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
 
 		return toponimiDaRevisionareService.findAllToponimi();
+	}	
+	@GetMapping("/toponimi-user")
+	public List<ToponimiDaRevisionareDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
+			@RequestParam(value = "stato", required = false) Short stato) {
+
+		return toponimiDaRevisionareService.findAllToponimiDRByStatoAndRevisore(user, stato);
+
 	}
 	@GetMapping (value = "/toponimi/{progressivo}")
 	public ToponimiDaRevisionareDto getToponimiDRByProgressivo(@PathVariable("progressivo") Integer id) { 

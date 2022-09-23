@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -76,10 +79,11 @@ public class ToponimiDaRevisionare implements Serializable {
     @Column(name = "FLAG_VERIFICA")
     private int flagVerifica;
     
-    @Column(name = "ID_REVISORE")
-    private int idRevisore; 
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_REVISORE")
+	private UsersEntity idRevisore;     
     @Column(name = "STATO")
-    private int stato; 
+	private Short stato;
     @Column(name = "DATA_INS")
 	private Date dataIns; 
     @Column(name = "DATA_MOD")
