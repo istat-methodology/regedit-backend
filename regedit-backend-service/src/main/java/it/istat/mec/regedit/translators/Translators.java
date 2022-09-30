@@ -32,6 +32,7 @@ import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.Dug;
 import it.istat.mec.regedit.domain.ToponimiDaRevisionare;
+import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.DugDto;
 import it.istat.mec.regedit.dto.ToponimiDaRevisionareDto;
@@ -113,6 +114,14 @@ public class Translators {
 		modelMapper.map(address, addressBackupEdited);
 
 		return addressBackupEdited;
+	}
+	
+	public static ToponimoBackupEdited translate(ToponimiDaRevisionare toponimo, ToponimoBackupEdited toponimoBackupEdited) {
+		
+		final ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(toponimo, toponimoBackupEdited);
+
+		return toponimoBackupEdited;
 	}
 
 	public static Dug translateUpdate(CreateDugRequest x, Dug dug) {
