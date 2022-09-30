@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "WP1_TOPONIMI_DA_REV_HISTORY")
-@IdClass(AddressBackupEditedID.class)
+@IdClass(ToponimoBackupEditedID.class)
 public class ToponimoBackupEdited extends ToponimiDaRevisionare implements Serializable {
 
 	
@@ -26,8 +26,8 @@ public class ToponimoBackupEdited extends ToponimiDaRevisionare implements Seria
 	private Integer editor;
 
 	@Id
-	@Column(name = "PROGRESSIVO_INDIRIZZO")
-	private Long progressivoIndirizzo;
+	@Column(name = "PROGRESSIVO_TOPONIMO")
+	private int progressivoToponimo;
 
 	@Id
 	@Column(name = "DATA_MOD")

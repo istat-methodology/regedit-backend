@@ -12,13 +12,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ToponimiDaRevisionareDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.request.CreateToponimiDRRequest;
-import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.security.JwtTokenProvider;
 import it.istat.mec.regedit.service.ToponimiDaRevisionareService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +27,11 @@ public class ToponimiDRController {
 	@Autowired
 	private ToponimiDaRevisionareService toponimiDaRevisionareService;
 	
-	@GetMapping (value = "/toponimi")
-	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
-
-		return toponimiDaRevisionareService.findAllToponimi();
-	}	
+//	@GetMapping (value = "/toponimi")
+//	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
+//
+//		return toponimiDaRevisionareService.findAllToponimi();
+//	}	
 	@GetMapping("/toponimi-user")
 	public List<ToponimiDaRevisionareDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato) {
@@ -78,11 +75,10 @@ public class ToponimiDRController {
 	@GetMapping(value = "/toponimi/first-toponimo/user/{user}/state/{stato}")
 	public ToponimiDaRevisionareDto getFirstToponimoByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "validazione", required = false) String validazione,
-			@RequestParam(value = "indirizzoOriginaleContains", required = false) String indirizzoOriginaleContains,
+			@RequestParam(value = "validazione", required = false) String validazione,			
 			@RequestParam(value = "offset", required = false) Integer offset,
-			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune,indirizzoOriginale") String[] orderBy,
-			@RequestParam(value = "sort", required = false, defaultValue = "ASC,ASC") String[] sort) {
+			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
+			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
 
 		return toponimiDaRevisionareService.getFirstToponimoByUser(user, stato, proCom, validazione,
 				offset, orderBy, sort);
