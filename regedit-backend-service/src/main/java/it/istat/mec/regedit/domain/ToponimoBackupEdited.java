@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-
 @Getter
 @Setter
 @Entity
@@ -27,7 +26,7 @@ public class ToponimoBackupEdited extends ToponimoBase implements Serializable {
 
 	@Id
 	@Column(name = "PROGRESSIVO_TOPONIMO")
-	private Integer progressivoToponimo;
+	private Long progressivoToponimo;
 
 	@Id
 	@Column(name = "DATA_MOD")

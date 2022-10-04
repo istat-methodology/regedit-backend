@@ -18,9 +18,10 @@ public class ToponimiDaRevisionare extends ToponimoBase implements Serializable 
 
 	
 	private static final long serialVersionUID = -4595102097449110502L;
-	@Id //@GeneratedValue(strategy=GenerationType.IDENTITY)	
+	@Id
 	@Column(name = "PROGRESSIVO_TOPONIMO")
-	private Integer progressivoToponimo;
+	private Long progressivoToponimo;
+	
 	@Column(name = "DATA_MOD")
 	private Date dataMod;
 
