@@ -65,7 +65,7 @@ public class ToponimiDRController {
 		return toponimiDaRevisionareService.findToponimoDRById(id);
 	}
 	
-	@GetMapping(value = "/users")
+	@GetMapping(value = "/users-toponimi")
 	public List<UsersDto> getUsersByToponimiAssigned() {
 
 		return toponimiDaRevisionareService.getUsersByToponimi();

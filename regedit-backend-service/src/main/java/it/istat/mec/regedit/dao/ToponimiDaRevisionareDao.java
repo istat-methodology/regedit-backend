@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import it.istat.mec.regedit.domain.ToponimiDaRevisionare;
+import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.UsersDto;
@@ -41,12 +42,12 @@ public interface ToponimiDaRevisionareDao extends JpaRepository<ToponimiDaRevisi
 	
 	Optional<ToponimiDaRevisionare> findById(Integer id);
 	
-	@Query("SELECT distinct new it.istat.mec.regedit.dto.UsersDto(adr.idRevisore.id, adr.idRevisore.email, adr.idRevisore.name, adr.idRevisore.surname, adr.idRevisore.role.id) FROM ToponimiDaRevisionare AS tp "			
+	@Query("SELECT distinct new it.istat.mec.regedit.dto.UsersDto(tp.idRevisore.id, tp.idRevisore.email, tp.idRevisore.name, tp.idRevisore.surname, tp.idRevisore.role.id) FROM ToponimiDaRevisionare AS tp "			
 			+ " where tp.stato is not NULL "
 			+ " ORDER BY tp.idRevisore.name ASC ")
 	List<UsersDto> findAllUsersWithToponimiAssigned();
 
-	public void save(Optional<ToponimiDaRevisionare> toponimiDaRevisionare);
+	public void save(ToponimoBackupEdited toponimoBackupEdited);
 
 	public void delete(ToponimiDaRevisionare toponimiDaRevisionare);
 }

@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "WP1_TOPONIMI_DA_REV_HISTORY")
 @IdClass(ToponimoBackupEditedID.class)
-public class ToponimoBackupEdited extends ToponimiDaRevisionare implements Serializable {
+public class ToponimoBackupEdited extends ToponimoBase implements Serializable {
 
 	
 	private static final long serialVersionUID = -3804798835339548060L;
@@ -27,7 +27,7 @@ public class ToponimoBackupEdited extends ToponimiDaRevisionare implements Seria
 
 	@Id
 	@Column(name = "PROGRESSIVO_TOPONIMO")
-	private Long progressivoToponimo;
+	private Integer progressivoToponimo;
 
 	@Id
 	@Column(name = "DATA_MOD")
