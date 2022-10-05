@@ -25,11 +25,8 @@ package it.istat.mec.regedit.service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import it.istat.mec.regedit.dao.AddressDao;
 import it.istat.mec.regedit.dao.ToponimiDaRevisionareDao;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.dto.ReportPivotDto;
@@ -59,9 +56,14 @@ public class ReportTopService {
 		return toponimoDao.getReportDailyToponimoState();
 	}
 
-	public List<ReportDto> getReportDailyAddressStateByUser(Integer user) {
+	public List<ReportDto> getReportDailyToponimoStateByUser(Integer user) {
 
 		return toponimoDao.getReportDailyToponimoStateByUser(user);
+	}
+	
+	public List<ReportDto> getReportDailyToponimoStateByUser(Integer user, Short state) {
+
+		return toponimoDao.getReportDailyToponimoStateByUserAndState(user, state);
 	}
 
 	public List<ReportDto> getReportDailyToponimoStateByUserAndState(Integer user, Short state) {

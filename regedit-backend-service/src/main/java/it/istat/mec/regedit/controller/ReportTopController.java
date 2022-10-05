@@ -37,83 +37,83 @@ import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.dto.ReportPivotDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
-import it.istat.mec.regedit.service.ReportService;
+import it.istat.mec.regedit.service.ReportTopService;
 
 @RestController
 @RequestMapping("/regedit")
 public class ReportTopController {
 
 	@Autowired
-	private ReportService reportService;
+	private ReportTopService reportTopService;
 
 	@GetMapping(value = "/report-top")
-	public List<ReportDto> getAddressStateByUser() {
+	public List<ReportDto> getToponimoStateByUser() {
 
-		return reportService.getReportAddressState();
+		return reportTopService.getReportToponimoState();
 
 	}
 
 	@GetMapping(value = "/report-top/users/{user}")
-	public List<ReportDto> getAddressStateByUser(@PathVariable("user") Integer user) {
+	public List<ReportDto> getToponimoStateByUser(@PathVariable("user") Integer user) {
 
-		return reportService.getReportAddressStateByUser(user);
+		return reportTopService.getReportToponimoStateByUser(user);
 
 	}
 
 	@GetMapping(value = "/report-top/users/{user}/states/{state}")
-	public ResponseEntity<ReportDto> getAddressStateByUser(@PathVariable("user") Integer user,
+	public ResponseEntity<ReportDto> getToponimoStateByUser(@PathVariable("user") Integer user,
 			@PathVariable("state") Short state) {
 
-		ReportDto reportDto = reportService.getReportAddressStateByUserAndState(user, state)
+		ReportDto reportDto = reportTopService.getReportToponimoStateByUserAndState(user, state)
 				.orElseThrow(() -> new NoDataException());
 		return ResponseEntity.ok().body(reportDto);
 
 	}
 
 	@GetMapping(value = "/report-top-daily")
-	public List<ReportDto> getDailyAddressStateByUser() {
+	public List<ReportDto> getDailyToponimoStateByUser() {
 
-		return reportService.getReportDailyAddressState();
+		return reportTopService.getReportDailyToponimoState();
 
 	}
 
 	@GetMapping(value = "/report-top-daily/users/{user}")
-	public List<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user) {
+	public List<ReportDto> getDailyToponimoStateByUser(@PathVariable("user") Integer user) {
 
-		return reportService.getReportDailyAddressStateByUser(user);
+		return reportTopService.getReportDailyToponimoStateByUser(user);
 
 	}
 
 	@GetMapping(value = "/report-top-daily/users/{user}/states/{state}")
-	public List<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user,
+	public List<ReportDto> getDailyToponimoStateByUser(@PathVariable("user") Integer user,
 			@PathVariable("state") Short state) {
 
-		return reportService.getReportDailyAddressStateByUserAndState(user, state);
+		return reportTopService.getReportDailyToponimoStateByUser(user, state);
 
 	}
 
 	@GetMapping(value = "/report-top-pivot")
-	public List<ReportPivotDto> getReportPivotAddressState(@RequestParam(value = "user",required = false) Integer user) {
+	public List<ReportPivotDto> getReportPivotToponimoState(@RequestParam(value = "user",required = false) Integer user) {
 
-		return reportService.getReportPivotAddressState(user);
+		return reportTopService.getReportPivotToponimoState(user);
 
 	}
 
 	@GetMapping(value = "/report-top-daily-pivot")
-	public List<ReportPivotDto> getReportDailyPivotAddressStateUser(@RequestParam(value = "user",required = false) Integer user,
+	public List<ReportPivotDto> getReportDailyPivotToponimoStateUser(@RequestParam(value = "user",required = false) Integer user,
 			                                                        @RequestParam(value = "dateModInf",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModInf,
 			                                                        @RequestParam(value = "dateModSup",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModSup) {
 
-		return reportService.getReportDailyPivotAddressStateUser(user,dateModInf,dateModSup);
+		return reportTopService.getReportDailyPivotToponimoStateUser(user,dateModInf,dateModSup);
 
 	}
 
 	@GetMapping(value = "/report-top-total-daily-pivot")
-	public List<ReportPivotDto> getReportTotalDailyPivotAddressStateUser(
+	public List<ReportPivotDto> getReportTotalDailyPivotToponimoStateUser(
 			                                                        @RequestParam(value = "dateModInf",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModInf,
 			                                                        @RequestParam(value = "dateModSup",required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateModSup) {
 
-		return reportService.getReportTotalDailyPivotAddressStateUser(dateModInf,dateModSup);
+		return reportTopService.getReportTotalDailyPivotToponimoStateUser(dateModInf,dateModSup);
 
 	}
 }
