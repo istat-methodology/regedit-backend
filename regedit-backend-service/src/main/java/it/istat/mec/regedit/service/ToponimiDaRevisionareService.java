@@ -8,18 +8,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import it.istat.mec.regedit.dao.ToponimiDaRevisionareDao;
-import it.istat.mec.regedit.domain.Address;
-import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.ToponimiDaRevisionare;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
-import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ToponimiDaRevisionareDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateToponimiDRRequest;
-import it.istat.mec.regedit.request.UpdateAddressRequest;
 import it.istat.mec.regedit.translators.Translators;
 
 @Service
