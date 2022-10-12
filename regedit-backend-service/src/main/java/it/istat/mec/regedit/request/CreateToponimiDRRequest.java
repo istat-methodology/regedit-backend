@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class CreateToponimiDRRequest implements Serializable {
 	
 	private static final long serialVersionUID = -6509639945928247724L;
-	private int progressivoToponimo;	
+	private Integer progressivoToponimo;	
 	private int codiceArchivio;	
 	private String proCom;	
 	private String denominazioneComune;	
