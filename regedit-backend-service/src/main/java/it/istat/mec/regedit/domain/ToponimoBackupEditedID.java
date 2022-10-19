@@ -11,10 +11,10 @@ public class ToponimoBackupEditedID implements Serializable {
 	private static final long serialVersionUID = -2324836111238155886L;
 	
 	private Integer editor;
-	private Integer progressivoToponimo;
+	private Long progressivoToponimo;
 	private Date dataMod;
 
-	public ToponimoBackupEditedID(Integer editor, Integer progressivoToponimo, Date dataMod) {
+	public ToponimoBackupEditedID(Integer editor, Long progressivoToponimo, Date dataMod) {
 		super();
 		this.editor = editor;
 		this.progressivoToponimo = progressivoToponimo;
