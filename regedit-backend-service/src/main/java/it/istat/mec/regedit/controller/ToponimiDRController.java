@@ -60,7 +60,7 @@ public class ToponimiDRController {
 
 	}
 	@GetMapping (value = "/toponimi/{progressivo}")
-	public ToponimiDaRevisionareDto getToponimiDRByProgressivo(@PathVariable("progressivo") Integer id) { 
+	public ToponimiDaRevisionareDto getToponimiDRByProgressivo(@PathVariable("progressivo") Long id) { 
 
 		return toponimiDaRevisionareService.findToponimoDRById(id);
 	}
@@ -102,7 +102,7 @@ public class ToponimiDRController {
 		return toponimiDaRevisionareService.updateToponimiDR(request, JwtTokenProvider.getUserId(jwt));
 	}
 	@DeleteMapping(value = "/toponimi/{id}")
-	public ToponimiDaRevisionareDto deleteToponimoDR(@PathVariable("id") Integer id) { 
+	public ToponimiDaRevisionareDto deleteToponimoDR(@PathVariable("id") Long id) { 
   
 		return toponimiDaRevisionareService.deleteToponimo(id);
 	}
