@@ -68,7 +68,7 @@ public class AddressController {
 		return ResponseEntity.ok(addressService.findAllAddressess(user, stato, proCom, validazione,
 				indirizzoOriginaleContains, orderBy, sort));
 
-	}
+	};
 
 	@GetMapping("/addresses-comuni")
 	public List<ComuneDto> getAllComuni(@RequestParam(value = "user", required = false) Integer user,
@@ -76,20 +76,20 @@ public class AddressController {
 
 		return addressService.findAllComuniByStatoAndRevisore(user, stato);
 
-	}
+	};
 
 	@GetMapping(value = "/addresses/{id}")
 	public AddressDto getAddress(@PathVariable("id") Long id) {
 
 		return addressService.findAddressById(id);
 
-	}
+	};
 	@GetMapping(value = "/users")
 	public List<UsersDto> getUsersByAddressesAssigned() {
 
 		return addressService.getUsersByAddresses();
 
-	}
+	};
 
 	@GetMapping(value = "/addresses/first-address/user/{user}/state/{stato}")
 	public AddressDto getFirstAddressByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
@@ -103,20 +103,20 @@ public class AddressController {
 		return addressService.getFirstAddressByUser(user, stato, proCom, validazione, indirizzoOriginaleContains,
 				offset, orderBy, sort);
 
-	}
+	};
 
 	@PostMapping("/addresses")
 	public AddressDto create(@RequestBody CreateAddressRequest request) {
 
 		return addressService.newAdress(request);
-	}
+	};
 
 	@PutMapping(value = "/addresses/{id}")
 	public AddressDto updateAddress(@RequestBody UpdateAddressRequest request,
 			@RequestHeader(name = "Authorization") final String jwt) {
 
 		return addressService.updateAddress(request, JwtTokenProvider.getUserId(jwt));
-	}
+	};
 
 	@PutMapping(value = "/addresses-list")
 	public Integer updateAddressList(@RequestBody UpdateAddressListRequest updateAddressListRequest,
@@ -124,12 +124,12 @@ public class AddressController {
 
 		return addressService.updateAddressList(updateAddressListRequest,
 				JwtTokenProvider.getUserId(jwt));
-	}
+	};
 
 	@DeleteMapping(value = "/addresses/{id}")
 	public AddressDto deleteAddress(@PathVariable("id") Long id) {
 
 		return addressService.deleteAddress(id);
-	}
+	};
 
 }
