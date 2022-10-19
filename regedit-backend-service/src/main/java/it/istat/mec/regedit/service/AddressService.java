@@ -37,6 +37,7 @@ import org.springframework.stereotype.Service;
 
 import it.istat.mec.regedit.dao.AddressBackupDao;
 import it.istat.mec.regedit.dao.AddressDao;
+import it.istat.mec.regedit.dao.ToponimoBackupDao;
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;

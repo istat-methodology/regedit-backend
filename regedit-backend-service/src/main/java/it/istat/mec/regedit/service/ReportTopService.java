@@ -27,14 +27,14 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import it.istat.mec.regedit.dao.ToponimiDaRevisionareDao;
+import it.istat.mec.regedit.dao.ToponimoDao;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.dto.ReportPivotDto;
 
 @Service
 public class ReportTopService {
 	@Autowired
-	ToponimiDaRevisionareDao toponimoDao;
+	ToponimoDao toponimoDao;
 
 	public List<ReportDto> getReportToponimoState() {
 

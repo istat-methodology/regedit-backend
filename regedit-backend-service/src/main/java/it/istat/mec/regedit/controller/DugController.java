@@ -49,23 +49,23 @@ public class DugController {
 	public List<DugDto> getDugList() {
 
 		return dugService.findAllDug();
-	}
+	};
 	@GetMapping (value = "/dug/{id}")
 	public DugDto getDugById(@PathVariable("id") Integer id) { 
 
 		return dugService.findDugById(id);
-	}
+	};
 	
 	@PostMapping("/dug")
 	public DugDto create(@RequestBody CreateDugRequest request) {		
 			
 		return dugService.newDug(request);
-	}
+	};
 	@PutMapping(value = "/dug/{id}")
 	public DugDto updateDug(@RequestBody CreateDugRequest request) {		
 		
 		return dugService.updateDug(request);
-	}	
+	};	
 	@DeleteMapping(value = "/dug/{id}")
 	public DugDto deleteDug(@PathVariable("id") Integer id) { 
   

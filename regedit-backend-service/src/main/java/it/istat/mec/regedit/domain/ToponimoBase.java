@@ -22,7 +22,7 @@ public class ToponimoBase {
 	@Column(name = "DENOMINAZIONE_COMUNE")
 	private String denominazioneComune;
 	@Column(name = "CDPSTR_RSBL")
-    private Double cdpstrRsbl;
+    private Long cdpstrRsbl;
     @Column(name = "LOCALITA_ORIG")
     private String localitaOrig;
     @Column(name = "DUG_ORIG")
@@ -30,7 +30,7 @@ public class ToponimoBase {
     @Column(name = "DUF_ORIG")
     private String dufOrig;
     @Column(name = "CDPSTR_PROB")
-    private Double cdpstrProb;
+    private Long cdpstrProb;
     @Column(name = "DUG_PROB")
     private String dugProb;  
     @Column(name = "DUF_PROB")

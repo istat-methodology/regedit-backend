@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.regedit.dto.ComuneDto;
-import it.istat.mec.regedit.dto.ToponimiDaRevisionareDto;
+import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.UsersDto;
-import it.istat.mec.regedit.request.CreateToponimiDRRequest;
+import it.istat.mec.regedit.request.CreateToponimoRequest;
 import it.istat.mec.regedit.security.JwtTokenProvider;
-import it.istat.mec.regedit.service.ToponimiDaRevisionareService;
+import it.istat.mec.regedit.service.ToponimoService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/regedit")
 public class ToponimiDRController {
 	@Autowired
-	private ToponimiDaRevisionareService toponimiDaRevisionareService;
+	private ToponimoService toponimiDaRevisionareService;
 	
 //	@GetMapping (value = "/toponimi")
 //	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
@@ -33,14 +33,14 @@ public class ToponimiDRController {
 //		return toponimiDaRevisionareService.findAllToponimi();
 //	}	
 	@GetMapping("/toponimi-user")
-	public List<ToponimiDaRevisionareDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
+	public List<ToponimoDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato) {
 
 		return toponimiDaRevisionareService.findAllToponimiDRByStatoAndRevisore(user, stato);
 
 	}
 	@GetMapping("/toponimi")
-	public ResponseEntity<List<ToponimiDaRevisionareDto>> getAllToponimi(
+	public ResponseEntity<List<ToponimoDto>> getAllToponimi(
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
@@ -60,7 +60,7 @@ public class ToponimiDRController {
 
 	}
 	@GetMapping (value = "/toponimi/{progressivo}")
-	public ToponimiDaRevisionareDto getToponimiDRByProgressivo(@PathVariable("progressivo") Long id) { 
+	public ToponimoDto getToponimiDRByProgressivo(@PathVariable("progressivo") Long id) { 
 
 		return toponimiDaRevisionareService.findToponimoDRById(id);
 	}
@@ -73,7 +73,7 @@ public class ToponimiDRController {
 	}
 	
 	@GetMapping(value = "/toponimi/first-toponimo/user/{user}/state/{stato}")
-	public ToponimiDaRevisionareDto getFirstToponimoByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
+	public ToponimoDto getFirstToponimoByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "validazione", required = false) String validazione,			
 			@RequestParam(value = "offset", required = false) Integer offset,
@@ -86,7 +86,7 @@ public class ToponimiDRController {
 	}
 	
 	@PostMapping("/toponimi")
-	public ToponimiDaRevisionareDto createToponimiDR(@RequestBody CreateToponimiDRRequest request) {		
+	public ToponimoDto createToponimiDR(@RequestBody CreateToponimoRequest request) {		
 			
 		return toponimiDaRevisionareService.newToponimiDaRevisionare(request);
 	}
@@ -96,13 +96,13 @@ public class ToponimiDRController {
 //		return toponimiDaRevisionareService.updateToponimiDR(request);
 //	}	
 	@PutMapping(value = "/toponimi/{progressivo}")
-	public ToponimiDaRevisionareDto updateToponimiDR(@RequestBody CreateToponimiDRRequest request,
+	public ToponimoDto updateToponimiDR(@RequestBody CreateToponimoRequest request,
 			@RequestHeader(name = "Authorization") final String jwt) {
 
 		return toponimiDaRevisionareService.updateToponimiDR(request, JwtTokenProvider.getUserId(jwt));
 	}
 	@DeleteMapping(value = "/toponimi/{id}")
-	public ToponimiDaRevisionareDto deleteToponimoDR(@PathVariable("id") Long id) { 
+	public ToponimoDto deleteToponimoDR(@PathVariable("id") Long id) { 
   
 		return toponimiDaRevisionareService.deleteToponimo(id);
 	}
