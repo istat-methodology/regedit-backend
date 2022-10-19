@@ -16,13 +16,13 @@ import lombok.Setter;
 @MappedSuperclass
 public class ToponimoBase {
 	@Column(name = "CODICE_ARCHIVIO")
-	private int codiceArchivio;
+	private Integer codiceArchivio;
 	@Column(name = "PRO_COM")
 	private String proCom;
 	@Column(name = "DENOMINAZIONE_COMUNE")
 	private String denominazioneComune;
 	@Column(name = "CDPSTR_RSBL")
-    private double cdpstrRsbl;
+    private Double cdpstrRsbl;
     @Column(name = "LOCALITA_ORIG")
     private String localitaOrig;
     @Column(name = "DUG_ORIG")
@@ -30,7 +30,7 @@ public class ToponimoBase {
     @Column(name = "DUF_ORIG")
     private String dufOrig;
     @Column(name = "CDPSTR_PROB")
-    private double cdpstrProb;
+    private Double cdpstrProb;
     @Column(name = "DUG_PROB")
     private String dugProb;  
     @Column(name = "DUF_PROB")
@@ -45,18 +45,18 @@ public class ToponimoBase {
     @Column(name = "DUF_VAL")
     private String dufVal;
     @Column(name = "CDPSTR_VAL")
-    private int cdpstrVal; 
+    private Integer cdpstrVal; 
     
     @Column(name = "DNC")
     private String dnc; 
     @Column(name = "FLAG_DUG")
-    private int flagDug; 
+    private Integer flagDug; 
     @Column(name = "MD")
     private String md; 
     @Column(name = "SOGLIA_W")
     private String sogliaW; 
     @Column(name = "ALT")
-    private int alt;
+    private Integer alt;
     @Column(name = "TM")
     private String tm;
     @Column(name = "WMAX")
@@ -66,7 +66,7 @@ public class ToponimoBase {
     @Column(name = "FALSI_NEGATIVI")
     private String falsiNegativi; 
     @Column(name = "FLAG_VERIFICA")
-    private int flagVerifica;
+    private Integer flagVerifica;
     
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_REVISORE")
@@ -77,7 +77,7 @@ public class ToponimoBase {
 	private Date dataIns; 
     
     @Column(name = "ID_SUPERVISOR")
-    private int idSupervisor;
+    private Integer idSupervisor;
     @Column(name = "NOTE")
     private String note; 
 }

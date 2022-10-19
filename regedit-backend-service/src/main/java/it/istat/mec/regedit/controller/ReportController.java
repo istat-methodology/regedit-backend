@@ -51,14 +51,14 @@ public class ReportController {
 
 		return reportService.getReportAddressState();
 
-	}
+	};
 
 	@GetMapping(value = "/report/users/{user}")
 	public List<ReportDto> getAddressStateByUser(@PathVariable("user") Integer user) {
 
 		return reportService.getReportAddressStateByUser(user);
 
-	}
+	};
 
 	@GetMapping(value = "/report/users/{user}/states/{state}")
 	public ResponseEntity<ReportDto> getAddressStateByUser(@PathVariable("user") Integer user,
@@ -68,21 +68,21 @@ public class ReportController {
 				.orElseThrow(() -> new NoDataException());
 		return ResponseEntity.ok().body(reportDto);
 
-	}
+	};
 
 	@GetMapping(value = "/report-daily")
 	public List<ReportDto> getDailyAddressStateByUser() {
 
 		return reportService.getReportDailyAddressState();
 
-	}
+	};
 
 	@GetMapping(value = "/report-daily/users/{user}")
 	public List<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user) {
 
 		return reportService.getReportDailyAddressStateByUser(user);
 
-	}
+	};
 
 	@GetMapping(value = "/report-daily/users/{user}/states/{state}")
 	public List<ReportDto> getDailyAddressStateByUser(@PathVariable("user") Integer user,
@@ -90,14 +90,14 @@ public class ReportController {
 
 		return reportService.getReportDailyAddressStateByUserAndState(user, state);
 
-	}
+	};
 
 	@GetMapping(value = "/report-pivot")
 	public List<ReportPivotDto> getReportPivotAddressState(@RequestParam(value = "user",required = false) Integer user) {
 
 		return reportService.getReportPivotAddressState(user);
 
-	}
+	};
 
 	@GetMapping(value = "/report-daily-pivot")
 	public List<ReportPivotDto> getReportDailyPivotAddressStateUser(@RequestParam(value = "user",required = false) Integer user,
@@ -106,7 +106,7 @@ public class ReportController {
 
 		return reportService.getReportDailyPivotAddressStateUser(user,dateModInf,dateModSup);
 
-	}
+	};
 
 	@GetMapping(value = "/report-total-daily-pivot")
 	public List<ReportPivotDto> getReportTotalDailyPivotAddressStateUser(
@@ -115,5 +115,5 @@ public class ReportController {
 
 		return reportService.getReportTotalDailyPivotAddressStateUser(dateModInf,dateModSup);
 
-	}
+	};
 }

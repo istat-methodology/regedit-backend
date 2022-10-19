@@ -63,7 +63,7 @@ public class ToponimiDaRevisionareService {
 	}
 
 	
-	public ToponimiDaRevisionareDto findToponimoDRById(Integer id) {
+	public ToponimiDaRevisionareDto findToponimoDRById(Long id) {
 		if (!toponimiDaRevisionareDao.findById(id).isPresent())
 			throw new NoDataException("Toponimo not present");
 		return Translators.translate(toponimiDaRevisionareDao.findById(id).get());
@@ -137,7 +137,7 @@ public class ToponimiDaRevisionareService {
 		return Translators.translate(toponimiDaRevisionare);
 	}
 	
-	public ToponimiDaRevisionareDto deleteToponimo(Integer id) {
+	public ToponimiDaRevisionareDto deleteToponimo(Long id) {
 		if (!toponimiDaRevisionareDao.findById(id).isPresent())
 			throw new NoDataException("Toponimo not present");
 		ToponimiDaRevisionare toponimiDaRevisionare = toponimiDaRevisionareDao.findById(id).get();
