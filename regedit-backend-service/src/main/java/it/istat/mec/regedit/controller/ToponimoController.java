@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/regedit")
 public class ToponimoController {
 	@Autowired
-	private ToponimoService toponimiDaRevisionareService;
+	private ToponimoService toponimoService;
 	
 //	@GetMapping (value = "/toponimi")
 //	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
@@ -36,7 +36,7 @@ public class ToponimoController {
 	public List<ToponimoDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato) {
 
-		return toponimiDaRevisionareService.findAllToponimiDRByStatoAndRevisore(user, stato);
+		return toponimoService.findAllToponimiDRByStatoAndRevisore(user, stato);
 
 	}
 	@GetMapping("/toponimi")
@@ -48,7 +48,7 @@ public class ToponimoController {
 			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
 
-		return ResponseEntity.ok(toponimiDaRevisionareService.findAllToponimi(user, stato, proCom, validazione,
+		return ResponseEntity.ok(toponimoService.findAllToponimi(user, stato, proCom, validazione,
 				orderBy, sort));
 
 	}
@@ -56,19 +56,19 @@ public class ToponimoController {
 	public List<ComuneDto> getAllComuni(@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato) {
 
-		return toponimiDaRevisionareService.findAllComuniByStatoAndRevisore(user, stato);
+		return toponimoService.findAllComuniByStatoAndRevisore(user, stato);
 
 	}
 	@GetMapping (value = "/toponimi/{progressivo}")
 	public ToponimoDto getToponimiDRByProgressivo(@PathVariable("progressivo") Long id) { 
 
-		return toponimiDaRevisionareService.findToponimoDRById(id);
+		return toponimoService.findToponimoDRById(id);
 	}
 	
 	@GetMapping(value = "/users-toponimi")
 	public List<UsersDto> getUsersByToponimiAssigned() {
 
-		return toponimiDaRevisionareService.getUsersByToponimi();
+		return toponimoService.getUsersByToponimi();
 
 	}
 	
@@ -80,7 +80,7 @@ public class ToponimoController {
 			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
 
-		return toponimiDaRevisionareService.getFirstToponimoByUser(user, stato, proCom, validazione,
+		return toponimoService.getFirstToponimoByUser(user, stato, proCom, validazione,
 				offset, orderBy, sort);
 
 	}
@@ -88,7 +88,7 @@ public class ToponimoController {
 	@PostMapping("/toponimi")
 	public ToponimoDto createToponimiDR(@RequestBody CreateToponimoRequest request) {		
 			
-		return toponimiDaRevisionareService.newToponimiDaRevisionare(request);
+		return toponimoService.newToponimiDaRevisionare(request);
 	}
 //	@PutMapping(value = "/toponimi/{id}")
 //	public ToponimiDaRevisionareDto updateToponimiDR(@RequestBody CreateToponimiDRRequest request) {		
@@ -99,12 +99,12 @@ public class ToponimoController {
 	public ToponimoDto updateToponimiDR(@RequestBody CreateToponimoRequest request,
 			@RequestHeader(name = "Authorization") final String jwt) {
 
-		return toponimiDaRevisionareService.updateToponimiDR(request, JwtTokenProvider.getUserId(jwt));
+		return toponimoService.updateToponimiDR(request, JwtTokenProvider.getUserId(jwt));
 	}
 	@DeleteMapping(value = "/toponimi/{id}")
 	public ToponimoDto deleteToponimoDR(@PathVariable("id") Long id) { 
   
-		return toponimiDaRevisionareService.deleteToponimo(id);
+		return toponimoService.deleteToponimo(id);
 	}
 
 }
