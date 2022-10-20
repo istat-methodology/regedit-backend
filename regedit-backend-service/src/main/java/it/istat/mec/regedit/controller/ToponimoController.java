@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/regedit")
-public class ToponimiDRController {
+public class ToponimoController {
 	@Autowired
 	private ToponimoService toponimiDaRevisionareService;
 	
