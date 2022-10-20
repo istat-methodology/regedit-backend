@@ -60,7 +60,7 @@ public class ToponimoController {
 
 	}
 	@GetMapping (value = "/toponimi/{progressivo}")
-	public ToponimoDto getToponimiDRByProgressivo(@PathVariable("progressivo") Long id) { 
+	public ToponimoDto getToponimoByProgressivo(@PathVariable("progressivo") Long id) { 
 
 		return toponimoService.findToponimoDRById(id);
 	}
@@ -86,7 +86,7 @@ public class ToponimoController {
 	}
 	
 	@PostMapping("/toponimi")
-	public ToponimoDto createToponimiDR(@RequestBody CreateToponimoRequest request) {		
+	public ToponimoDto createToponimo(@RequestBody CreateToponimoRequest request) {		
 			
 		return toponimoService.newToponimiDaRevisionare(request);
 	}
@@ -96,7 +96,7 @@ public class ToponimoController {
 //		return toponimiDaRevisionareService.updateToponimiDR(request);
 //	}	
 	@PutMapping(value = "/toponimi/{progressivo}")
-	public ToponimoDto updateToponimiDR(@RequestBody CreateToponimoRequest request,
+	public ToponimoDto updateToponimo(@RequestBody CreateToponimoRequest request,
 			@RequestHeader(name = "Authorization") final String jwt) {
 
 		return toponimoService.updateToponimiDR(request, JwtTokenProvider.getUserId(jwt));
