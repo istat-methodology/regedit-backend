@@ -224,9 +224,9 @@ public class ToponimoService {
 
 		Integer countUpdate = 0;
 		for (Iterator<Long> iterator = updateToponimoListRequest.getToponimoList().iterator(); iterator.hasNext();) {
-			Long progressivoIndirizzo = (Long) iterator.next();
+			Long progressivoToponimo = (Long) iterator.next();
 
-			final Optional<Toponimo> optToponimo = toponimoDao.findById(progressivoIndirizzo);
+			final Optional<Toponimo> optToponimo = toponimoDao.findById(progressivoToponimo);
 			if (!optToponimo.isPresent())
 				throw new NoDataException("Toponimo no present");
 
@@ -239,8 +239,8 @@ public class ToponimoService {
 				toponimo.setDufVal(updateToponimoListRequest.getDufVal());
 			if (updateToponimoListRequest.getLocalitaVal() != null)
 				toponimo.setLocalitaVal(updateToponimoListRequest.getLocalitaVal());
-			if (updateToponimoListRequest.getCdpstrEgon() != null)
-				toponimo.setCdpstrProb(updateToponimoListRequest.getCdpstrEgon());
+			if (updateToponimoListRequest.getCdpstr() != null)
+				toponimo.setCdpstrProb(updateToponimoListRequest.getCdpstr());
 			/*
 			 * if (updateToponimoListRequest.getIdFonte() != null)
 			 * toponimo.setIdFonte(updateToponimoListRequest.getIdFonte());
