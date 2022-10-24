@@ -114,40 +114,46 @@ public class ToponimoService {
 		toponimoDao.save(toponimiDaRevisionare);		    
 		return Translators.translate(toponimiDaRevisionare);
 	}
-//	public ToponimiDaRevisionareDto updateToponimiDR(CreateToponimiDRRequest request) {		
-//		
-//		if (!toponimoDao.findById(request.getProgressivoToponimo()).isPresent())
-//			throw new NoDataException("Toponimo not present");
-//		
-//		ToponimiDaRevisionare toponimiDaRevisionare = toponimoDao.findById(request.getProgressivoToponimo()).get();	
-//		
-//		toponimiDaRevisionare = Translators.translateUpdate(request, toponimiDaRevisionare);
-//		
-//		toponimoDao.save(toponimiDaRevisionare);		
-//		
-//		return Translators.translate(toponimiDaRevisionare);
-//	}
+	/*
+	 * public ToponimoDto updateToponimiDR(CreateToponimoRequest request) {
+	 * 
+	 * if (!toponimoDao.findById(request.getProgressivoToponimo()).isPresent())
+	 * throw new NoDataException("Toponimo not present");
+	 * 
+	 * Toponimo toponimiDaRevisionare =
+	 * toponimoDao.findById(request.getProgressivoToponimo()).get();
+	 * 
+	 * toponimiDaRevisionare = Translators.translateUpdate(request,
+	 * toponimiDaRevisionare);
+	 * 
+	 * toponimoDao.save(toponimiDaRevisionare);
+	 * 
+	 * return Translators.translate(toponimiDaRevisionare); }
+	 */
 	
-	public ToponimoDto updateToponimiDR(CreateToponimoRequest request, Integer editor) {
-
-		if (!toponimoDao.findById(request.getProgressivoToponimo()).isPresent())
-			throw new NoDataException("Toponimo not present");
-
-		Toponimo toponimiDaRevisionare = toponimoDao.findById(request.getProgressivoToponimo()).get();
-		toponimiDaRevisionare = Translators.translateUpdate(request, toponimiDaRevisionare);
-
-		toponimiDaRevisionare.setDataMod(new Timestamp(System.currentTimeMillis()));
-
-		toponimoDao.save(toponimiDaRevisionare);
-
-		if (editingBackup) {
-			ToponimoBackupEdited toponimoBackupEdited = new ToponimoBackupEdited();
-			toponimoBackupEdited = Translators.translate(toponimiDaRevisionare, toponimoBackupEdited);
-			toponimoBackupEdited.setEditor(editor);
-			toponimoBackupDao.save(toponimoBackupEdited);
-		}
-		return Translators.translate(toponimiDaRevisionare);
-	}
+	
+	  public ToponimoDto updateToponimiDR(CreateToponimoRequest request, Integer
+	  editor) {
+	  
+	  if (!toponimoDao.findById(request.getProgressivoToponimo()).isPresent())
+	  throw new NoDataException("Toponimo not present");
+	  
+	  Toponimo toponimiDaRevisionare =
+	  toponimoDao.findById(request.getProgressivoToponimo()).get();
+	  toponimiDaRevisionare = Translators.translateUpdate(request,
+	  toponimiDaRevisionare);
+	  
+	  toponimiDaRevisionare.setDataMod(new Timestamp(System.currentTimeMillis()));
+	  
+	  toponimoDao.save(toponimiDaRevisionare);
+	  
+	  if (editingBackup) { ToponimoBackupEdited toponimoBackupEdited = new
+	  ToponimoBackupEdited(); toponimoBackupEdited =
+	  Translators.translate(toponimiDaRevisionare, toponimoBackupEdited);
+	  toponimoBackupEdited.setEditor(editor);
+	  toponimoBackupDao.save(toponimoBackupEdited); } return
+	  Translators.translate(toponimiDaRevisionare); }
+	 
 	
 	public ToponimoDto deleteToponimo(Long id) {
 		if (!toponimoDao.findById(id).isPresent())
@@ -158,7 +164,7 @@ public class ToponimoService {
 	}
 	
 	
-	public ToponimoDto newAdress(CreateToponimoRequest request) {
+	public ToponimoDto newToponimo(CreateToponimoRequest request) {
 		Toponimo toponimo = new Toponimo();
 		toponimo = Translators.translate(request);
 		toponimo.setDataMod(new Timestamp(System.currentTimeMillis()));
