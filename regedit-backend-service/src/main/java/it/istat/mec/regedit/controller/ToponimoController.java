@@ -16,6 +16,8 @@ import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
+import it.istat.mec.regedit.request.UpdateAddressListRequest;
+import it.istat.mec.regedit.request.UpdateToponimoListRequest;
 import it.istat.mec.regedit.security.JwtTokenProvider;
 import it.istat.mec.regedit.service.ToponimoService;
 import lombok.extern.slf4j.Slf4j;
@@ -84,6 +86,13 @@ public class ToponimoController {
 				offset, orderBy, sort);
 
 	}
+	@PutMapping(value = "/toponimi-list")
+	public Integer updateToponimoList(@RequestBody UpdateToponimoListRequest updateToponimoListRequest,
+			@RequestHeader(name = "Authorization") final String jwt) {
+
+		return toponimoService.updateToponimoList(updateToponimoListRequest,
+				JwtTokenProvider.getUserId(jwt));
+	};
 	
 	@PostMapping("/toponimi")
 	public ToponimoDto createToponimo(@RequestBody CreateToponimoRequest request) {		
