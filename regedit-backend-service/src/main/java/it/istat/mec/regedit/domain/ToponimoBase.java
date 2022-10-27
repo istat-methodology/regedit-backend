@@ -45,7 +45,7 @@ public class ToponimoBase {
     @Column(name = "DUF_VAL")
     private String dufVal;
     @Column(name = "CDPSTR_VAL")
-    private Integer cdpstrVal; 
+    private Long cdpstrVal; 
     
     @Column(name = "DNC")
     private String dnc; 
