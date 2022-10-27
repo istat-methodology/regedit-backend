@@ -77,33 +77,39 @@ public interface ToponimoDao extends JpaRepository<Toponimo, Long> {
 			@Param("stato") Short stato);
 
 	
-	  @Query("SELECT adr FROM Toponimo AS adr " +
-	  " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) " +
-	  " AND ((:stato is NULL) OR (adr.stato = :stato)) " +
-	  " AND ((:proCom is NULL) OR (adr.proCom = :proCom)) " +
-	  " AND ((:validazione is NULL) OR (adr.validazione = :validazione)) " +
-	  " AND ((:localitaOrig is NULL) OR (UPPER(adr.localitaOrig) like CONCAT('%',UPPER(:localitaOrig),'%') )) "
-	  ) List<Toponimo> findAllWithFilter(@Param("idRevisore")
-	  UsersEntity idRevisore, @Param("stato") Short stato, @Param("proCom") String
-	  proCom, @Param("validazione") String
-	  validazione, @Param("localitaOrig") String localitaOrig, Sort
-	  sort);
-	 
+	  
+	  @Query("SELECT adr FROM Toponimo AS adr "
+				+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
+				+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
+				+ " AND ((:proCom is NULL) OR (adr.proCom = :proCom)) "
+				+ " AND ((:validazione is NULL) OR (adr.validazione = :validazione)) " 
+				+ " AND ((:localitaOrig is NULL) OR (UPPER(adr.localitaOrig) like CONCAT('%',UPPER(:localitaOrig),'%') )) ")
 
-	
-	
-	/*
-	 * @Query("SELECT tp FROM Toponimo AS tp " +
-	 * " where 1=1 AND ((:idRevisore is NULL) OR (tp.idRevisore = :idRevisore)) " +
-	 * " AND ((:stato is NULL) OR (tp.stato = :stato)) " +
-	 * " AND ((:proCom is NULL) OR (tp.proCom = :proCom)) " +
-	 * " AND ((:validazione is NULL) OR (tp.validazione = :validazione)) ")
-	 * List<Toponimo> findAllWithFilter(@Param("idRevisore") UsersEntity
-	 * idRevisore, @Param("stato") Short stato, @Param("proCom") String
-	 * proCom, @Param("validazione") String validazione, String
-	 * indirizzoOriginaleContains, Sort sort);
-	 */
-	
+List<Toponimo> findAllWithFilter(@Param("idRevisore") UsersEntity
+	  idRevisore, @Param("stato") Short stato, @Param("proCom") String
+	  proCom, @Param("validazione") String validazione, @Param("localitaOrig") String
+	  localitaOrig, Sort sort);
+	 
+	 
+	  
+	  
+/*
+ * @Query("SELECT adr FROM Address AS adr " +
+ * " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) " +
+ * " AND ((:stato is NULL) OR (adr.stato = :stato)) " +
+ * " AND ((:proCom is NULL) OR (adr.proCom = :proCom)) " +
+ * " AND ((:validazione is NULL) OR (adr.validazione = :validazione)) " +
+ * " AND ((:indirizzoOriginale is NULL) OR (UPPER(adr.indirizzoOriginale) like CONCAT('%',UPPER(:indirizzoOriginale),'%') )) "
+ * ) List<Address> findAllWithFilter(@Param("idRevisore") UsersEntity
+ * idRevisore, @Param("stato") Short stato, @Param("proCom") String
+ * proCom, @Param("validazione") String
+ * validazione, @Param("indirizzoOriginale") String indirizzoOriginale, Sort
+ * sort);
+ */
+	  
+	  
+	  
+	  
 	@Query("SELECT distinct new it.istat.mec.regedit.dto.ComuneDto (adr.denominazioneComune,adr.proCom) FROM Toponimo AS adr "
 			+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
 			+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
@@ -175,12 +181,13 @@ public interface ToponimoDao extends JpaRepository<Toponimo, Long> {
 			+ " ORDER BY adr.idRevisore.name ASC ")
 	List<UsersDto> findAllUsersWithToponimiAssigned();
 	
-	 @Query("SELECT tp FROM Toponimo AS tp " +
-			  " where 1=1 AND ((:idRevisore is NULL) OR (tp.idRevisore = :idRevisore)) " +
-			  " AND ((:stato is NULL) OR (tp.stato = :stato)) " +
-			  " ORDER BY tp.denominazioneComune ASC, tp.proCom ASC ")
-			  List<Toponimo>
-			  findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
-			  
-			  @Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short stato);
+	/*
+	 * @Query("SELECT tp FROM Toponimo AS tp " +
+	 * " where 1=1 AND ((:idRevisore is NULL) OR (tp.idRevisore = :idRevisore)) " +
+	 * " AND ((:stato is NULL) OR (tp.stato = :stato)) " +
+	 * " ORDER BY tp.denominazioneComune ASC, tp.proCom ASC ") List<Toponimo>
+	 * findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
+	 * 
+	 * @Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short stato);
+	 */
 }
