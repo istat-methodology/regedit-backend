@@ -240,7 +240,7 @@ public class ToponimoService {
 			if (updateToponimoListRequest.getLocalitaVal() != null)
 				toponimo.setLocalitaVal(updateToponimoListRequest.getLocalitaVal());
 			if (updateToponimoListRequest.getCdpstr() != null)
-				toponimo.setCdpstrProb(updateToponimoListRequest.getCdpstr());
+				toponimo.setCdpstrVal(updateToponimoListRequest.getCdpstr());
 			/*
 			 * if (updateToponimoListRequest.getIdFonte() != null)
 			 * toponimo.setIdFonte(updateToponimoListRequest.getIdFonte());
