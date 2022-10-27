@@ -34,24 +34,19 @@ public class ToponimoController {
 //
 //		return toponimiDaRevisionareService.findAllToponimi();
 //	}	
-	@GetMapping("/toponimi-user")
-	public List<ToponimoDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
-			@RequestParam(value = "stato", required = false) Short stato) {
 
-		return toponimoService.findAllToponimiDRByStatoAndRevisore(user, stato);
-
-	}
 	@GetMapping("/toponimi")
 	public ResponseEntity<List<ToponimoDto>> getAllToponimi(
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "validazione", required = false) String validazione,			
+			@RequestParam(value = "validazione", required = false) String validazione,	
+			@RequestParam(value = "toponimoOriginaleContains", required = false) String toponimoOriginaleContains,
 			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
 
 		return ResponseEntity.ok(toponimoService.findAllToponimi(user, stato, proCom, validazione,
-				orderBy, sort));
+				toponimoOriginaleContains, orderBy, sort));
 
 	}
 	@GetMapping("/toponimi-comuni")
@@ -64,7 +59,7 @@ public class ToponimoController {
 	@GetMapping (value = "/toponimi/{progressivo}")
 	public ToponimoDto getToponimoByProgressivo(@PathVariable("progressivo") Long id) { 
 
-		return toponimoService.findToponimoDRById(id);
+		return toponimoService.findToponimoById(id);
 	}
 	
 	@GetMapping(value = "/users-toponimi")
@@ -97,7 +92,7 @@ public class ToponimoController {
 	@PostMapping("/toponimi")
 	public ToponimoDto createToponimo(@RequestBody CreateToponimoRequest request) {		
 			
-		return toponimoService.newToponimiDaRevisionare(request);
+		return toponimoService.newToponimo(request);
 	}
 //	@PutMapping(value = "/toponimi/{id}")
 //	public ToponimiDaRevisionareDto updateToponimiDR(@RequestBody CreateToponimiDRRequest request) {		
