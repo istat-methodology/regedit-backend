@@ -39,20 +39,25 @@ public class ToponimoService {
 	@Autowired
 	ToponimoBackupDao toponimoBackupDao;
 	
-	public List<ToponimoDto> findAllToponimi() {		
-		
-		return Translators.translateToponimiDR(toponimoDao.findAll());
-	}
+	/*
+	 * public List<ToponimoDto> findAllToponimi() {
+	 * 
+	 * return Translators.translateToponimiDR(toponimoDao.findAll()); }
+	 */
 	
-	public List<ToponimoDto> findAllToponimiDRByStatoAndRevisore(Integer revisore, Short stato) {
-
-		return Translators.translateToponimiDR(toponimoDao.findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
-				(revisore != null) ? new UsersEntity(revisore) : null, stato));
-
-	}
+	/*
+	 * public List<ToponimoDto> findAllToponimiDRByStatoAndRevisore(Integer
+	 * revisore, Short stato) {
+	 * 
+	 * return Translators.translateToponimiDR(toponimoDao.
+	 * findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc( (revisore
+	 * != null) ? new UsersEntity(revisore) : null, stato));
+	 * 
+	 * }
+	 */
 	
 	public List<ToponimoDto> findAllToponimi(Integer revisore, Short stato, String proCom,String validazione,
-			String[] orderBy, String[] sort) {
+			String toponimoOriginaleContains,String[] orderBy, String[] sort) {
 
 		List<Order> orders = new ArrayList<Order>();
 		for (int i = 0; i < orderBy.length; i++) {
@@ -63,9 +68,11 @@ public class ToponimoService {
 
 		Sort sortQuery = Sort.by(orders);
 		return Translators.translateToponimiDR(toponimoDao.findAllWithFilter((revisore != null) ? new UsersEntity(revisore) : null,
-				stato, proCom,  validazione, validazione, sortQuery));
+				stato, proCom,  validazione, toponimoOriginaleContains, sortQuery));
 
+		
 	}
+	
 	
 	public List<ComuneDto> findAllComuniByStatoAndRevisore(Integer revisore, Short stato) {
 
@@ -75,11 +82,12 @@ public class ToponimoService {
 	}
 
 	
-	public ToponimoDto findToponimoDRById(Long id) {
-		if (!toponimoDao.findById(id).isPresent())
-			throw new NoDataException("Toponimo not present");
-		return Translators.translate(toponimoDao.findById(id).get());
-	}
+	/*
+	 * public ToponimoDto findToponimoDRById(Long id) { if
+	 * (!toponimoDao.findById(id).isPresent()) throw new
+	 * NoDataException("Toponimo not present"); return
+	 * Translators.translate(toponimoDao.findById(id).get()); }
+	 */
 	
 	public List<UsersDto> getUsersByToponimi() {
 		List<UsersDto> users = toponimoDao.findAllUsersWithToponimiAssigned();
@@ -107,13 +115,14 @@ public class ToponimoService {
 
 	}
 	
-	public ToponimoDto newToponimiDaRevisionare(CreateToponimoRequest request) {
-		Toponimo toponimiDaRevisionare = new Toponimo();
-		toponimiDaRevisionare = Translators.translate(request);		
-		toponimiDaRevisionare.setDataMod(new Timestamp(System.currentTimeMillis()));
-		toponimoDao.save(toponimiDaRevisionare);		    
-		return Translators.translate(toponimiDaRevisionare);
-	}
+	/*
+	 * public ToponimoDto newToponimiDaRevisionare(CreateToponimoRequest request) {
+	 * Toponimo toponimiDaRevisionare = new Toponimo(); toponimiDaRevisionare =
+	 * Translators.translate(request); toponimiDaRevisionare.setDataMod(new
+	 * Timestamp(System.currentTimeMillis()));
+	 * toponimoDao.save(toponimiDaRevisionare); return
+	 * Translators.translate(toponimiDaRevisionare); }
+	 */
 	/*
 	 * public ToponimoDto updateToponimiDR(CreateToponimoRequest request) {
 	 * 
@@ -179,7 +188,7 @@ public class ToponimoService {
 		return Translators.translate(toponimoDao.findById(id).get());
 	}
 
-	public List<ToponimoDto> getToponimoesByUser(Integer user, Short stato) {
+	public List<ToponimoDto> getToponimiByUser(Integer user, Short stato) {
 		List<ToponimoDto> toponimoes = toponimoDao.findByIdRevisoreAndStatoOrderByProComAsc(new UsersEntity(user), stato)
 				.stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 
@@ -187,36 +196,39 @@ public class ToponimoService {
 
 	}
 	
-	public List<UsersDto> getUsersByToponimoes() {
-		List<UsersDto> users = toponimoDao.findAllUsersWithToponimiAssigned();
-		return users;
-	}
+	/*
+	 * public List<UsersDto> getUsersByToponimi() { List<UsersDto> users =
+	 * toponimoDao.findAllUsersWithToponimiAssigned(); return users; }
+	 */
 	
 
-	public ToponimoDto getFirstToponimoByUser(Integer user, Short stato, String proCom,String validazione,
-			String indirizzoOriginaleContains, Integer offsetInt, String[] orderBy, String[] sort) {
-		
-		List<Order> orders = new ArrayList<Order>();
-		for (int i = 0; i < orderBy.length; i++) {
-			Order order = new Order((i<sort.length &&  Sort.Direction.DESC.name().equalsIgnoreCase(sort[i]))? Sort.Direction.DESC:Sort.Direction.ASC,orderBy[i]);
-			orders.add(order);
-
-		}
-
-		Sort sortQuery = Sort.by(orders);
-		/*
-		 * List<Toponimo> toponimoes = toponimoDao.findAllWithFilter(new
-		 * UsersEntity(user), stato, proCom, validazione, indirizzoOriginaleContains,
-		 * sortQuery);
-		 */
-		List<Toponimo> toponimoes = toponimoDao.findAllWithFilter(new UsersEntity(user), stato, proCom,  validazione,
-				indirizzoOriginaleContains, sortQuery);
-		int offset = offsetInt != null ? offsetInt.intValue() : 0;
-		if (toponimoes.size() == 0 || offset >= toponimoes.size())
-			throw new NoDataException("Toponimo no present");
-		return Translators.translate(toponimoes.get(offset));
-
-	}
+	/*
+	 * public ToponimoDto getFirstToponimoByUser(Integer user, Short stato, String
+	 * proCom,String validazione, String indirizzoOriginaleContains, Integer
+	 * offsetInt, String[] orderBy, String[] sort) {
+	 * 
+	 * List<Order> orders = new ArrayList<Order>(); for (int i = 0; i <
+	 * orderBy.length; i++) { Order order = new Order((i<sort.length &&
+	 * Sort.Direction.DESC.name().equalsIgnoreCase(sort[i]))?
+	 * Sort.Direction.DESC:Sort.Direction.ASC,orderBy[i]); orders.add(order);
+	 * 
+	 * }
+	 * 
+	 * Sort sortQuery = Sort.by(orders);
+	 * 
+	 * List<Toponimo> toponimoes = toponimoDao.findAllWithFilter(new
+	 * UsersEntity(user), stato, proCom, validazione, indirizzoOriginaleContains,
+	 * sortQuery);
+	 * 
+	 * List<Toponimo> toponimoes = toponimoDao.findAllWithFilter(new
+	 * UsersEntity(user), stato, proCom, validazione, indirizzoOriginaleContains,
+	 * sortQuery); int offset = offsetInt != null ? offsetInt.intValue() : 0; if
+	 * (toponimoes.size() == 0 || offset >= toponimoes.size()) throw new
+	 * NoDataException("Toponimo no present"); return
+	 * Translators.translate(toponimoes.get(offset));
+	 * 
+	 * }
+	 */
 
 	public Integer updateToponimoList(final UpdateToponimoListRequest updateToponimoListRequest, final Integer editor) {
 		if ( updateToponimoListRequest.getToponimoList()==null||updateToponimoListRequest.getToponimoList().size() == 0)
