@@ -97,8 +97,8 @@ public class Translators {
 	public static Toponimo translate(CreateToponimoRequest x) {
 
 		final ModelMapper modelMapper = new ModelMapper();
-		final Toponimo toponimiDaRevisionare = modelMapper.map(x, Toponimo.class);
-		return toponimiDaRevisionare;
+		final Toponimo toponimo = modelMapper.map(x, Toponimo.class);
+		return toponimo;
 	}
 
 	public static Address translateUpdate(UpdateAddressRequest x, Address address) {
@@ -130,10 +130,10 @@ public class Translators {
 		return dug;
 	}
 	
-	public static Toponimo translateUpdate(CreateToponimoRequest x, Toponimo toponimiDaRevisionare) {
+	public static Toponimo translateUpdate(CreateToponimoRequest x, Toponimo toponimo) {
 		final ModelMapper modelMapper = new ModelMapper();
-		modelMapper.map(x, toponimiDaRevisionare);
-		return toponimiDaRevisionare;
+		modelMapper.map(x, toponimo);
+		return toponimo;
 	}
 
 	public static <S, T> List<T> mapList(List<S> source, Class<T> targetClass) {

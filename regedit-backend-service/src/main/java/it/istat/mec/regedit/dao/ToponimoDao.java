@@ -24,16 +24,16 @@ import it.istat.mec.regedit.dto.UsersDto;
 public interface ToponimoDao extends JpaRepository<Toponimo, Long> {
 	/*
 	 * @Override List<Toponimo> findAll();
-	 * 
-	 * @Query("SELECT tp FROM Toponimo AS tp " +
-	 * " where 1=1 AND ((:idRevisore is NULL) OR (tp.idRevisore = :idRevisore)) " +
-	 * " AND ((:stato is NULL) OR (tp.stato = :stato)) " +
-	 * " ORDER BY tp.denominazioneComune ASC, tp.proCom ASC ")
-	 * List<Toponimo>
-	 * findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
-	 * 
-	 * @Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short stato);
-	 * 
+	 */
+	 @Query("SELECT tp FROM Toponimo AS tp " +
+	 " where 1=1 AND ((:idRevisore is NULL) OR (tp.idRevisore = :idRevisore)) " +
+	 " AND ((:stato is NULL) OR (tp.stato = :stato)) " +
+	 " ORDER BY tp.denominazioneComune ASC, tp.proCom ASC ")
+	 List<Toponimo>
+	 findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
+	 
+	 @Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short stato);
+	 /* 
 	 * @Query("SELECT tp FROM Toponimo AS tp " +
 	 * " where 1=1 AND ((:idRevisore is NULL) OR (tp.idRevisore = :idRevisore)) " +
 	 * " AND ((:stato is NULL) OR (tp.stato = :stato)) " +

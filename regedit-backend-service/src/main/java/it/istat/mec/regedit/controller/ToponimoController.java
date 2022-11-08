@@ -16,7 +16,6 @@ import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
-import it.istat.mec.regedit.request.UpdateAddressListRequest;
 import it.istat.mec.regedit.request.UpdateToponimoListRequest;
 import it.istat.mec.regedit.security.JwtTokenProvider;
 import it.istat.mec.regedit.service.ToponimoService;
@@ -29,11 +28,7 @@ public class ToponimoController {
 	@Autowired
 	private ToponimoService toponimoService;
 	
-//	@GetMapping (value = "/toponimi")
-//	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
-//
-//		return toponimiDaRevisionareService.findAllToponimi();
-//	}	
+	
 	@GetMapping("/toponimi-user")
 	public List<ToponimoDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato) {
@@ -46,12 +41,13 @@ public class ToponimoController {
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "validazione", required = false) String validazione,			
+			@RequestParam(value = "validazione", required = false) String validazione,
+			@RequestParam(value = "toponimoOriginaleContains", required = false) String toponimoOriginaleContains,
 			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
 
 		return ResponseEntity.ok(toponimoService.findAllToponimi(user, stato, proCom, validazione,
-				orderBy, sort));
+				toponimoOriginaleContains, orderBy, sort));
 
 	}
 	@GetMapping("/toponimi-comuni")
@@ -97,13 +93,9 @@ public class ToponimoController {
 	@PostMapping("/toponimi")
 	public ToponimoDto createToponimo(@RequestBody CreateToponimoRequest request) {		
 			
-		return toponimoService.newToponimiDaRevisionare(request);
+		return toponimoService.newToponimo(request);
 	}
-//	@PutMapping(value = "/toponimi/{id}")
-//	public ToponimiDaRevisionareDto updateToponimiDR(@RequestBody CreateToponimiDRRequest request) {		
-//		
-//		return toponimiDaRevisionareService.updateToponimiDR(request);
-//	}	
+
 	@PutMapping(value = "/toponimi/{progressivo}")
 	public ToponimoDto updateToponimo(@RequestBody CreateToponimoRequest request,
 			@RequestHeader(name = "Authorization") final String jwt) {
