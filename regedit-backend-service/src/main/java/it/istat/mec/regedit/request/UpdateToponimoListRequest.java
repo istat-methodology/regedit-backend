@@ -41,7 +41,7 @@ public class UpdateToponimoListRequest implements Serializable {
 	String dufVal;
 	String validazione;
 	String localitaVal;
-	Long cdpstrEgon;
+	Long cdpstr;
 	Integer idFonte;
 	Short state;
 	String note;

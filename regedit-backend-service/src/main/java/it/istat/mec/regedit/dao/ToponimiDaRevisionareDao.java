@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 //import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.ToponimiDaRevisionare;
+import it.istat.mec.regedit.domain.Toponimo;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ComuneDto;
@@ -20,7 +21,7 @@ import it.istat.mec.regedit.dto.ReportPivotDto;
 import it.istat.mec.regedit.dto.UsersDto;
 
 @Repository
-public interface ToponimiDaRevisionareDao extends JpaRepository<ToponimiDaRevisionare, Integer> {
+public interface ToponimiDaRevisionareDao extends JpaRepository<Toponimo, Integer> {
 	/*
 	 * @Override List<ToponimiDaRevisionare> findAll();
 	 * 
@@ -61,9 +62,9 @@ public interface ToponimiDaRevisionareDao extends JpaRepository<ToponimiDaRevisi
 	 * public void delete(ToponimiDaRevisionare toponimiDaRevisionare);
 	 */
 	@Override
-	List<ToponimiDaRevisionare> findAll();
-	@Override
-	Optional<ToponimiDaRevisionare> findById(Integer id);
+	List<Toponimo> findAll();
+	
+	Optional<Toponimo> findById(Long id);
 
 	public void save(ToponimoBackupEdited toponimoBackupEdited);
 
@@ -97,7 +98,7 @@ public interface ToponimiDaRevisionareDao extends JpaRepository<ToponimiDaRevisi
 			 " AND ((:stato is NULL) OR (tp.stato = :stato)) " +
 			 " AND ((:proCom is NULL) OR (tp.proCom = :proCom)) " +
 			 " AND ((:validazione is NULL) OR (tp.validazione = :validazione)) ")
-			 List<ToponimiDaRevisionare> findAllWithFilter(@Param("idRevisore")
+			 List<Toponimo> findAllWithFilter(@Param("idRevisore")
 			 UsersEntity idRevisore, @Param("stato") Short stato, @Param("proCom") String
 			 proCom, @Param("validazione") String validazione, Sort sort);
 	
@@ -176,7 +177,7 @@ public interface ToponimiDaRevisionareDao extends JpaRepository<ToponimiDaRevisi
 			  " where 1=1 AND ((:idRevisore is NULL) OR (tp.idRevisore = :idRevisore)) " +
 			  " AND ((:stato is NULL) OR (tp.stato = :stato)) " +
 			  " ORDER BY tp.denominazioneComune ASC, tp.proCom ASC ")
-			  List<ToponimiDaRevisionare>
+			  List<Toponimo>
 			  findAllToponimiDRByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
 			  
 			  @Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short stato);
