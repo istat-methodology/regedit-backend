@@ -80,4 +80,7 @@ public class ToponimoBase {
     private Integer idSupervisor;
     @Column(name = "NOTE")
     private String note; 
+    @Column(name = "DENOMINAZIONE_PROVINCIA")
+    private String denominazioneProvincia; 
+    
 }
