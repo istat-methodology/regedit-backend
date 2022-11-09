@@ -42,5 +42,6 @@ public class CreateToponimoRequest implements Serializable {
     private Date dataMod;    
     private Integer idSupervisor;    
     private String note; 
+    private String denominazioneProvincia;	
 }
 
