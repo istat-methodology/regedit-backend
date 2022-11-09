@@ -43,6 +43,7 @@ public class ToponimoDto implements Serializable {
     private Date dataMod;    
     private int idSupervisor;    
     private String note; 
+    private String denominazioneProvincia;
     
     public ToponimoDto(String denominazioneComune, String proCom) {
 		super();	
