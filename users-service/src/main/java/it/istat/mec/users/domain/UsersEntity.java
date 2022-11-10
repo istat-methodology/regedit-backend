@@ -23,16 +23,12 @@ public class UsersEntity implements Serializable{
     private String name;
     private String surname;
     private String password;
+    private UserRolesEntity role;
     //(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     // updatable = false, insertable = false
     @ManyToOne
     @JoinColumn(name = "ROLE_ID")
     
-    UserRolesEntity role;
-
-  
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
