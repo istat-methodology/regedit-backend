@@ -16,7 +16,6 @@ import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
-import it.istat.mec.regedit.request.UpdateAddressListRequest;
 import it.istat.mec.regedit.request.UpdateToponimoListRequest;
 import it.istat.mec.regedit.security.JwtTokenProvider;
 import it.istat.mec.regedit.service.ToponimoService;
@@ -29,11 +28,18 @@ public class ToponimoController {
 	@Autowired
 	private ToponimoService toponimoService;
 	
+<<<<<<< HEAD
 //	@GetMapping (value = "/toponimi")
 //	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
 //
 //		return toponimiDaRevisionareService.findAllToponimi();
 //	}	
+=======
+	
+	@GetMapping("/toponimi-user")
+	public List<ToponimoDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
+			@RequestParam(value = "stato", required = false) Short stato) {
+>>>>>>> branch 'main' of https://github.com/istat-methodology/regedit-backend.git
 
 	@GetMapping("/toponimi")
 	public ResponseEntity<List<ToponimoDto>> getAllToponimi(
@@ -94,11 +100,7 @@ public class ToponimoController {
 			
 		return toponimoService.newToponimo(request);
 	}
-//	@PutMapping(value = "/toponimi/{id}")
-//	public ToponimiDaRevisionareDto updateToponimiDR(@RequestBody CreateToponimiDRRequest request) {		
-//		
-//		return toponimiDaRevisionareService.updateToponimiDR(request);
-//	}	
+
 	@PutMapping(value = "/toponimi/{progressivo}")
 	public ToponimoDto updateToponimo(@RequestBody CreateToponimoRequest request,
 			@RequestHeader(name = "Authorization") final String jwt) {
