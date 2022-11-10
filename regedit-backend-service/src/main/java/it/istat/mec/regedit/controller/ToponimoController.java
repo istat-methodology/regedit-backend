@@ -28,18 +28,6 @@ public class ToponimoController {
 	@Autowired
 	private ToponimoService toponimoService;
 	
-<<<<<<< HEAD
-//	@GetMapping (value = "/toponimi")
-//	public List<ToponimiDaRevisionareDto> getToponimiDRList() {
-//
-//		return toponimiDaRevisionareService.findAllToponimi();
-//	}	
-=======
-	
-	@GetMapping("/toponimi-user")
-	public List<ToponimoDto> getAllToponimi(@RequestParam(value = "user", required = false) Integer user,
-			@RequestParam(value = "stato", required = false) Short stato) {
->>>>>>> branch 'main' of https://github.com/istat-methodology/regedit-backend.git
 
 	@GetMapping("/toponimi")
 	public ResponseEntity<List<ToponimoDto>> getAllToponimi(
