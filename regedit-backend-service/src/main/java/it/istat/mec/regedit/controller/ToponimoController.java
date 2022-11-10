@@ -40,7 +40,7 @@ public class ToponimoController {
 			@RequestParam(value = "user", required = false) Integer user,
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "validazione", required = false) String validazione,	
+			@RequestParam(value = "validazione", required = false) String validazione,
 			@RequestParam(value = "toponimoOriginaleContains", required = false) String toponimoOriginaleContains,
 			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
