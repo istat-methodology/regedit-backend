@@ -19,7 +19,7 @@ import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.ComuneDto;
-
+import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
@@ -81,7 +81,13 @@ public class ToponimoService {
 	}
 
 	
-	
+	public List<ProvinciaDto> findAllProvinceByStatoAndRevisore(Integer revisore, Short stato) {
+
+		return toponimoDao.findAllProvinceByIdRevisoreAndStatoOrderByDenominazioneProvinciaAsc(
+				(revisore != null) ? new UsersEntity(revisore) : null, stato);
+
+	}
+
 	 public ToponimoDto findToponimoDRById(Long id) { if
 	 (!toponimoDao.findById(id).isPresent()) throw new
 	 NoDataException("Toponimo not present"); return

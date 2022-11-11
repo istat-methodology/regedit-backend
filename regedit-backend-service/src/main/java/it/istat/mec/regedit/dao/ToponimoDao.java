@@ -16,6 +16,7 @@ import it.istat.mec.regedit.domain.Toponimo;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ComuneDto;
+import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.dto.ReportPivotDto;
 import it.istat.mec.regedit.dto.UsersDto;
@@ -115,6 +116,13 @@ List<Toponimo> findAllWithFilter(@Param("idRevisore") UsersEntity
 			+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
 			+ " ORDER BY adr.denominazioneComune ASC, adr.proCom ASC ")
 	List<ComuneDto> findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
+			@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short statoCom);
+	
+	@Query("SELECT distinct new it.istat.mec.regedit.dto.ProvinciaDto (adr.denominazioneProvincia) FROM Toponimo AS adr "
+			+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
+			+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
+			+ " ORDER BY adr.denominazioneProvincia ASC")
+	List<ProvinciaDto> findAllProvinceByIdRevisoreAndStatoOrderByDenominazioneProvinciaAsc(
 			@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short statoCom);
 
 	@Query("SELECT new it.istat.mec.regedit.dto.ReportDto(adr.idRevisore.email,adr.stato ,adr.validazione, COUNT(*)) "

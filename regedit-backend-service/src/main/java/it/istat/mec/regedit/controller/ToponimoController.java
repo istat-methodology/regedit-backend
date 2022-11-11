@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.regedit.dto.ComuneDto;
+import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
@@ -48,6 +49,13 @@ public class ToponimoController {
 			@RequestParam(value = "stato", required = false) Short stato) {
 
 		return toponimoService.findAllComuniByStatoAndRevisore(user, stato);
+
+	}
+	@GetMapping("/toponimi-province")
+	public List<ProvinciaDto> getAllProvince(@RequestParam(value = "user", required = false) Integer user,
+			@RequestParam(value = "stato", required = false) Short stato) {
+
+		return toponimoService.findAllProvinceByStatoAndRevisore(user, stato);
 
 	}
 	@GetMapping (value = "/toponimi/{progressivo}")
