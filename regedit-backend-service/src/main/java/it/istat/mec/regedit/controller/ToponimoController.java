@@ -89,7 +89,15 @@ public class ToponimoController {
 
 		return toponimoService.updateToponimoList(updateToponimoListRequest,
 				JwtTokenProvider.getUserId(jwt));
-	};
+	}
+	
+	@PutMapping(value = "/toponimi-validate")
+	public Integer validateToponimoList(@RequestBody UpdateToponimoListRequest updateToponimoListRequest,
+			@RequestHeader(name = "Authorization") final String jwt) {
+
+		return toponimoService.validateToponimoList(updateToponimoListRequest,
+				JwtTokenProvider.getUserId(jwt));
+	}
 	
 	@PostMapping("/toponimi")
 	public ToponimoDto createToponimo(@RequestBody CreateToponimoRequest request) {		

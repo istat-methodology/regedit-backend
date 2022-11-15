@@ -245,7 +245,7 @@ public class ToponimoService {
 
 			final Optional<Toponimo> optToponimo = toponimoDao.findById(progressivoToponimo);
 			if (!optToponimo.isPresent())
-				throw new NoDataException("Toponimo no present");
+				throw new NoDataException("Toponimo not present");
 
 			final Toponimo toponimo = optToponimo.get();
 			if (updateToponimoListRequest.getValidazione() != null)
@@ -268,6 +268,36 @@ public class ToponimoService {
 			if (updateToponimoListRequest.getState() != null)
 				toponimo.setStato(updateToponimoListRequest.getState());
 
+			toponimo.setDataMod(new Timestamp(System.currentTimeMillis()));
+
+			toponimoDao.save(toponimo);
+			countUpdate++;
+			if (editingBackup) {
+				ToponimoBackupEdited toponimoBackupEdited = new ToponimoBackupEdited();
+				toponimoBackupEdited = Translators.translate(toponimo, toponimoBackupEdited);
+				toponimoBackupEdited.setEditor(editor);
+				toponimoBackupDao.save(toponimoBackupEdited);
+			}
+
+		}
+		return countUpdate;
+	}
+	// TO-DO: Test update massivo da verificare
+	public Integer validateToponimoList(final UpdateToponimoListRequest updateToponimoListRequest, final Integer editor) {
+		if ( updateToponimoListRequest.getToponimoList()==null||updateToponimoListRequest.getToponimoList().size() == 0)
+			throw new NoDataException("Toponimo List is empty");
+
+		Integer countUpdate = 0;
+		for (Iterator<Long> iterator = updateToponimoListRequest.getToponimoList().iterator(); iterator.hasNext();) {
+			Long progressivoToponimo = (Long) iterator.next();
+
+			final Optional<Toponimo> optToponimo = toponimoDao.findById(progressivoToponimo);
+			if (!optToponimo.isPresent())
+				throw new NoDataException("Toponimo not present");
+
+			final Toponimo toponimo = optToponimo.get();
+			
+			toponimo.setValidazione("SI");
 			toponimo.setDataMod(new Timestamp(System.currentTimeMillis()));
 
 			toponimoDao.save(toponimo);
