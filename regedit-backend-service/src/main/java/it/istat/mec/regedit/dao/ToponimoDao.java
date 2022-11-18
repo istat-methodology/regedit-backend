@@ -79,17 +79,19 @@ public interface ToponimoDao extends JpaRepository<Toponimo, Long> {
 
 	
 	  
-	  @Query("SELECT adr FROM Toponimo AS adr "
-				+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
-				+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
-				+ " AND ((:proCom is NULL) OR (adr.proCom = :proCom)) "
-				+ " AND ((:validazione is NULL) OR (adr.validazione = :validazione)) " 
-				+ " AND ((:localitaOrig is NULL) OR (UPPER(adr.localitaOrig) like CONCAT('%',UPPER(:localitaOrig),'%') ))")
+	  @Query("SELECT toponimo FROM Toponimo AS toponimo "
+				+ " where 1=1 AND ((:idRevisore is NULL) OR (toponimo.idRevisore = :idRevisore)) "
+				+ " AND ((:stato is NULL) OR (toponimo.stato = :stato)) "
+				+ " AND ((:proCom is NULL) OR (toponimo.proCom = :proCom)) "
+				+ " AND ((:validazione is NULL) OR (toponimo.validazione = :validazione)) " 
+				+ " AND ((:provincia is NULL) OR (UPPER(toponimo.denominazioneProvincia) like (UPPER(:provincia)) ))"
+				+ " AND ((:sogliaW is NULL) OR (toponimo.sogliaW > :soglia)) "
+				+ " AND ((:localitaOrig is NULL) OR (UPPER(toponimo.localitaOrig) like CONCAT('%',UPPER(:localitaOrig),'%') ))")
 
 List<Toponimo> findAllWithFilter(@Param("idRevisore") UsersEntity
-	  idRevisore, @Param("stato") Short stato, @Param("proCom") String
-	  proCom, @Param("validazione") String validazione, @Param("localitaOrig") String
-	  localitaOrig,  Sort sort);
+	  idRevisore, @Param("stato") Short stato, @Param("proCom") String proCom, @Param("validazione") String validazione, 
+	  @Param("provincia") String provincia, @Param("soglia") Double soglia,
+	  @Param("localitaOrig") String localitaOrig,  Sort sort);
 	 
 	 
 	  

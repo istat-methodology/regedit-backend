@@ -55,8 +55,8 @@ public class ToponimoService {
 	}
 	
 	
-	public List<ToponimoDto> findAllToponimi(Integer revisore, Short stato, String proCom,String validazione,
-			String toponimoOriginaleContains,String[] orderBy, String[] sort) {
+	public List<ToponimoDto> findAllToponimi(Integer revisore, Short stato, String proCom,String validazione, String provincia,
+			Double soglia, String toponimoOriginaleContains,String[] orderBy, String[] sort) {
 
 		List<Order> orders = new ArrayList<Order>();
 		for (int i = 0; i < orderBy.length; i++) {
@@ -67,7 +67,7 @@ public class ToponimoService {
 
 		Sort sortQuery = Sort.by(orders);
 		return Translators.translateToponimiDR(toponimoDao.findAllWithFilter((revisore != null) ? new UsersEntity(revisore) : null,
-				stato, proCom,  validazione, toponimoOriginaleContains, sortQuery));
+				stato, proCom,  validazione, provincia, soglia, toponimoOriginaleContains, sortQuery));
 
 		
 	}
@@ -99,7 +99,7 @@ public class ToponimoService {
 		return users;
 	}
 	
-	public ToponimoDto getFirstToponimoByUser(Integer user, Short stato, String proCom,String validazione,
+	public ToponimoDto getFirstToponimoByUser(Integer user, Short stato, String proCom,String validazione, String provincia, Double soglia, String toponimoOriginaleContains,
 			Integer offsetInt, String[] orderBy, String[] sort) {
 		
 		List<Order> orders = new ArrayList<Order>();
@@ -111,7 +111,7 @@ public class ToponimoService {
 
 		Sort sortQuery = Sort.by(orders);
 		List<Toponimo> toponimiDaRevisionare = toponimoDao.findAllWithFilter(new UsersEntity(user), stato, proCom,  validazione,
-				 validazione, sortQuery);
+				 provincia, soglia, toponimoOriginaleContains, sortQuery);
 		
 		int offset = offsetInt != null ? offsetInt.intValue() : 0;
 		if (toponimiDaRevisionare.size() == 0 || offset >= toponimiDaRevisionare.size())

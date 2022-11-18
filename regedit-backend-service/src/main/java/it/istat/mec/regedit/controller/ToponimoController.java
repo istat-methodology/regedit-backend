@@ -36,12 +36,14 @@ public class ToponimoController {
 			@RequestParam(value = "stato", required = false) Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
 			@RequestParam(value = "validazione", required = false) String validazione,
+			@RequestParam(value = "provincia", required = false) String provincia,
+			@RequestParam(value = "soglia", required = false) Double soglia,
 			@RequestParam(value = "toponimoOriginaleContains", required = false) String toponimoOriginaleContains,
 			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
 
 		return ResponseEntity.ok(toponimoService.findAllToponimi(user, stato, proCom, validazione,
-				toponimoOriginaleContains, orderBy, sort));
+				provincia, soglia, toponimoOriginaleContains, orderBy, sort));
 
 	}
 	@GetMapping("/toponimi-comuni")
@@ -74,13 +76,16 @@ public class ToponimoController {
 	@GetMapping(value = "/toponimi/first-toponimo/user/{user}/state/{stato}")
 	public ToponimoDto getFirstToponimoByUser(@PathVariable("user") Integer user, @PathVariable("stato") Short stato,
 			@RequestParam(value = "proCom", required = false) String proCom,
-			@RequestParam(value = "validazione", required = false) String validazione,			
+			@RequestParam(value = "validazione", required = false) String validazione,	
+			@RequestParam(value = "provincia", required = false) String provincia,
+			@RequestParam(value = "soglia", required = false) Double soglia,
+			@RequestParam(value = "toponimoOriginaleContains", required = false) String toponimoOriginaleContains,
 			@RequestParam(value = "offset", required = false) Integer offset,
 			@RequestParam(value = "orderBy", required = false, defaultValue = "denominazioneComune") String[] orderBy,
 			@RequestParam(value = "sort", required = false, defaultValue = "ASC") String[] sort) {
 
 		return toponimoService.getFirstToponimoByUser(user, stato, proCom, validazione,
-				offset, orderBy, sort);
+				provincia, soglia, toponimoOriginaleContains, offset, orderBy, sort);
 
 	}
 	@PutMapping(value = "/toponimi-list")
