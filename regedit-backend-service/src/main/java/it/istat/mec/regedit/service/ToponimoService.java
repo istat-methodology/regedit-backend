@@ -298,6 +298,8 @@ public class ToponimoService {
 			final Toponimo toponimo = optToponimo.get();
 			
 			toponimo.setValidazione("SI");
+			short stato = 2;
+			toponimo.setStato(stato);
 			toponimo.setDataMod(new Timestamp(System.currentTimeMillis()));
 
 			toponimoDao.save(toponimo);
