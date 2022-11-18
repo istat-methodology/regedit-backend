@@ -85,7 +85,7 @@ public interface ToponimoDao extends JpaRepository<Toponimo, Long> {
 				+ " AND ((:proCom is NULL) OR (toponimo.proCom = :proCom)) "
 				+ " AND ((:validazione is NULL) OR (toponimo.validazione = :validazione)) " 
 				+ " AND ((:provincia is NULL) OR (UPPER(toponimo.denominazioneProvincia) like (UPPER(:provincia)) ))"
-				+ " AND ((:sogliaW is NULL) OR (toponimo.sogliaW > :soglia)) "
+				+ " AND ((:soglia is NULL) OR (toponimo.sogliaW > :soglia)) "
 				+ " AND ((:localitaOrig is NULL) OR (UPPER(toponimo.localitaOrig) like CONCAT('%',UPPER(:localitaOrig),'%') ))")
 
 List<Toponimo> findAllWithFilter(@Param("idRevisore") UsersEntity
