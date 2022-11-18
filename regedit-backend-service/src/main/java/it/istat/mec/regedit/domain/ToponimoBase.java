@@ -54,7 +54,7 @@ public class ToponimoBase {
     @Column(name = "MD")
     private String md; 
     @Column(name = "SOGLIA_W")
-    private String sogliaW; 
+    private Double sogliaW; 
     @Column(name = "ALT")
     private Integer alt;
     @Column(name = "TM")
