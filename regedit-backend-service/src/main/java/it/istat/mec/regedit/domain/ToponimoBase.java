@@ -35,6 +35,8 @@ public class ToponimoBase {
     private String dugProb;  
     @Column(name = "DUF_PROB")
     private String dufProb;
+    @Column(name = "LOCALITA_PROB")
+    private String localitaProb;
     @Column(name = "VALIDAZIONE")
     private String validazione;
     

@@ -21,7 +21,8 @@ public class ToponimoDto implements Serializable {
     private String dufOrig;    
     private double cdpstrProb;    
     private String dugProb;      
-    private String dufProb;    
+    private String dufProb; 
+    private String localitaProb;
     private String validazione;   
     private String localitaVal;     
     private String dugVal;     
