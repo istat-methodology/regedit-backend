@@ -73,11 +73,15 @@ public class ToponimoService {
 	}
 	
 	
-	public List<ComuneDto> findAllComuniByStatoAndRevisore(Integer revisore, Short stato) {
+	public List<ComuneDto> findAllComuniByStatoRevisoreAndProvincia(Integer revisore, Short stato, String provincia) {
 
-		return toponimoDao.findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
-				(revisore != null) ? new UsersEntity(revisore) : null, stato);
-
+		if( provincia!=null ) {
+			return toponimoDao.findAllComuniByIdRevisoreStatoAndProvinciaOrderByDenominazioneComuneAsc(
+					(revisore != null) ? new UsersEntity(revisore) : null, stato, provincia);
+		}else {
+			return toponimoDao.findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
+					(revisore != null) ? new UsersEntity(revisore) : null, stato);
+		}
 	}
 
 	

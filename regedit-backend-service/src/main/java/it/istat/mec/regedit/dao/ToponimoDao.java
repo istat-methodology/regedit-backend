@@ -111,14 +111,20 @@ List<Toponimo> findAllWithFilter(@Param("idRevisore") UsersEntity
  */
 	  
 	  
-	  
+	  @Query("SELECT distinct new it.istat.mec.regedit.dto.ComuneDto (adr.denominazioneComune,adr.proCom) FROM Toponimo AS adr "
+				+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
+				+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
+				+ " ORDER BY adr.denominazioneComune ASC, adr.proCom ASC ")
+		List<ComuneDto> findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
+				@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short statoCom);
 	  
 	@Query("SELECT distinct new it.istat.mec.regedit.dto.ComuneDto (adr.denominazioneComune,adr.proCom) FROM Toponimo AS adr "
 			+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "
 			+ " AND ((:stato is NULL) OR (adr.stato = :stato)) "
+			+ " AND (UPPER(adr.denominazioneProvincia) = UPPER(:provincia)) "
 			+ " ORDER BY adr.denominazioneComune ASC, adr.proCom ASC ")
-	List<ComuneDto> findAllComuniByIdRevisoreAndStatoOrderByDenominazioneComuneAsc(
-			@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short statoCom);
+	List<ComuneDto> findAllComuniByIdRevisoreStatoAndProvinciaOrderByDenominazioneComuneAsc(
+			@Param("idRevisore") UsersEntity idRevisore, @Param("stato") Short statoCom, @Param("provincia") String provincia);
 	
 	@Query("SELECT distinct new it.istat.mec.regedit.dto.ProvinciaDto (adr.denominazioneProvincia) FROM Toponimo AS adr "
 			+ " where 1=1 AND ((:idRevisore is NULL) OR (adr.idRevisore = :idRevisore)) "

@@ -48,9 +48,9 @@ public class ToponimoController {
 	}
 	@GetMapping("/toponimi-comuni")
 	public List<ComuneDto> getAllComuni(@RequestParam(value = "user", required = false) Integer user,
-			@RequestParam(value = "stato", required = false) Short stato) {
+			@RequestParam(value = "stato", required = false) Short stato, @RequestParam(value = "provincia", required = false) String provincia) {
 
-		return toponimoService.findAllComuniByStatoAndRevisore(user, stato);
+		return toponimoService.findAllComuniByStatoRevisoreAndProvincia(user, stato, provincia);
 
 	}
 	@GetMapping("/toponimi-province")
