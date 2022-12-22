@@ -45,6 +45,8 @@ public class ToponimoDto implements Serializable {
     private int idSupervisor;    
     private String note; 
     private String denominazioneProvincia;
+    private String toponimoOrig;
+    private String toponimoProb;
     
     public ToponimoDto(String denominazioneComune, String proCom) {
 		super();	

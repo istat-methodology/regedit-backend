@@ -84,5 +84,9 @@ public class ToponimoBase {
     private String note; 
     @Column(name = "DENOMINAZIONE_PROVINCIA")
     private String denominazioneProvincia; 
+    @Column(name = "TOPONIMO_ORIG")
+    private String toponimoOrig; 
+    @Column(name = "TOPONIMO_PROB")
+    private String toponimoProb; 
     
 }

@@ -35,7 +35,6 @@ import it.istat.mec.users.domain.UsersEntity;
 @Repository
 public interface UsersDao extends CrudRepository<UsersEntity, Integer> {
 
-	@Override
 	List<UsersEntity> findAll();
 	
 	@Query("SELECT u from UsersEntity u where u.role.role=:role")
