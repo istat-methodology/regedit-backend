@@ -19,6 +19,7 @@ import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.ComuneDto;
+import it.istat.mec.regedit.dto.ExportToponimiDto;
 import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
@@ -45,7 +46,11 @@ public class ToponimoService {
 	 * return Translators.translateToponimiDR(toponimoDao.findAll()); }
 	 */
 	
-	
+	@SuppressWarnings("unchecked")
+	public List<ExportToponimiDto> exportToponimi() {
+	 
+		return (List<ExportToponimiDto>) toponimoDao.callExportToponimi();	 
+	}
 	public List<ToponimoDto> findAllToponimiDRByStatoAndRevisore(Integer
 			 revisore, Short stato) {
 	 

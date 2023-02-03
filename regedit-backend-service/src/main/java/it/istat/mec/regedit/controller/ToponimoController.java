@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import it.istat.mec.regedit.dto.ComuneDto;
+import it.istat.mec.regedit.dto.ExportToponimiDto;
 import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.UsersDto;
@@ -28,6 +29,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ToponimoController {
 	@Autowired
 	private ToponimoService toponimoService;
+	
+	@GetMapping (value = "/toponimi/export-toponimi")
+	public List<ExportToponimiDto> exportToponimi() { 
+
+		return toponimoService.exportToponimi();
+	}
 	
 
 	@GetMapping("/toponimi")

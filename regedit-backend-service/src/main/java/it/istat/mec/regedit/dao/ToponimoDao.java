@@ -1,21 +1,17 @@
 package it.istat.mec.regedit.dao;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import it.istat.mec.regedit.domain.Address;
-//import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.Toponimo;
-import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ComuneDto;
+import it.istat.mec.regedit.dto.ExportToponimiDto;
 import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.ReportDto;
 import it.istat.mec.regedit.dto.ReportPivotDto;
@@ -23,6 +19,11 @@ import it.istat.mec.regedit.dto.UsersDto;
 
 @Repository
 public interface ToponimoDao extends JpaRepository<Toponimo, Long> {
+	
+	
+	@Procedure("export_toponimi")
+	List<ExportToponimiDto> callExportToponimi();
+	
 	/*
 	 * @Override List<Toponimo> findAll();
 	 */
