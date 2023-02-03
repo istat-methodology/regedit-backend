@@ -46,10 +46,12 @@ public class ToponimoService {
 	 * return Translators.translateToponimiDR(toponimoDao.findAll()); }
 	 */
 	
-	@SuppressWarnings("unchecked")
+	
 	public List<ExportToponimiDto> exportToponimi() {
 	 
-		return (List<ExportToponimiDto>) toponimoDao.callExportToponimi();	 
+		List<ExportToponimiDto> listaToponimi = new ArrayList<ExportToponimiDto>();
+		listaToponimi = toponimoDao.callExportToponimi();
+		return listaToponimi; 
 	}
 	public List<ToponimoDto> findAllToponimiDRByStatoAndRevisore(Integer
 			 revisore, Short stato) {
