@@ -31,10 +31,12 @@ import org.springframework.stereotype.Component;
 import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.Dug;
+import it.istat.mec.regedit.domain.ExportToponimiEntity;
 import it.istat.mec.regedit.domain.Toponimo;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.DugDto;
+import it.istat.mec.regedit.dto.ExportToponimiDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
 import it.istat.mec.regedit.request.CreateDugRequest;
@@ -61,6 +63,11 @@ public class Translators {
 	public static List<ToponimoDto> translateToponimiDR(List<Toponimo> list) {
 		return mapList(list, ToponimoDto.class);
 	}
+	
+	public static List<ExportToponimiDto> translateExportToponimi(List<ExportToponimiEntity> list) {
+		return mapList(list, ExportToponimiDto.class);
+	}
+
 
 	public static List<AddressDto> translate(List<Address> list) {
 		return mapList(list, AddressDto.class);

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import it.istat.mec.regedit.dao.ToponimoDao;
+import it.istat.mec.regedit.dao.ExportToponimiDao;
 import it.istat.mec.regedit.dao.ToponimoBackupDao;
 import it.istat.mec.regedit.domain.Toponimo;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
@@ -38,6 +39,9 @@ public class ToponimoService {
 	ToponimoDao toponimoDao;
 	
 	@Autowired
+	ExportToponimiDao exportToponimiDao;
+	
+	@Autowired
 	ToponimoBackupDao toponimoBackupDao;
 	
 	/*
@@ -49,10 +53,10 @@ public class ToponimoService {
 	
 	public List<ExportToponimiDto> exportToponimi() {
 	 
-		List<ExportToponimiDto> listaToponimi = new ArrayList<ExportToponimiDto>();
-		listaToponimi = toponimoDao.callExportToponimi();
-		return listaToponimi; 
+		return Translators.translateExportToponimi(exportToponimiDao.exportToponimi());
 	}
+	
+	
 	public List<ToponimoDto> findAllToponimiDRByStatoAndRevisore(Integer
 			 revisore, Short stato) {
 	 

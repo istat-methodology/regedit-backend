@@ -2,12 +2,14 @@ package it.istat.mec.regedit.dto;
 import java.io.Serializable;
 import org.springframework.lang.Nullable;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class ExportToponimiDto implements Serializable {
 	private static final long serialVersionUID = 1958222043420954543L;
 	@Nullable
-	private Integer progressivo;
+	private Double progressivo;
 	@Nullable
 	private String localita_prob;
 	@Nullable
@@ -21,7 +23,7 @@ public class ExportToponimiDto implements Serializable {
 	@Nullable
 	private Integer sottofase;	
 	
-	public ExportToponimiDto(Integer progressivo, String localita_prob, String pro_com, String indirizzo, String civico, 
+	public ExportToponimiDto(Double progressivo, String localita_prob, String pro_com, String indirizzo, String civico, 
 			String indirizzo_dett, Integer sottofase) {
 		super();
 		this.progressivo = progressivo;

@@ -21,8 +21,8 @@ import it.istat.mec.regedit.dto.UsersDto;
 public interface ToponimoDao extends JpaRepository<Toponimo, Long> {
 	
 	
-	@Procedure("export_toponimi")
-	List<ExportToponimiDto> callExportToponimi();
+	//@Procedure("export_toponimi")
+	//List<ExportToponimiDto> callExportToponimi();
 	
 	/*
 	 * @Override List<Toponimo> findAll();
