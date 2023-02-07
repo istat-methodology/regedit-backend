@@ -48,7 +48,9 @@ public class ExportToponimiEntity implements Serializable {
 	@Id
 	private Double progressivo;
 	@Nullable
-	private String localita_prob;
+	private String codice_archivio;
+	@Nullable
+	private String localita;
 	@Nullable
 	private String pro_com;	
 	@Nullable

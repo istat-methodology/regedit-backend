@@ -11,7 +11,9 @@ public class ExportToponimiDto implements Serializable {
 	@Nullable
 	private Double progressivo;
 	@Nullable
-	private String localita_prob;
+	private String codice_archivio;
+	@Nullable
+	private String localita;
 	@Nullable
 	private String pro_com;	
 	@Nullable
@@ -23,11 +25,11 @@ public class ExportToponimiDto implements Serializable {
 	@Nullable
 	private Integer sottofase;	
 	
-	public ExportToponimiDto(Double progressivo, String localita_prob, String pro_com, String indirizzo, String civico, 
+	public ExportToponimiDto(Double progressivo, String codice_archivio, String localita, String pro_com, String indirizzo, String civico, 
 			String indirizzo_dett, Integer sottofase) {
 		super();
 		this.progressivo = progressivo;
-		this.localita_prob = localita_prob;
+		this.localita = localita;
 		this.pro_com = pro_com;
 		this.indirizzo = indirizzo;
 		this.civico = civico;
