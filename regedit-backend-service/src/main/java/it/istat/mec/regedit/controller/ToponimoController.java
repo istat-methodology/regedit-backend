@@ -33,7 +33,7 @@ public class ToponimoController {
 	@GetMapping (value = "/toponimi/export-toponimi")
 	public List<ExportToponimiDto> exportToponimi() { 
 
-		return toponimoService.exportToponimi();
+		return (List<ExportToponimiDto>) toponimoService.exportToponimi();
 	}
 	
 

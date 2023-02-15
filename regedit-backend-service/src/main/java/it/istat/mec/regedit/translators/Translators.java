@@ -43,6 +43,7 @@ import it.istat.mec.regedit.request.CreateDugRequest;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
 import it.istat.mec.regedit.request.UpdateAddressRequest;
 
+
 @Component
 public class Translators {
 
@@ -65,6 +66,7 @@ public class Translators {
 	}
 	
 	public static List<ExportToponimiDto> translateExportToponimi(List<ExportToponimiEntity> list) {
+	    
 		return mapList(list, ExportToponimiDto.class);
 	}
 
