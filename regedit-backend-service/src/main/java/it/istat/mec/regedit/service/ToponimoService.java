@@ -54,20 +54,25 @@ public class ToponimoService {
 	
 	public List<ExportToponimiDto> exportToponimi() {
 	 
-//		List<ExportToponimiDto> export = new ArrayList<ExportToponimiDto>();
-//		
-//		List<ExportToponimiEntity> list = exportToponimiDao.exportToponimi();
-//		
-//		Iterator<ExportToponimiEntity>iter = list.iterator();
-//		 while (iter.hasNext()) {
-//			 ExportToponimiDto temp = new ExportToponimiDto();
-//			 temp.setCivico(iter.next().getCivico());
-//			 temp.setCodice_archivio(iter.next().getCodice_archivio());
-//			 temp.setIndirizzo(iter.next().getIndirizzo());
-//			 export.add(temp);
-//		}
+		List<ExportToponimiDto> export = new ArrayList<ExportToponimiDto>();
 		
-		return Translators.translateExportToponimi(exportToponimiDao.exportToponimi());
+		List<ExportToponimiEntity> list = exportToponimiDao.exportToponimi();
+		
+		Iterator<ExportToponimiEntity>iter = list.iterator();
+		 while (iter.hasNext()) {
+			 ExportToponimiDto temp = new ExportToponimiDto();
+			 temp.setProgressivo(iter.next().getProgressivo());
+			 temp.setCivico(iter.next().getCivico( )== null? "": iter.next().getCivico());
+			 temp.setCodice_archivio(iter.next().getCodice_archivio() == null? "": iter.next().getCodice_archivio());
+			 temp.setIndirizzo(iter.next().getIndirizzo() == null? "": iter.next().getIndirizzo());
+			 temp.setLocalita(iter.next().getLocalita() == null? "": iter.next().getLocalita());
+			 temp.setPro_com(iter.next().getPro_com() == null? "": iter.next().getPro_com());
+			 temp.setIndirizzo_dett(iter.next().getIndirizzo() == null? "": iter.next().getIndirizzo());
+			 temp.setSottofase(iter.next().getSottofase());
+			 export.add(temp);
+		}
+		
+		return export; //Translators.translateExportToponimi(exportToponimiDao.exportToponimi());
 	}
 	
 	
