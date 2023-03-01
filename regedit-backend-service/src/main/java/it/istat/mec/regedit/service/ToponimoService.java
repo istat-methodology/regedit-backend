@@ -67,7 +67,7 @@ public class ToponimoService {
 			 temp.setIndirizzo(iter.next().getIndirizzo() == null? "": iter.next().getIndirizzo());
 			 temp.setLocalita(iter.next().getLocalita() == null? "": iter.next().getLocalita());
 			 temp.setPro_com(iter.next().getPro_com() == null? "": iter.next().getPro_com());
-			 temp.setIndirizzo_dett(iter.next().getIndirizzo() == null? "": iter.next().getIndirizzo());
+			 temp.setIndirizzo_dett(iter.next().getIndirizzo_dett() == null? "": iter.next().getIndirizzo_dett());
 			 temp.setSottofase(iter.next().getSottofase());
 			 export.add(temp);
 		}
