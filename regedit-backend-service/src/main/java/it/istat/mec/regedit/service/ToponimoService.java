@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -31,6 +33,7 @@ import it.istat.mec.regedit.request.UpdateToponimoListRequest;
 import it.istat.mec.regedit.translators.Translators;
 
 @Service
+@Transactional
 public class ToponimoService {
 	
 	@Value("${app.editing.backup:false}")
@@ -52,24 +55,37 @@ public class ToponimoService {
 	 */
 	
 	
-	public List<ExportToponimiDto> exportToponimi() {
+	/**
+	 * @return
+	 */
+	public List<ExportToponimiDto>  exportToponimi() throws InterruptedException {
 	 
 		List<ExportToponimiDto> export = new ArrayList<ExportToponimiDto>();
 		
-		List<ExportToponimiEntity> list = exportToponimiDao.exportToponimi();
-		
+		Iterable<ExportToponimiEntity> list = exportToponimiDao.exportToponimi();
+	
 		Iterator<ExportToponimiEntity>iter = list.iterator();
 		 while (iter.hasNext()) {
-			 ExportToponimiDto temp = new ExportToponimiDto();
-			 temp.setProgressivo(iter.next().getProgressivo());
-			 temp.setCivico(iter.next().getCivico( )== null? "": iter.next().getCivico());
-			 temp.setCodice_archivio(iter.next().getCodice_archivio() == null? "": iter.next().getCodice_archivio());
-			 temp.setIndirizzo(iter.next().getIndirizzo() == null? "": iter.next().getIndirizzo());
-			 temp.setLocalita(iter.next().getLocalita() == null? "": iter.next().getLocalita());
-			 temp.setPro_com(iter.next().getPro_com() == null? "": iter.next().getPro_com());
-			 temp.setIndirizzo_dett(iter.next().getIndirizzo_dett() == null? "": iter.next().getIndirizzo_dett());
-			 temp.setSottofase(iter.next().getSottofase());
-			 export.add(temp);
+			 
+			 try {
+				ExportToponimiDto temp = new ExportToponimiDto();
+				 temp.setProgressivo(iter.next().getProgressivo());
+				 temp.setCivico((iter.next().getCivico()== null || iter.next().getCivico()== "")? "": iter.next().getCivico());
+				 temp.setCodice_archivio((iter.next().getCodice_archivio() == null || iter.next().getCodice_archivio() == "")? "": iter.next().getCodice_archivio());
+				 temp.setIndirizzo((iter.next().getIndirizzo() == null || iter.next().getIndirizzo() == "" )? "" : iter.next().getIndirizzo());
+				 temp.setLocalita((iter.next().getLocalita() == null || iter.next().getLocalita() == "")? "": iter.next().getLocalita());
+				 temp.setPro_com((iter.next().getPro_com() == null || iter.next().getPro_com() == "") ? "": iter.next().getPro_com());
+				 temp.setIndirizzo_dett(iter.next().getIndirizzo_dett() == null? "": iter.next().getIndirizzo_dett());
+				 temp.setSottofase(iter.next().getSottofase());
+				 export.add(temp);
+				 System.out.println(temp);
+				 System.out.println(export.size());
+			} catch (Exception e) {
+				System.out.println(export.get(export.size()));
+				System.out.println(export.size());
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return export; //Translators.translateExportToponimi(exportToponimiDao.exportToponimi());
