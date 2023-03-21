@@ -46,7 +46,7 @@ public class ExportToponimiEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	private Double progressivo;
+	private Long progressivo;
 	@Nullable
 	private String codice_archivio;
 	@Nullable

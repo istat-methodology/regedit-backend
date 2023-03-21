@@ -5,9 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -16,10 +14,8 @@ import org.springframework.stereotype.Service;
 import it.istat.mec.regedit.dao.ToponimoDao;
 import it.istat.mec.regedit.dao.ExportToponimiDao;
 import it.istat.mec.regedit.dao.ToponimoBackupDao;
-import it.istat.mec.regedit.domain.ExportToponimiEntity;
 import it.istat.mec.regedit.domain.Toponimo;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
-
 import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.ComuneDto;
@@ -28,7 +24,6 @@ import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
-
 import it.istat.mec.regedit.request.UpdateToponimoListRequest;
 import it.istat.mec.regedit.translators.Translators;
 
@@ -53,42 +48,10 @@ public class ToponimoService {
 	 * 
 	 * return Translators.translateToponimiDR(toponimoDao.findAll()); }
 	 */
-	
-	
-	/**
-	 * @return
-	 */
-	public List<ExportToponimiDto>  exportToponimi() throws InterruptedException {
-	 
-		List<ExportToponimiDto> export = new ArrayList<ExportToponimiDto>();
 		
-		Iterable<ExportToponimiEntity> list = exportToponimiDao.exportToponimi();
 	
-		Iterator<ExportToponimiEntity>iter = list.iterator();
-		 while (iter.hasNext()) {
-			 
-			 try {
-				ExportToponimiDto temp = new ExportToponimiDto();
-				 temp.setProgressivo(iter.next().getProgressivo());
-				 temp.setCivico((iter.next().getCivico()== null || iter.next().getCivico()== "")? "": iter.next().getCivico());
-				 temp.setCodice_archivio((iter.next().getCodice_archivio() == null || iter.next().getCodice_archivio() == "")? "": iter.next().getCodice_archivio());
-				 temp.setIndirizzo((iter.next().getIndirizzo() == null || iter.next().getIndirizzo() == "" )? "" : iter.next().getIndirizzo());
-				 temp.setLocalita((iter.next().getLocalita() == null || iter.next().getLocalita() == "")? "": iter.next().getLocalita());
-				 temp.setPro_com((iter.next().getPro_com() == null || iter.next().getPro_com() == "") ? "": iter.next().getPro_com());
-				 temp.setIndirizzo_dett(iter.next().getIndirizzo_dett() == null? "": iter.next().getIndirizzo_dett());
-				 temp.setSottofase(iter.next().getSottofase());
-				 export.add(temp);
-				 System.out.println(temp);
-				 System.out.println(export.size());
-			} catch (Exception e) {
-				System.out.println(export.get(export.size()));
-				System.out.println(export.size());
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		return export; //Translators.translateExportToponimi(exportToponimiDao.exportToponimi());
+	public List<ExportToponimiDto>  exportToponimi() {
+		return Translators.translateExportToponimi(exportToponimiDao.exportToponimi());
 	}
 	
 	

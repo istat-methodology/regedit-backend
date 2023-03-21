@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ExportToponimiDto implements Serializable {
 	private static final long serialVersionUID = 1958222043420954543L;
 	@Nullable
-	private Double progressivo;
+	private Long progressivo;
 	@Nullable
 	private String codice_archivio;
 	@Nullable
@@ -28,7 +28,7 @@ public class ExportToponimiDto implements Serializable {
 	@Nullable
 	private Integer sottofase;	
 	
-	public ExportToponimiDto(Double progressivo, String codice_archivio, String localita, String pro_com, String indirizzo, String civico, 
+	public ExportToponimiDto(Long progressivo, String codice_archivio, String localita, String pro_com, String indirizzo, String civico, 
 			String indirizzo_dett, Integer sottofase) {
 		super();
 		this.progressivo = progressivo;
