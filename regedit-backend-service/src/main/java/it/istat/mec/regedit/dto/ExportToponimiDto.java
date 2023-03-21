@@ -1,6 +1,9 @@
 package it.istat.mec.regedit.dto;
 import java.io.Serializable;
 import org.springframework.lang.Nullable;
+
+
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -36,4 +39,21 @@ public class ExportToponimiDto implements Serializable {
 		this.indirizzo_dett = indirizzo_dett;
 		this.sottofase = sottofase;
 	}
+	public String getLocalita() {		
+		return this.localita == null ? "" :  this.localita;
+	}
+	public String getPro_com() {
+		return this.pro_com == null ? "" :  this.pro_com;
+	}
+	public String getIndirizzo() {
+		return this.indirizzo == null ? "" :  this.indirizzo;
+	}
+	public String getCivico() {		
+		return this.civico == null ? "" :  this.civico;
+	}
+	public String getIndirizzo_dett() {
+		return this.indirizzo_dett == null ? "" :  this.indirizzo_dett;
+	}
+	
+
 }
