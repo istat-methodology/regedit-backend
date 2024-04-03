@@ -2,24 +2,22 @@ spring:
   application:
     name: regedit-service
   jpa:
-    show-sql: true
-    database-platform: org.hibernate.dialect.Oracle12cDialect
+    show-sql: false
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        default_schema: SV_REGEDIT
         jdbc:
           lob:
             non_contextual_creation: true
   datasource:
-    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(LOAD_BALANCE=on)(ADDRESS=(PROTOCOL=TCP)(HOST=dm05-scan.istat.it)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=CRO1C)))
-    username: UP_IANNACONE[SV_REGEDIT]
-    password: 
-    driverClassName: oracle.jdbc.OracleDriver
-    platform: oracle
+    url: jdbc:mysql://localhost:3306/regedit?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+    platform: mysql
     hikari:
       minimum-idle: 1
       maximum-pool-size: 3
@@ -45,11 +43,12 @@ management:
         enabled: false
 api:
   version: 1
-
+  
 security:
   secret-key: is2-secretkey
   
 app:
   editing:
     backup: true  
+
 

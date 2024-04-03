@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "wp1_jwttoken", schema = "regedit")
+@Table(name = "wp1_jwttoken", schema = "PD_RSA_SPER")
 public class JwttokenEntity {
     private String token;
 

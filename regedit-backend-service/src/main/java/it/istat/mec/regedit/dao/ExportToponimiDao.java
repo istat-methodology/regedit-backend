@@ -29,7 +29,7 @@ import it.istat.mec.regedit.domain.ExportToponimiEntity;
 
 public interface ExportToponimiDao extends JpaRepository<ExportToponimiEntity, Integer> {
 
-	 @Query(value = "CALL export_toponimi()", nativeQuery = true)
-	 List<ExportToponimiEntity> exportToponimi();
-	
+	 @Query(value = "select * from table(SV_REGEDIT.EXPORT_TOPONIMI())", nativeQuery = true)
+	 List<ExportToponimiEntity> exportToponimi();	
+	 
 }

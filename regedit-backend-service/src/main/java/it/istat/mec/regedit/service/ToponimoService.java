@@ -20,7 +20,7 @@ import it.istat.mec.regedit.domain.UsersEntity;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.dto.ComuneDto;
 import it.istat.mec.regedit.dto.ExportToponimiDto;
-import it.istat.mec.regedit.dto.ProvinciaDto;
+import it.istat.mec.regedit.dto.ProvinciaDenomDto;
 import it.istat.mec.regedit.dto.UsersDto;
 import it.istat.mec.regedit.exceptions.NoDataException;
 import it.istat.mec.regedit.request.CreateToponimoRequest;
@@ -52,6 +52,7 @@ public class ToponimoService {
 	
 	public List<ExportToponimiDto>  exportToponimi() {
 		return Translators.translateExportToponimi(exportToponimiDao.exportToponimi());
+	
 	}
 	
 	
@@ -94,7 +95,7 @@ public class ToponimoService {
 	}
 
 	
-	public List<ProvinciaDto> findAllProvinceByStatoAndRevisore(Integer revisore, Short stato) {
+	public List<ProvinciaDenomDto> findAllProvinceByStatoAndRevisore(Integer revisore, Short stato) {
 
 		return toponimoDao.findAllProvinceByIdRevisoreAndStatoOrderByDenominazioneProvinciaAsc(
 				(revisore != null) ? new UsersEntity(revisore) : null, stato);

@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProvinciaDto implements Serializable {
 	
-	private static final long serialVersionUID = -4792730443225120417L;
-	//private String proCom;	
-	private String denominazioneProvincia;	
+	private static final long serialVersionUID = -1137487682445048643L;
+	private String cod_prov;
+	private String provincia;	
 	
-	public ProvinciaDto(String denominazioneProvincia) {
+	public ProvinciaDto(String cod_prov, String provincia) {
 		super();	
-		this.denominazioneProvincia = denominazioneProvincia;		
-		//this.proCom = proCom;
+		this.cod_prov = cod_prov;		
+		this.provincia = provincia;
 	}
 }
