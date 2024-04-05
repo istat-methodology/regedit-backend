@@ -1,10 +1,11 @@
 package it.istat.mec.regedit.service;
-
+import org.rosuda.REngine.REXP;
 import org.rosuda.REngine.REXPMismatchException;
-import org.rosuda.REngine.RList;
+import org.rosuda.REngine.REngineException;
 import org.rosuda.REngine.Rserve.RConnection;
 import org.rosuda.REngine.Rserve.RserveException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import it.istat.mec.regedit.dao.RScriptDao;
@@ -14,45 +15,44 @@ public class RScriptService {
 	
 	@Autowired
 	RScriptDao rScriptDao;
+	@Value("${app.editing.Rserver}")
+	private String Rserver;
+	@Value("${app.editing.Rport}")
+	private Integer Rport;
+	@Value("${app.editing.Ruser}")
+	private String Ruser;
+	@Value("${app.editing.Rpass}")
+	private String Rpass;
+	@Value("${app.editing.Rwd}")
+	private String Rwd;
 
-	public void eseguiScript() throws REXPMismatchException {
-		String hostname = "rstudio.istat.it";
-		int port=6311;
-		//RConnection connection=null;	
-		String risultato = null;
+	public void eseguiScript() throws REXPMismatchException, REngineException {		
+			
 		
+		String risultato = null;	
 
-//	try {
-//		
-//		connection = open(connection, hostname, port, username, password);
-//		System.out.println("Sono nel try");
-//		//connection = new RConnection(hostname,port);
-//		System.out.println("test R: " +connection);
-//	//}catch(RserveException e) {
-//	}catch(Exception e) {
-//		System.out.println("Si è verificata un'eccezione: "+e);
-//	}
-		try {
-			RConnection conn=null;
-			conn = open(null,hostname,port,"ruser","Ruser2023");
+
+		RConnection conn=null;			
+		conn = open(null,Rserver,Rport,Ruser,Rpass);
+		try {			
+			
 			System.out.println("Connessione Server R:" + conn.toString());
 			risultato += conn.eval("3 * 5").asString();
 			System.out.println("Risultato moltiplicazione R;" + risultato);
-			//conn.eval("setwd('" +"script/regedit/" + "')");
-			//risultato += conn.parseAndEval("getwd()").toString();
-			conn.eval("setwd('//home2//ruser')").toString();
+	
 			String path = conn.eval("getwd()").asString();
+			conn.eval("setwd('//home2//ruser')").toString();
+			path = conn.eval("getwd()").asString();
 			System.out.println("path RServe;" + path);
-            RList ris = conn.eval("source('script//regedit//prova.R')").asList();
-			System.out.print(ris);
-			for(int i=0;i<ris.size();i++){
-			      System.out.println(ris.at(i).toString());
-			}
+			REXP rResponseObject =  conn.parseAndEval("try(source('R_directory_test//LinkageProbabilistico.R'), silent=TRUE)");
+			
 			//"source('" + fileScriptR + "')"
-			System.out.println("Risultato sript R;" + risultato);
+			System.out.println("Risultato sript R;" + rResponseObject);
 		} catch (RserveException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			conn.close();
 		}
 	
 			

@@ -2,6 +2,7 @@ package it.istat.mec.regedit.controller;
 
 
 import org.rosuda.REngine.REXPMismatchException;
+import org.rosuda.REngine.REngineException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ public class RScriptController {
 	private RScriptService rScriptService;
 
 	@GetMapping(value = "/esegui-rscript")
-	public void eseguiRScript() throws REXPMismatchException {
+	public void eseguiRScript() throws REXPMismatchException, REngineException {
 
 		rScriptService.eseguiScript();
 
