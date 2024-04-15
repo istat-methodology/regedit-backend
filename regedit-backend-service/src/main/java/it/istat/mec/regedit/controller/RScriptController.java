@@ -18,6 +18,7 @@ public class RScriptController {
 	private RScriptService rScriptService;
 
 	@GetMapping(value = "/esegui-rscript")
+
 	public String eseguiRScript() {
        
         String result=null;

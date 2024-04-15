@@ -26,37 +26,38 @@ public class RScriptService {
 	@Value("${app.editing.Rwd}")
 	private String Rwd;
 
-	public void eseguiScript() throws REXPMismatchException, REngineException {		
+	public String eseguiScript() throws REXPMismatchException, REngineException {		
 			
 		
-		String risultato = null;	
+		String result = null;	
 
 
 		RConnection conn=null;			
-		conn = open(null,Rserver,Rport,Ruser,Rpass);
+		
 		try {			
-			
+			conn = open(null,Rserver,Rport,Ruser,Rpass);
 			System.out.println("Connessione Server R:" + conn.toString());
-			risultato += conn.eval("3 * 5").asString();
-			System.out.println("Risultato moltiplicazione R;" + risultato);
+			
 	
 			String path = conn.eval("getwd()").asString();
 			conn.eval("setwd('//home2//ruser')").toString();
 			path = conn.eval("getwd()").asString();
 			System.out.println("path RServe;" + path);
 			REXP rResponseObject =  conn.parseAndEval("try(source('R_directory_test//LinkageProbabilistico.R'), silent=TRUE)");
-			
+			result = conn.eval("outstr").asString();
+			System.out.println(result);
 			//"source('" + fileScriptR + "')"
-			System.out.println("Risultato sript R;" + rResponseObject);
+			//System.out.println("Risultato sript R;" + rResponseObject);
 		} catch (RserveException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			result = e.getMessage();
 		} finally{
 			conn.close();
 		}
 	
 			
-		
+		return result;
 	}
 	public static RConnection open(RConnection connection,String hostname,int port,String username,String password) throws RserveException{
 		//connection = new RConnection(hostname,port);
