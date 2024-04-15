@@ -18,9 +18,17 @@ public class RScriptController {
 	private RScriptService rScriptService;
 
 	@GetMapping(value = "/esegui-rscript")
-	public void eseguiRScript() throws REXPMismatchException, REngineException {
-
-		rScriptService.eseguiScript();
+	public String eseguiRScript() {
+       
+        String result=null;
+		try {
+			result = rScriptService.eseguiScript();
+		} catch (REXPMismatchException | REngineException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result=e.getMessage();
+		}
+		return result;
 
 	}
 }
