@@ -16,8 +16,8 @@ spring:
             non_contextual_creation: true
   datasource:
     url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(LOAD_BALANCE=on)(ADDRESS=(PROTOCOL=TCP)(HOST=dm05-scan.istat.it)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=CRO1C)))
-    username: UP_IANNACONE[SV_REGEDIT]
-    password: 
+    username: UP_STEFANO_MACONE[SV_REGEDIT]
+    password: Marittimoxyz#1971
     driverClassName: oracle.jdbc.OracleDriver
     platform: oracle
     hikari:
@@ -25,7 +25,8 @@ spring:
       maximum-pool-size: 3
 server:
   port: 8081
-
+  tomcat:
+    connection-timeout: -1
 eureka:
   client:
     register-with-eureka: false
