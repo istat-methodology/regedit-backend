@@ -32,12 +32,14 @@ import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.Dug;
 import it.istat.mec.regedit.domain.ExportToponimiEntity;
+import it.istat.mec.regedit.domain.IndirizzoProbab;  
 import it.istat.mec.regedit.domain.Provincia;
 import it.istat.mec.regedit.domain.Toponimo;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
 import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.DugDto;
 import it.istat.mec.regedit.dto.ExportToponimiDto;
+import it.istat.mec.regedit.dto.IndirizzoProbabDto;
 import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
@@ -63,8 +65,19 @@ public class Translators {
 		return dTO;
 	}
 	
+	public static IndirizzoProbabDto translate(IndirizzoProbab x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final IndirizzoProbabDto dTO = modelMapper.map(x, IndirizzoProbabDto.class);
+		return dTO;
+	}
+	
 	public static List<ToponimoDto> translateToponimiDR(List<Toponimo> list) {
 		return mapList(list, ToponimoDto.class);
+	}
+	
+	public static List<IndirizzoProbabDto> translateIndirizzoProbab(List<IndirizzoProbab> list) {
+		return mapList(list, IndirizzoProbabDto.class);
 	}
 	
 	public static List<ExportToponimiDto> translateExportToponimi(List<ExportToponimiEntity> list) {
