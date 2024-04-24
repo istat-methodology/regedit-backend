@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "wp1_user_roles", schema = "PD_RSA_SPER")
+@Table(name = "wp1_user_roles", schema = "SV_REGEDIT")
 public class UserRolesEntity {
     private int id;
     private String role;
