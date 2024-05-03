@@ -1,5 +1,7 @@
 package it.istat.mec.regedit.service;
 
+import java.util.List;
+
 import org.rosuda.REngine.REXP;
 import org.rosuda.REngine.REXPMismatchException;
 import org.rosuda.REngine.REngineException;
@@ -41,13 +43,13 @@ public class RScriptService {
 		try {			
 			conn = open(null,Rserver,Rport,Ruser,Rpass);
 			System.out.println("Connessione Server R:" + conn.toString());
-			String elencoProvince = new String();
-			elencoProvince = "\"";
-			for (String provincia: scriptParameters.getProvince()) {
-	            elencoProvince +=  "'" + provincia + "'"+ ",";
-	        }
-			elencoProvince = elencoProvince.substring(0, elencoProvince.length()-1 );
-			elencoProvince +=  "\"";
+			String elencoProvince = formatParameterString(scriptParameters.getProvince());
+			/*
+			 * elencoProvince = "\""; for (String provincia: scriptParameters.getProvince())
+			 * { elencoProvince += "'" + provincia + "'"+ ","; } elencoProvince =
+			 * elencoProvince.substring(0, elencoProvince.length()-1 ); elencoProvince +=
+			 * "\"";
+			 */
 			String path = conn.eval("getwd()").asString();
 			conn.eval("setwd('//home2//ruser')").toString();
 			path = conn.eval("getwd()").asString();
@@ -69,6 +71,20 @@ public class RScriptService {
 			
 		return result;
 	}
+	public String formatParameterString(List<String> parameter) {	
+		String elencoProvince = new String();
+		elencoProvince = "\"";
+		if (parameter!= null){
+			{	for (String provincia: parameter) {
+					elencoProvince +=  "'" + provincia + "'"+ ",";
+				}
+				elencoProvince = elencoProvince.substring(0, elencoProvince.length()-1 );
+				elencoProvince +=  "\"";
+			}	
+		}
+		return elencoProvince;
+	}
+	
 	public static RConnection open(RConnection connection,String hostname,int port,String username,String password) throws RserveException{
 		//connection = new RConnection(hostname,port);
 		connection = new RConnection(hostname);
