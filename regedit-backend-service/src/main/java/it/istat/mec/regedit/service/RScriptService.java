@@ -1,4 +1,5 @@
 package it.istat.mec.regedit.service;
+
 import org.rosuda.REngine.REXP;
 import org.rosuda.REngine.REXPMismatchException;
 import org.rosuda.REngine.REngineException;
@@ -7,8 +8,11 @@ import org.rosuda.REngine.Rserve.RserveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import it.istat.mec.regedit.dao.RScriptDao;
+import it.istat.mec.regedit.domain.Provincia;
+import it.istat.mec.regedit.request.ScriptRequest;
 
 @Service
 public class RScriptService {
@@ -26,24 +30,30 @@ public class RScriptService {
 	@Value("${app.editing.Rwd}")
 	private String Rwd;
 
-	public String eseguiScript() throws REXPMismatchException, REngineException {		
+	public String eseguiScript(@RequestBody ScriptRequest scriptParameters) throws REXPMismatchException, REngineException {		
 			
 		
 		String result = null;	
 
 
 		RConnection conn=null;			
-		
+		System.out.println("Parametri script:" + scriptParameters.getProvince() + scriptParameters.getCodArchivio() + scriptParameters.getSoglia());
 		try {			
 			conn = open(null,Rserver,Rport,Ruser,Rpass);
 			System.out.println("Connessione Server R:" + conn.toString());
-			
-	
+			String elencoProvince = new String();
+			elencoProvince = "\"";
+			for (String provincia: scriptParameters.getProvince()) {
+	            elencoProvince +=  "'" + provincia + "'"+ ",";
+	        }
+			elencoProvince = elencoProvince.substring(0, elencoProvince.length()-1 );
+			elencoProvince +=  "\"";
 			String path = conn.eval("getwd()").asString();
 			conn.eval("setwd('//home2//ruser')").toString();
 			path = conn.eval("getwd()").asString();
 			System.out.println("path RServe;" + path);
-			REXP rResponseObject =  conn.parseAndEval("try(source('R_directory_test//LinkageProbabilistico.R'), silent=TRUE)");
+			conn.eval("in_codprovince <-" + elencoProvince);
+			conn.parseAndEval("try(source('R_directory_test//LinkageProbabilistico.R'), silent=TRUE)");
 			result = conn.eval("outstr").asString();
 			System.out.println(result);
 			//"source('" + fileScriptR + "')"

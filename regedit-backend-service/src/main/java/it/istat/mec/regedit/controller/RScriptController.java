@@ -1,13 +1,23 @@
 package it.istat.mec.regedit.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.rosuda.REngine.REXPMismatchException;
 import org.rosuda.REngine.REngineException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.istat.mec.regedit.request.ScriptRequest;
+import it.istat.mec.regedit.request.UpdateAddressListRequest;
 import it.istat.mec.regedit.service.RScriptService;
 
 
@@ -17,13 +27,23 @@ public class RScriptController {
 	@Autowired
 	private RScriptService rScriptService;
 
-	@GetMapping(value = "/esegui-rscript")
+	@GetMapping(value = "/esegui-rscript/{province}/{codArchivio}/{soglia}")
 
-	public String eseguiRScript() {
-       
-        String result=null;
+	//public String eseguiRScript(@RequestBody ScriptRequest scriptParameters) {
+        
+	public String eseguiRScript(@PathVariable("province") List<String> province,@PathVariable("codArchivio") String codArchivio, @PathVariable("soglia") String soglia) {
+        //System.out.println("variabili in input:" + params.province.toString() + "-" + codArchivio +  "-" + soglia.toString());
+		String result=null;
+		List<String> elencoProvince= new ArrayList<String>();
+		for (String provincia: province) {
+            elencoProvince.add(provincia.substring(0, 3));
+        }
 		try {
-			result = rScriptService.eseguiScript();
+			ScriptRequest scriptParameters = new ScriptRequest();
+			scriptParameters.setProvince(elencoProvince);
+			scriptParameters.setCodArchivio(codArchivio);
+			scriptParameters.setSoglia(soglia);
+			result = rScriptService.eseguiScript(scriptParameters);
 		} catch (REXPMismatchException | REngineException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
