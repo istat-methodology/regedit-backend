@@ -44,26 +44,52 @@ public class RScriptService {
 			conn = open(null,Rserver,Rport,Ruser,Rpass);
 			System.out.println("Connessione Server R:" + conn.toString());
 			String elencoProvince = formatParameterString(scriptParameters.getProvince());
+			//Integer codArchivio = Integer.parseInt(scriptParameters.getCodArchivio());
+			//Integer soglia = Integer.parseInt(scriptParameters.getSoglia());
 			/*
 			 * elencoProvince = "\""; for (String provincia: scriptParameters.getProvince())
 			 * { elencoProvince += "'" + provincia + "'"+ ","; } elencoProvince =
 			 * elencoProvince.substring(0, elencoProvince.length()-1 ); elencoProvince +=
 			 * "\"";
 			 */
-			String path = conn.eval("getwd()").asString();
-			conn.eval("setwd('//home2//ruser')").toString();
-			path = conn.eval("getwd()").asString();
-			System.out.println("path RServe;" + path);
-			conn.eval("in_codprovince <-" + elencoProvince);
-			conn.parseAndEval("try(source('R_directory_test//LinkageProbabilistico.R'), silent=TRUE)");
-			result = conn.eval("outstr").asString();
-			System.out.println(result);
+			
+			try {
+				Integer codArchivio = Integer.parseInt(scriptParameters.getCodArchivio());
+				Long soglia = Long.getLong(scriptParameters.getSoglia().trim());
+				
+				String path = conn.eval("getwd()").asString();
+				conn.eval("setwd('//home2//ruser')").toString();
+				path = conn.eval("getwd()").asString();
+				System.out.println("path RServe;" + path);
+				conn.eval("in_codprovince <-" + elencoProvince);
+				conn.eval("in_codarchivio <-" + scriptParameters.getCodArchivio());
+				conn.eval("in_soglia <-" + scriptParameters.getSoglia());
+				conn.parseAndEval("try(source('R_directory_test//LinkageProbabilistico.R'), silent=TRUE)");
+				result = conn.eval("outstr").asString();
+				System.out.println(result);
+			} catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				result = e1.getMessage();
+				System.out.println(result);
+			} catch (REXPMismatchException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+				result = e2.getMessage();
+				System.out.println(result);
+			} catch (REngineException e3) {
+				// TODO Auto-generated catch block
+				e3.printStackTrace();
+				result = e3.getMessage();
+				System.out.println(result);
+			}
 			//"source('" + fileScriptR + "')"
 			//System.out.println("Risultato sript R;" + rResponseObject);
 		} catch (RserveException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			result = e.getMessage();
+			System.out.println(result);
 		} finally{
 			conn.close();
 		}
