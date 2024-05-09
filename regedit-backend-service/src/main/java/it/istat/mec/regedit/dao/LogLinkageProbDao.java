@@ -3,10 +3,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import it.istat.mec.regedit.domain.Provincia;
+import it.istat.mec.regedit.domain.LogLinkageProb;
 
 @Repository
-public interface ProvinciaDao extends JpaRepository<Provincia, Integer> {
+public interface LogLinkageProbDao extends JpaRepository<LogLinkageProb, Integer> {
 	@Override
-	List<Provincia> findAll();
+	List<LogLinkageProb> findAll();
 }

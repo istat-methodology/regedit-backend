@@ -32,7 +32,8 @@ import it.istat.mec.regedit.domain.Address;
 import it.istat.mec.regedit.domain.AddressBackupEdited;
 import it.istat.mec.regedit.domain.Dug;
 import it.istat.mec.regedit.domain.ExportToponimiEntity;
-import it.istat.mec.regedit.domain.IndirizzoProbab;  
+import it.istat.mec.regedit.domain.IndirizzoProbab;
+import it.istat.mec.regedit.domain.LogLinkageProb;
 import it.istat.mec.regedit.domain.Provincia;
 import it.istat.mec.regedit.domain.Toponimo;
 import it.istat.mec.regedit.domain.ToponimoBackupEdited;
@@ -40,6 +41,7 @@ import it.istat.mec.regedit.dto.AddressDto;
 import it.istat.mec.regedit.dto.DugDto;
 import it.istat.mec.regedit.dto.ExportToponimiDto;
 import it.istat.mec.regedit.dto.IndirizzoProbabDto;
+import it.istat.mec.regedit.dto.LogLinkageProbDto;
 import it.istat.mec.regedit.dto.ProvinciaDto;
 import it.istat.mec.regedit.dto.ToponimoDto;
 import it.istat.mec.regedit.request.CreateAddressRequest;
@@ -55,6 +57,13 @@ public class Translators {
 
 		final ModelMapper modelMapper = new ModelMapper();
 		final AddressDto dTO = modelMapper.map(x, AddressDto.class);
+		return dTO;
+	}
+	
+	public static LogLinkageProbDto translate(LogLinkageProb x) {
+
+		final ModelMapper modelMapper = new ModelMapper();
+		final LogLinkageProbDto dTO = modelMapper.map(x, LogLinkageProbDto.class);
 		return dTO;
 	}
 	
