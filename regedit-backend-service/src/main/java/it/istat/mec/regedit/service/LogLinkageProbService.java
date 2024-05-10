@@ -15,7 +15,7 @@ public class LogLinkageProbService {
 	
 	public List<LogLinkageProbDto> findAllLogLinkageProb() {
 		
-		return logLinkageProbDao.findAll(Sort.by(Sort.Direction.ASC, "dataInizio")).stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
+		return logLinkageProbDao.findAll(Sort.by(Sort.Direction.DESC, "dataInizio")).stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
 		
 }
