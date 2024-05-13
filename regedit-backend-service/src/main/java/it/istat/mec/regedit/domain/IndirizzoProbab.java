@@ -65,4 +65,6 @@ public class IndirizzoProbab implements Serializable  {
 	private String codProv;
 	@Column(name = "ORDINE")
 	private String ordine;
+	@Column(name = "ID_PROCESSO")
+	private String idProcesso;
 }
