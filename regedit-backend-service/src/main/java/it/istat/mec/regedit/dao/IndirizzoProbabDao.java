@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import it.istat.mec.regedit.domain.IndirizzoProbab;
 
+
 public interface IndirizzoProbabDao extends JpaRepository<IndirizzoProbab, Long> {
 
 	@Override
@@ -11,4 +12,6 @@ public interface IndirizzoProbabDao extends JpaRepository<IndirizzoProbab, Long>
 
 	@Override
 	Optional<IndirizzoProbab> findById(Long id);
+	
+	List<IndirizzoProbab> findByIdProcesso(Long id);
 }

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class IndirizzoProbabDto{
 	
+	private String idProcesso;
 	private Long rownames;	
 	private String proCom;			
 	private String indirizzo;	

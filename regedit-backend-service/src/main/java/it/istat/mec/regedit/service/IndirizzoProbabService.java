@@ -9,14 +9,25 @@ import it.istat.mec.regedit.dto.IndirizzoProbabDto;
 import it.istat.mec.regedit.translators.Translators;
 
 @Service
-public class IndirizzoProbabService {
-	@Autowired
-	IndirizzoProbabDao indirizzoProbabDao;
+	public class IndirizzoProbabService {
+		@Autowired
+		IndirizzoProbabDao indirizzoProbabDao;
 	
 	
 	
-public List<IndirizzoProbabDto> findAllIndirizzoProbab() {
+	public List<IndirizzoProbabDto> findAllIndirizzoProbab() {
 		
 		return indirizzoProbabDao.findAll(Sort.by(Sort.Direction.ASC, "comune")).stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
+
+
+	public List<IndirizzoProbabDto> findAllIndirizzoProbabByIdProcess(Long idProcess) {
+		List<IndirizzoProbabDto> indirizziProbab = indirizzoProbabDao.findByIdProcesso(idProcess)
+				.stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
+	
+		return indirizziProbab;
+
+	}
+
+
 }

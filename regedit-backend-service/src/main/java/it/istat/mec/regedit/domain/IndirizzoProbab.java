@@ -1,11 +1,8 @@
 package it.istat.mec.regedit.domain; 
 import java.io.Serializable; 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -19,6 +16,8 @@ public class IndirizzoProbab implements Serializable  {
 	
 	private static final long serialVersionUID = 2985962201906130543L;
 	@Id
+	@Column(name = "ID_PROCESSO")
+	private Long idProcesso;
 	@Column(name = "ROWNAMES")
 	private Long rownames;
 	@Column(name = "PRO_COM")
@@ -65,6 +64,5 @@ public class IndirizzoProbab implements Serializable  {
 	private String codProv;
 	@Column(name = "ORDINE")
 	private String ordine;
-	@Column(name = "ID_PROCESSO")
-	private String idProcesso;
+	
 }
