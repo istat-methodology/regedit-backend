@@ -21,10 +21,21 @@ public class LogLinkageProbController {
 
 		return logLinkageProbService.findAllLogLinkageProb();
 	};
-	@GetMapping(value = "/log-linkage-probabilistico/{stato}")
-	public LogLinkageProbDto getLogLinkageProbByStato(@PathVariable("stato") Short stato) {
 
-		return logLinkageProbService.findAllLogLinkageProbByStato(stato);
+	/*
+	 * @GetMapping(value = "/log-linkage-probabilistico/{stato}") public
+	 * LogLinkageProbDto getLogLinkageProbByStato(@PathVariable("stato") Short
+	 * stato) {
+	 * 
+	 * return logLinkageProbService.findAllLogLinkageProbByStato(stato);
+	 * 
+	 * };
+	 */
+	@GetMapping(value = "/log-linkage-probabilistico-last-proc")
+	public LogLinkageProbDto getLogLinkageProbByStato() {
+
+		return logLinkageProbService.findLogLinkageProbLastProc();
 
 	};
+	
 }

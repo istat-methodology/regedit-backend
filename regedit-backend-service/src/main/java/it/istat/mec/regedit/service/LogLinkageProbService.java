@@ -19,13 +19,21 @@ public class LogLinkageProbService {
 		return logLinkageProbDao.findAll(Sort.by(Sort.Direction.DESC, "dataInizio")).stream().map(x -> Translators.translate(x)).collect(Collectors.toList());
 	}
 	
-	public LogLinkageProbDto findAllLogLinkageProbByStato(Short stato) {
+	/*
+	 * public LogLinkageProbDto findAllLogLinkageProbByStato(Short stato) {
+	 * 
+	 * List<LogLinkageProb> lista =
+	 * logLinkageProbDao.findAllLogLinkageProbByStatoDesc(stato); LogLinkageProb log
+	 * = lista.get(0);
+	 * 
+	 * return Translators.translate(log);
+	 * 
+	 * }
+	 */
+	public LogLinkageProbDto findLogLinkageProbLastProc(){
 
-		List<LogLinkageProb> lista = logLinkageProbDao.findAllLogLinkageProbByStatoDesc(stato);
-		LogLinkageProb log =  lista.get(0);		
-		
-		return Translators.translate(log);
+		LogLinkageProb lastProc = logLinkageProbDao.findLogLinkageProbLastProc();		
+		return Translators.translate(lastProc);
 
 	}
-		
 }
