@@ -1,23 +1,16 @@
 package it.istat.mec.regedit.controller;
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.rosuda.REngine.REXPMismatchException;
 import org.rosuda.REngine.REngineException;
+import org.rosuda.REngine.Rserve.RConnection;
+import org.rosuda.REngine.Rserve.RserveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import it.istat.mec.regedit.request.ScriptRequest;
-import it.istat.mec.regedit.request.UpdateAddressListRequest;
 import it.istat.mec.regedit.service.RScriptService;
 
 
@@ -50,6 +43,13 @@ public class RScriptController {
 			result=e.getMessage();
 		}
 		return result;
+
+	}
+	@GetMapping(value = "/checkR")
+	public String checkR() {
+        
+		return rScriptService.checkR();
+		
 
 	}
 }

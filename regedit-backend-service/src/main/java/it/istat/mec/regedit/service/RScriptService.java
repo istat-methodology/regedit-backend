@@ -117,4 +117,28 @@ public class RScriptService {
 	      connection.login(username,password);
 	      return connection;
 	}
+	
+	public String checkR() {
+        
+		String result = null;
+		RConnection conn = null;
+		try {			
+			conn = open(null,Rserver,Rport,Ruser,Rpass);			
+		} catch (RserveException e1) {			
+			e1.printStackTrace();
+		}		
+		try {			
+			result = conn.eval("3 * 5").asString();				
+			if(Double.parseDouble(result) == 15.0)			
+			result = "ok";
+			
+			
+		} catch (REXPMismatchException | REngineException e) {			
+			e.printStackTrace();
+			result=e.getMessage();
+		}
+		conn.close();
+	return result;
+
+	}
 }
