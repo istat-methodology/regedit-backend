@@ -1,4 +1,5 @@
 package it.istat.mec.regedit.controller;
+import java.rmi.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 import org.rosuda.REngine.REXPMismatchException;
@@ -47,9 +48,15 @@ public class RScriptController {
 	}
 	@GetMapping(value = "/checkR")
 	public String checkR() {
-        
-		return rScriptService.checkR();
+		String result=null;
+		try {
+			result = rScriptService.checkR();
+		} catch (RserveException | ConnectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result=e.getMessage();
+		}
 		
-
+		return result;
 	}
 }

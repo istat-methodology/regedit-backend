@@ -1,5 +1,6 @@
 package it.istat.mec.regedit.service;
 
+import java.rmi.ConnectException;
 import java.util.List;
 
 import org.rosuda.REngine.REXP;
@@ -118,26 +119,27 @@ public class RScriptService {
 	      return connection;
 	}
 	
-	public String checkR() {
+	public String checkR() throws RserveException, ConnectException{
         
 		String result = null;
 		RConnection conn = null;
 		try {			
-			conn = open(null,Rserver,Rport,Ruser,Rpass);			
-		} catch (RserveException e1) {			
-			e1.printStackTrace();
-		}		
-		try {			
+			conn = open(null,Rserver,Rport,Ruser,Rpass);	
 			result = conn.eval("3 * 5").asString();				
 			if(Double.parseDouble(result) == 15.0)			
 			result = "ok";
-			
-			
-		} catch (REXPMismatchException | REngineException e) {			
+		}catch (REngineException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+			result = e3.getMessage();
+			System.out.println(result);
+		} catch (REXPMismatchException e) {			
 			e.printStackTrace();
 			result=e.getMessage();
+		}finally{
+			conn.close();
 		}
-		conn.close();
+		
 	return result;
 
 	}
